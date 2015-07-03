@@ -13,6 +13,7 @@
 		F16D613F1B47421700C80F63 /* UMBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */; };
 		F16D61491B47477C00C80F63 /* libZXingObjC-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */; };
 		F16D61501B474ADB00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
+		F16D61F91B47570300C80F63 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D61F61B4756EA00C80F63 /* libzbar.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,20 @@
 			remoteGlobalIDString = 25403CB2166A96FA00E13304;
 			remoteInfo = "ZXingObjC-iOS";
 		};
+		F16D61F51B4756EA00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61F11B4756E900C80F63 /* zbar.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F16D615F1B47508000C80F63;
+			remoteInfo = zbar;
+		};
+		F16D61F71B4756FB00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61F11B4756E900C80F63 /* zbar.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F16D615E1B47508000C80F63;
+			remoteInfo = zbar;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -99,6 +114,7 @@
 		F16D61531B474DCB00C80F63 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		F16D61541B474DF100C80F63 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F16D61551B474E0400C80F63 /* Distribution.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Distribution.xcconfig; sourceTree = "<group>"; };
+		F16D61F11B4756E900C80F63 /* zbar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zbar.xcodeproj; path = "lib/zbar-shim/zbar.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F16D61F91B47570300C80F63 /* libzbar.a in Frameworks */,
 				F16D61491B47477C00C80F63 /* libZXingObjC-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */,
+				F16D61F11B4756E900C80F63 /* zbar.xcodeproj */,
 			);
 			name = subprojects;
 			sourceTree = "<group>";
@@ -191,6 +209,14 @@
 			path = include;
 			sourceTree = "<group>";
 		};
+		F16D61F21B4756E900C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F16D61F61B4756EA00C80F63 /* libzbar.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -205,6 +231,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F16D61F81B4756FB00C80F63 /* PBXTargetDependency */,
 				F16D61481B47477200C80F63 /* PBXTargetDependency */,
 			);
 			name = barcodes;
@@ -237,6 +264,10 @@
 			productRefGroup = F16D60FB1B473E3E00C80F63 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = F16D61F21B4756E900C80F63 /* Products */;
+					ProjectRef = F16D61F11B4756E900C80F63 /* zbar.xcodeproj */;
+				},
 				{
 					ProductGroup = F16D61161B47405300C80F63 /* Products */;
 					ProjectRef = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
@@ -292,6 +323,13 @@
 			remoteRef = F16D61281B47405400C80F63 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F16D61F61B4756EA00C80F63 /* libzbar.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libzbar.a;
+			remoteRef = F16D61F51B4756EA00C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -315,6 +353,11 @@
 			name = "ZXingObjC-iOS";
 			targetProxy = F16D61471B47477200C80F63 /* PBXContainerItemProxy */;
 		};
+		F16D61F81B4756FB00C80F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = zbar;
+			targetProxy = F16D61F71B4756FB00C80F63 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -335,10 +378,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
