@@ -1,0 +1,458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F16D613B1B47421700C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
+		F16D613C1B47421700C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
+		F16D613E1B47421700C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
+		F16D613F1B47421700C80F63 /* UMBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */; };
+		F16D61491B47477C00C80F63 /* libZXingObjC-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */; };
+		F16D61501B474ADB00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F16D611E1B47405400C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25403CB3166A96FA00E13304;
+			remoteInfo = "ZXingObjC-iOS";
+		};
+		F16D61201B47405400C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25403CC4166A96FA00E13304;
+			remoteInfo = "Unit Tests iOS";
+		};
+		F16D61221B47405400C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25404166166AADAC00E13304;
+			remoteInfo = "ZXingObjC-osx";
+		};
+		F16D61241B47405400C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25404178166AADAC00E13304;
+			remoteInfo = "Unit Tests OS X";
+		};
+		F16D61261B47405400C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2540439E166ABA0A00E13304;
+			remoteInfo = "OS X Framework";
+		};
+		F16D61281B47405400C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DB72547F1A523C9200EFF81B;
+			remoteInfo = "iOS Framework";
+		};
+		F16D61471B47477200C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 25403CB2166A96FA00E13304;
+			remoteInfo = "ZXingObjC-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F16D60F81B473E3E00C80F63 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F16D60FA1B473E3E00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZXingObjC.xcodeproj; path = lib/zxing/ZXingObjC.xcodeproj; sourceTree = "<group>"; };
+		F16D612E1B47421700C80F63 /* UMBarcodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeView.h; sourceTree = "<group>"; };
+		F16D612F1B47421700C80F63 /* UMBarcodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeViewController.h; sourceTree = "<group>"; };
+		F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBarcodeScanContext.m; sourceTree = "<group>"; };
+		F16D61331B47421700C80F63 /* UMBarcodeScanUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeScanUtilities.h; sourceTree = "<group>"; };
+		F16D61341B47421700C80F63 /* UMBarcodeScanContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeScanContext.h; sourceTree = "<group>"; };
+		F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBarcodeScanUtilities.m; sourceTree = "<group>"; };
+		F16D61361B47421700C80F63 /* UMBarcodeScanViewControllerPvt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeScanViewControllerPvt.h; sourceTree = "<group>"; };
+		F16D61391B47421700C80F63 /* UMBarcodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBarcodeView.m; sourceTree = "<group>"; };
+		F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBarcodeViewController.m; sourceTree = "<group>"; };
+		F16D61411B4743B800C80F63 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		F16D61421B47447F00C80F63 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		F16D614B1B4748CC00C80F63 /* UMBarcodeScanDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeScanDelegate.h; sourceTree = "<group>"; };
+		F16D614E1B474ACD00C80F63 /* UMBarcodeScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMBarcodeScanViewController.h; sourceTree = "<group>"; };
+		F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBarcodeScanViewController.m; sourceTree = "<group>"; };
+		F16D61531B474DCB00C80F63 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		F16D61541B474DF100C80F63 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		F16D61551B474E0400C80F63 /* Distribution.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Distribution.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F16D60F71B473E3E00C80F63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F16D61491B47477C00C80F63 /* libZXingObjC-iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F16D60F11B473E3E00C80F63 = {
+			isa = PBXGroup;
+			children = (
+				F16D61401B4743B800C80F63 /* essentials */,
+				F16D614A1B4748CC00C80F63 /* include */,
+				F16D612D1B47421700C80F63 /* src */,
+				F16D61141B47402E00C80F63 /* subprojects */,
+				F16D60FB1B473E3E00C80F63 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F16D60FB1B473E3E00C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F16D60FA1B473E3E00C80F63 /* libbarcodes.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F16D61141B47402E00C80F63 /* subprojects */ = {
+			isa = PBXGroup;
+			children = (
+				F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */,
+			);
+			name = subprojects;
+			sourceTree = "<group>";
+		};
+		F16D61161B47405300C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */,
+				F16D61211B47405400C80F63 /* Unit Tests iOS.xctest */,
+				F16D61231B47405400C80F63 /* libZXingObjC-osx.a */,
+				F16D61251B47405400C80F63 /* Unit Tests OS X.xctest */,
+				F16D61271B47405400C80F63 /* ZXingObjC.framework */,
+				F16D61291B47405400C80F63 /* ZXingObjC.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F16D612D1B47421700C80F63 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F16D61361B47421700C80F63 /* UMBarcodeScanViewControllerPvt.h */,
+				F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */,
+				F16D612F1B47421700C80F63 /* UMBarcodeViewController.h */,
+				F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */,
+				F16D612E1B47421700C80F63 /* UMBarcodeView.h */,
+				F16D61391B47421700C80F63 /* UMBarcodeView.m */,
+				F16D61341B47421700C80F63 /* UMBarcodeScanContext.h */,
+				F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */,
+				F16D61331B47421700C80F63 /* UMBarcodeScanUtilities.h */,
+				F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		F16D61401B4743B800C80F63 /* essentials */ = {
+			isa = PBXGroup;
+			children = (
+				F16D61421B47447F00C80F63 /* Config.xcconfig */,
+				F16D61531B474DCB00C80F63 /* Debug.xcconfig */,
+				F16D61541B474DF100C80F63 /* Release.xcconfig */,
+				F16D61551B474E0400C80F63 /* Distribution.xcconfig */,
+				F16D61411B4743B800C80F63 /* PrefixHeader.pch */,
+			);
+			path = essentials;
+			sourceTree = "<group>";
+		};
+		F16D614A1B4748CC00C80F63 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				F16D614B1B4748CC00C80F63 /* UMBarcodeScanDelegate.h */,
+				F16D614E1B474ACD00C80F63 /* UMBarcodeScanViewController.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F16D60F91B473E3E00C80F63 /* barcodes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes" */;
+			buildPhases = (
+				F16D60F61B473E3E00C80F63 /* Sources */,
+				F16D60F71B473E3E00C80F63 /* Frameworks */,
+				F16D60F81B473E3E00C80F63 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F16D61481B47477200C80F63 /* PBXTargetDependency */,
+			);
+			name = barcodes;
+			productName = barcodes;
+			productReference = F16D60FA1B473E3E00C80F63 /* libbarcodes.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F16D60F21B473E3E00C80F63 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Ravel Developers Group";
+				TargetAttributes = {
+					F16D60F91B473E3E00C80F63 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = F16D60F51B473E3E00C80F63 /* Build configuration list for PBXProject "barcodes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F16D60F11B473E3E00C80F63;
+			productRefGroup = F16D60FB1B473E3E00C80F63 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F16D61161B47405300C80F63 /* Products */;
+					ProjectRef = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				F16D60F91B473E3E00C80F63 /* barcodes */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libZXingObjC-iOS.a";
+			remoteRef = F16D611E1B47405400C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F16D61211B47405400C80F63 /* Unit Tests iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Unit Tests iOS.xctest";
+			remoteRef = F16D61201B47405400C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F16D61231B47405400C80F63 /* libZXingObjC-osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libZXingObjC-osx.a";
+			remoteRef = F16D61221B47405400C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F16D61251B47405400C80F63 /* Unit Tests OS X.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Unit Tests OS X.xctest";
+			remoteRef = F16D61241B47405400C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F16D61271B47405400C80F63 /* ZXingObjC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ZXingObjC.framework;
+			remoteRef = F16D61261B47405400C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F16D61291B47405400C80F63 /* ZXingObjC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ZXingObjC.framework;
+			remoteRef = F16D61281B47405400C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F16D60F61B473E3E00C80F63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F16D613C1B47421700C80F63 /* UMBarcodeScanUtilities.m in Sources */,
+				F16D613F1B47421700C80F63 /* UMBarcodeViewController.m in Sources */,
+				F16D61501B474ADB00C80F63 /* UMBarcodeScanViewController.m in Sources */,
+				F16D613B1B47421700C80F63 /* UMBarcodeScanContext.m in Sources */,
+				F16D613E1B47421700C80F63 /* UMBarcodeView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F16D61481B47477200C80F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ZXingObjC-iOS";
+			targetProxy = F16D61471B47477200C80F63 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F16D610C1B473E3E00C80F63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F16D61531B474DCB00C80F63 /* Debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+			};
+			name = Debug;
+		};
+		F16D610D1B473E3E00C80F63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F16D61541B474DF100C80F63 /* Release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F16D610F1B473E3E00C80F63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F16D61101B473E3E00C80F63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F16D61511B474D1E00C80F63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F16D61551B474E0400C80F63 /* Distribution.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		F16D61521B474D1E00C80F63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Distribution;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F16D60F51B473E3E00C80F63 /* Build configuration list for PBXProject "barcodes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F16D610C1B473E3E00C80F63 /* Debug */,
+				F16D610D1B473E3E00C80F63 /* Release */,
+				F16D61511B474D1E00C80F63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F16D610F1B473E3E00C80F63 /* Debug */,
+				F16D61101B473E3E00C80F63 /* Release */,
+				F16D61521B474D1E00C80F63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F16D60F21B473E3E00C80F63 /* Project object */;
+}

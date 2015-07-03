@@ -1,0 +1,13 @@
+//
+//  Debug.xcconfig
+//  barcodes
+//
+//  Created by Cyril Murzin on 04/07/15.
+//  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
+//
+
+#include "Config.xcconfig"
+
+ONLY_ACTIVE_ARCH = YES
+
+GCC_OPTIMIZATION_LEVEL = 0

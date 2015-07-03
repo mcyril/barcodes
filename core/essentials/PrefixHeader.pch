@@ -1,0 +1,27 @@
+//
+//  PrefixHeader.pch
+//  UMZebraTest
+//
+//  Created by Cyril Murzin on 02/07/15.
+//  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
+//
+
+#ifndef _PrefixHeader_pch
+#define _PrefixHeader_pch
+
+#import <Availability.h>
+
+#ifdef __OBJC__
+#   import <UIKit/UIKit.h>
+#   import <Foundation/Foundation.h>
+#endif
+
+#if !defined(UMBARCODE_SCAN_ZBAR)
+#   define UMBARCODE_SCAN_ZBAR     1
+#endif
+
+#if !defined(UMBARCODE_SCAN_ZXING)
+#   define UMBARCODE_SCAN_ZXING    1
+#endif
+
+#endif
