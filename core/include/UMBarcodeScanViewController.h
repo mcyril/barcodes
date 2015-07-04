@@ -5,8 +5,6 @@
 //  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
 //
 
-#import "UMBarcodeScanDelegate.h"
-
 enum _UMBarcodeScanMode
 {
     kUMBarcodeScanMode_NONE = 0,
@@ -25,20 +23,31 @@ typedef enum _UMBarcodeScanMode UMBarcodeScanMode_t;
 #define API_EXPORT  __attribute__((visibility("default")))
 #define EXT_EXPORT  extern __attribute__((visibility("default")))
 
-EXT_EXPORT NSString* const kUMBarcodeScanTypeUPCACode;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeUPCECode;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeCode39Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeCode39Mod43Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeEAN13Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeEAN8Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeCode93Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeCode128Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypePDF417Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeAztecCode;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeQRCode;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeInterleaved2of5Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeITF14Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeDataMatrixCode;
+EXT_EXPORT NSString* const kUMBarcodeTypeUPCACode;
+EXT_EXPORT NSString* const kUMBarcodeTypeUPCECode;
+EXT_EXPORT NSString* const kUMBarcodeTypeCode39Code;
+EXT_EXPORT NSString* const kUMBarcodeTypeCode39Mod43Code;
+EXT_EXPORT NSString* const kUMBarcodeTypeEAN13Code;
+EXT_EXPORT NSString* const kUMBarcodeTypeEAN8Code;
+EXT_EXPORT NSString* const kUMBarcodeTypeCode93Code;
+EXT_EXPORT NSString* const kUMBarcodeTypeCode128Code;
+EXT_EXPORT NSString* const kUMBarcodeTypePDF417Code;
+EXT_EXPORT NSString* const kUMBarcodeTypeAztecCode;
+EXT_EXPORT NSString* const kUMBarcodeTypeQRCode;
+EXT_EXPORT NSString* const kUMBarcodeTypeInterleaved2of5Code;
+EXT_EXPORT NSString* const kUMBarcodeTypeITF14Code;
+EXT_EXPORT NSString* const kUMBarcodeTypeDataMatrixCode;
+
+@class UMBarcodeScanViewController;
+
+@protocol UMBarcodeScanDelegate <NSObject>
+@required
+- (void)scanViewController:(UMBarcodeScanViewController*)scanViewController didCancelWithError:(NSError*)error;
+- (void)scanViewController:(UMBarcodeScanViewController*)scanViewController didScanString:(NSString*)barcodeData ofBarcodeType:(NSString*)barcodeType;
+
+@optional
+- (void)scanViewControllerDidPressHelpButton:(UMBarcodeScanViewController*)scanViewController;
+@end
 
 @class UMBarcodeScanContext;
 

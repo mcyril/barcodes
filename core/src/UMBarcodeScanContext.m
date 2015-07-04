@@ -10,20 +10,20 @@
 #import "UMBarcodeScanUtilities.h"
 
 
-NSString* const kUMBarcodeScanTypeUPCACode = @"kUMBarcodeScanTypeUPCACode";
-NSString* const kUMBarcodeScanTypeUPCECode = @"kUMBarcodeScanTypeUPCECode";
-NSString* const kUMBarcodeScanTypeCode39Code = @"kUMBarcodeScanTypeCode39Code";
-NSString* const kUMBarcodeScanTypeCode39Mod43Code = @"kUMBarcodeScanTypeCode39Mod43Code";
-NSString* const kUMBarcodeScanTypeEAN13Code = @"kUMBarcodeScanTypeEAN13Code";
-NSString* const kUMBarcodeScanTypeEAN8Code = @"kUMBarcodeScanTypeEAN8Code";
-NSString* const kUMBarcodeScanTypeCode93Code = @"kUMBarcodeScanTypeCode93Code";
-NSString* const kUMBarcodeScanTypeCode128Code = @"kUMBarcodeScanTypeCode128Code";
-NSString* const kUMBarcodeScanTypePDF417Code = @"kUMBarcodeScanTypePDF417Code";
-NSString* const kUMBarcodeScanTypeAztecCode = @"kUMBarcodeScanTypeAztecCode";
-NSString* const kUMBarcodeScanTypeQRCode = @"kUMBarcodeScanTypeQRCode";
-NSString* const kUMBarcodeScanTypeInterleaved2of5Code = @"kUMBarcodeScanTypeInterleaved2of5Code";
-NSString* const kUMBarcodeScanTypeITF14Code = @"kUMBarcodeScanTypeITF14Code";
-NSString* const kUMBarcodeScanTypeDataMatrixCode = @"kUMBarcodeScanTypeDataMatrixCode";
+NSString* const kUMBarcodeTypeUPCACode              = @"UPCA";
+NSString* const kUMBarcodeTypeUPCECode              = @"UPCE";
+NSString* const kUMBarcodeTypeCode39Code            = @"Code39";
+NSString* const kUMBarcodeTypeCode39Mod43Code       = @"Code39Mod43";
+NSString* const kUMBarcodeTypeEAN13Code             = @"EAN13";
+NSString* const kUMBarcodeTypeEAN8Code              = @"EAN8";
+NSString* const kUMBarcodeTypeCode93Code            = @"Code93";
+NSString* const kUMBarcodeTypeCode128Code           = @"Code128";
+NSString* const kUMBarcodeTypePDF417Code            = @"PDF417";
+NSString* const kUMBarcodeTypeAztecCode             = @"Aztec";
+NSString* const kUMBarcodeTypeQRCode                = @"QR";
+NSString* const kUMBarcodeTypeInterleaved2of5Code   = @"Interleaved2of5";
+NSString* const kUMBarcodeTypeITF14Code             = @"ITF14";
+NSString* const kUMBarcodeTypeDataMatrixCode        = @"DataMatrix";
 
 NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContextChangedOrientation";
 

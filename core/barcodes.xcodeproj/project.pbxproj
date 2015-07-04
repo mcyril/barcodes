@@ -108,7 +108,6 @@
 		F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBarcodeViewController.m; sourceTree = "<group>"; };
 		F16D61411B4743B800C80F63 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		F16D61421B47447F00C80F63 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		F16D614B1B4748CC00C80F63 /* UMBarcodeScanDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeScanDelegate.h; sourceTree = "<group>"; };
 		F16D614E1B474ACD00C80F63 /* UMBarcodeScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMBarcodeScanViewController.h; sourceTree = "<group>"; };
 		F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBarcodeScanViewController.m; sourceTree = "<group>"; };
 		F16D61531B474DCB00C80F63 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -203,7 +202,6 @@
 		F16D614A1B4748CC00C80F63 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				F16D614B1B4748CC00C80F63 /* UMBarcodeScanDelegate.h */,
 				F16D614E1B474ACD00C80F63 /* UMBarcodeScanViewController.h */,
 			);
 			path = include;

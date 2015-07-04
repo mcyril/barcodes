@@ -85,20 +85,20 @@
 
     // set of formats depends on scan mode
     scanViewController.barcodeTypes = [NSArray arrayWithObjects:
-                                                    kUMBarcodeScanTypeUPCACode,
-                                                    kUMBarcodeScanTypeUPCECode,
-                                                    kUMBarcodeScanTypeCode39Code,
-                                                    kUMBarcodeScanTypeCode39Mod43Code,
-                                                    kUMBarcodeScanTypeEAN13Code,
-                                                    kUMBarcodeScanTypeEAN8Code,
-                                                    kUMBarcodeScanTypeCode93Code,
-                                                    kUMBarcodeScanTypeCode128Code,
-                                                    kUMBarcodeScanTypePDF417Code,
-                                                    kUMBarcodeScanTypeAztecCode,
-                                                    kUMBarcodeScanTypeQRCode,
-                                                    kUMBarcodeScanTypeInterleaved2of5Code,
-                                                    kUMBarcodeScanTypeITF14Code,
-                                                    kUMBarcodeScanTypeDataMatrixCode,
+                                                    kUMBarcodeTypeUPCACode,
+                                                    kUMBarcodeTypeUPCECode,
+                                                    kUMBarcodeTypeCode39Code,
+                                                    kUMBarcodeTypeCode39Mod43Code,
+                                                    kUMBarcodeTypeEAN13Code,
+                                                    kUMBarcodeTypeEAN8Code,
+                                                    kUMBarcodeTypeCode93Code,
+                                                    kUMBarcodeTypeCode128Code,
+                                                    kUMBarcodeTypePDF417Code,
+                                                    kUMBarcodeTypeAztecCode,
+                                                    kUMBarcodeTypeQRCode,
+                                                    kUMBarcodeTypeInterleaved2of5Code,
+                                                    kUMBarcodeTypeITF14Code,
+                                                    kUMBarcodeTypeDataMatrixCode,
                                                 nil];
 
     UIViewController* parent = self.presentedViewController;

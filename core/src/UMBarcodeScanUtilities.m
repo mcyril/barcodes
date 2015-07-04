@@ -67,33 +67,33 @@ static dispatch_once_t onceToken;
 
 + (NSString*)um2avBarcodeType:(NSString*)umBarcodeType
 {
-    if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeUPCECode])
+    if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCECode])
         return AVMetadataObjectTypeUPCECode;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeUPCACode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCACode])
         return AVMetadataObjectTypeEAN13Code;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode39Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode39Code])
         return AVMetadataObjectTypeCode39Code;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode39Mod43Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode39Mod43Code])
         return AVMetadataObjectTypeCode39Mod43Code;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeEAN13Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN13Code])
         return AVMetadataObjectTypeEAN13Code;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeEAN8Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN8Code])
         return AVMetadataObjectTypeEAN8Code;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode93Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode93Code])
         return AVMetadataObjectTypeCode93Code;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode128Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode128Code])
         return AVMetadataObjectTypeCode128Code;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypePDF417Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypePDF417Code])
         return AVMetadataObjectTypePDF417Code;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeAztecCode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeAztecCode])
         return AVMetadataObjectTypeAztecCode;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeQRCode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeQRCode])
         return AVMetadataObjectTypeQRCode;
-    else if (UMBarcodeScan_isOS8() && [umBarcodeType isEqualToString:kUMBarcodeScanTypeInterleaved2of5Code])
+    else if (UMBarcodeScan_isOS8() && [umBarcodeType isEqualToString:kUMBarcodeTypeInterleaved2of5Code])
         return AVMetadataObjectTypeInterleaved2of5Code;
-    else if (UMBarcodeScan_isOS8() && [umBarcodeType isEqualToString:kUMBarcodeScanTypeITF14Code])
+    else if (UMBarcodeScan_isOS8() && [umBarcodeType isEqualToString:kUMBarcodeTypeITF14Code])
         return AVMetadataObjectTypeITF14Code;
-    else if (UMBarcodeScan_isOS8() && [umBarcodeType isEqualToString:kUMBarcodeScanTypeDataMatrixCode])
+    else if (UMBarcodeScan_isOS8() && [umBarcodeType isEqualToString:kUMBarcodeTypeDataMatrixCode])
         return AVMetadataObjectTypeDataMatrixCode;
     else
         return nil;
@@ -102,31 +102,31 @@ static dispatch_once_t onceToken;
 + (NSString*)av2umBarcodeType:(NSString*)avBarcodeType
 {
     if ([avBarcodeType isEqualToString:AVMetadataObjectTypeUPCECode])
-        return kUMBarcodeScanTypeUPCECode;
+        return kUMBarcodeTypeUPCECode;
     else if ([avBarcodeType isEqualToString:AVMetadataObjectTypeCode39Code])
-        return kUMBarcodeScanTypeCode39Code;
+        return kUMBarcodeTypeCode39Code;
     else if ([avBarcodeType isEqualToString:AVMetadataObjectTypeCode39Mod43Code])
-        return kUMBarcodeScanTypeCode39Mod43Code;
+        return kUMBarcodeTypeCode39Mod43Code;
     else if ([avBarcodeType isEqualToString:AVMetadataObjectTypeEAN13Code])
-        return kUMBarcodeScanTypeEAN13Code;
+        return kUMBarcodeTypeEAN13Code;
     else if ([avBarcodeType isEqualToString:AVMetadataObjectTypeEAN8Code])
-        return kUMBarcodeScanTypeEAN8Code;
+        return kUMBarcodeTypeEAN8Code;
     else if ([avBarcodeType isEqualToString:AVMetadataObjectTypeCode93Code])
-        return kUMBarcodeScanTypeCode93Code;
+        return kUMBarcodeTypeCode93Code;
     else if ([avBarcodeType isEqualToString:AVMetadataObjectTypeCode128Code])
-        return kUMBarcodeScanTypeCode128Code;
+        return kUMBarcodeTypeCode128Code;
     else if ([avBarcodeType isEqualToString:AVMetadataObjectTypePDF417Code])
-        return kUMBarcodeScanTypePDF417Code;
+        return kUMBarcodeTypePDF417Code;
     else if ([avBarcodeType isEqualToString:AVMetadataObjectTypeAztecCode])
-        return kUMBarcodeScanTypeAztecCode;
+        return kUMBarcodeTypeAztecCode;
     else if ([avBarcodeType isEqualToString:AVMetadataObjectTypeQRCode])
-        return kUMBarcodeScanTypeQRCode;
+        return kUMBarcodeTypeQRCode;
     else if (UMBarcodeScan_isOS8() && [avBarcodeType isEqualToString:AVMetadataObjectTypeInterleaved2of5Code])
-        return kUMBarcodeScanTypeInterleaved2of5Code;
+        return kUMBarcodeTypeInterleaved2of5Code;
     else if (UMBarcodeScan_isOS8() && [avBarcodeType isEqualToString:AVMetadataObjectTypeITF14Code])
-        return kUMBarcodeScanTypeITF14Code;
+        return kUMBarcodeTypeITF14Code;
     else if (UMBarcodeScan_isOS8() && [avBarcodeType isEqualToString:AVMetadataObjectTypeDataMatrixCode])
-        return kUMBarcodeScanTypeDataMatrixCode;
+        return kUMBarcodeTypeDataMatrixCode;
     else
         return nil;
 }
@@ -134,29 +134,29 @@ static dispatch_once_t onceToken;
 #if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
 + (ZXBarcodeFormat)um2zxBarcodeType:(NSString*)umBarcodeType
 {
-    if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeUPCECode])
+    if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCECode])
         return kBarcodeFormatUPCE;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeUPCACode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCACode])
         return kBarcodeFormatUPCA;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode39Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode39Code])
         return kBarcodeFormatCode39;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeEAN13Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN13Code])
         return kBarcodeFormatEan13;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeEAN8Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN8Code])
         return kBarcodeFormatEan8;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode93Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode93Code])
         return kBarcodeFormatCode93;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode128Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode128Code])
         return kBarcodeFormatCode128;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypePDF417Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypePDF417Code])
         return kBarcodeFormatPDF417;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeAztecCode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeAztecCode])
         return kBarcodeFormatAztec;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeQRCode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeQRCode])
         return kBarcodeFormatQRCode;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeInterleaved2of5Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeInterleaved2of5Code])
         return kBarcodeFormatITF;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeDataMatrixCode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeDataMatrixCode])
         return kBarcodeFormatDataMatrix;
     else
         return (ZXBarcodeFormat)-1;
@@ -167,29 +167,29 @@ static dispatch_once_t onceToken;
     switch (zxBarcodeType)
     {
     case kBarcodeFormatAztec:
-        return kUMBarcodeScanTypeAztecCode;
+        return kUMBarcodeTypeAztecCode;
     case kBarcodeFormatCode39:
-        return kUMBarcodeScanTypeCode39Code;
+        return kUMBarcodeTypeCode39Code;
     case kBarcodeFormatCode93:
-        return kUMBarcodeScanTypeCode93Code;
+        return kUMBarcodeTypeCode93Code;
     case kBarcodeFormatCode128:
-        return kUMBarcodeScanTypeCode128Code;
+        return kUMBarcodeTypeCode128Code;
     case kBarcodeFormatDataMatrix:
-        return kUMBarcodeScanTypeDataMatrixCode;
+        return kUMBarcodeTypeDataMatrixCode;
     case kBarcodeFormatEan8:
-        return kUMBarcodeScanTypeEAN8Code;
+        return kUMBarcodeTypeEAN8Code;
     case kBarcodeFormatEan13:
-        return kUMBarcodeScanTypeEAN13Code;
+        return kUMBarcodeTypeEAN13Code;
     case kBarcodeFormatITF:
-        return kUMBarcodeScanTypeInterleaved2of5Code;
+        return kUMBarcodeTypeInterleaved2of5Code;
     case kBarcodeFormatPDF417:
-        return kUMBarcodeScanTypePDF417Code;
+        return kUMBarcodeTypePDF417Code;
     case kBarcodeFormatQRCode:
-        return kUMBarcodeScanTypeQRCode;
+        return kUMBarcodeTypeQRCode;
     case kBarcodeFormatUPCA:
-        return kUMBarcodeScanTypeUPCACode;
+        return kUMBarcodeTypeUPCACode;
     case kBarcodeFormatUPCE:
-        return kUMBarcodeScanTypeUPCECode;
+        return kUMBarcodeTypeUPCECode;
     default:
         return nil;
     }
@@ -199,27 +199,27 @@ static dispatch_once_t onceToken;
 #if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
 + (zbar_symbol_type_t)um2zbBarcodeType:(NSString*)umBarcodeType
 {
-    if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeUPCECode])
+    if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCECode])
         return ZBAR_UPCE;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeUPCACode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCACode])
         return ZBAR_UPCA;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode39Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode39Code])
         return ZBAR_CODE39;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeEAN13Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN13Code])
         return ZBAR_EAN13;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeEAN8Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN8Code])
         return ZBAR_EAN8;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode93Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode93Code])
         return ZBAR_CODE93;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeCode128Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode128Code])
         return ZBAR_CODE128;
 #if 0 // not implemented
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypePDF417Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypePDF417Code])
         return ZBAR_PDF417;
 #endif
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeAztecCode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeAztecCode])
         return ZBAR_QRCODE;
-    else if ([umBarcodeType isEqualToString:kUMBarcodeScanTypeInterleaved2of5Code])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeInterleaved2of5Code])
         return ZBAR_I25;
     else
         return ZBAR_NONE;
@@ -230,27 +230,27 @@ static dispatch_once_t onceToken;
     switch (zbBarcodeType)
     {
     case ZBAR_CODE39:
-        return kUMBarcodeScanTypeCode39Code;
+        return kUMBarcodeTypeCode39Code;
     case ZBAR_CODE93:
-        return kUMBarcodeScanTypeCode93Code;
+        return kUMBarcodeTypeCode93Code;
     case ZBAR_CODE128:
-        return kUMBarcodeScanTypeCode128Code;
+        return kUMBarcodeTypeCode128Code;
     case ZBAR_EAN8:
-        return kUMBarcodeScanTypeEAN8Code;
+        return kUMBarcodeTypeEAN8Code;
     case ZBAR_EAN13:
-        return kUMBarcodeScanTypeEAN13Code;
+        return kUMBarcodeTypeEAN13Code;
     case ZBAR_I25:
-        return kUMBarcodeScanTypeInterleaved2of5Code;
+        return kUMBarcodeTypeInterleaved2of5Code;
 #if 0 // not implemented
     case ZBAR_PDF417:
-        return kUMBarcodeScanTypePDF417Code;
+        return kUMBarcodeTypePDF417Code;
 #endif
     case ZBAR_QRCODE:
-        return kUMBarcodeScanTypeQRCode;
+        return kUMBarcodeTypeQRCode;
     case ZBAR_UPCA:
-        return kUMBarcodeScanTypeUPCACode;
+        return kUMBarcodeTypeUPCACode;
     case ZBAR_UPCE:
-        return kUMBarcodeScanTypeUPCECode;
+        return kUMBarcodeTypeUPCECode;
     default:
         return nil;
     }
