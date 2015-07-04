@@ -14,6 +14,7 @@
 		F16D61491B47477C00C80F63 /* libZXingObjC-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */; };
 		F16D61501B474ADB00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
 		F16D61F91B47570300C80F63 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D61F61B4756EA00C80F63 /* libzbar.a */; };
+		F1ABD1981B47FFC900C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,9 @@
 		F16D61541B474DF100C80F63 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F16D61551B474E0400C80F63 /* Distribution.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Distribution.xcconfig; sourceTree = "<group>"; };
 		F16D61F11B4756E900C80F63 /* zbar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zbar.xcodeproj; path = "lib/zbar-shim/zbar.xcodeproj"; sourceTree = "<group>"; };
+		F1ABD1961B47FFC900C80F63 /* UMBarcodeGeneratorPvt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeGeneratorPvt.h; sourceTree = "<group>"; };
+		F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBarcodeGenerator.m; sourceTree = "<group>"; };
+		F1ABD19E1B48002100C80F63 /* UMBarcodeGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMBarcodeGenerator.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +187,8 @@
 				F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */,
 				F16D61331B47421700C80F63 /* UMBarcodeScanUtilities.h */,
 				F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */,
+				F1ABD1961B47FFC900C80F63 /* UMBarcodeGeneratorPvt.h */,
+				F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -203,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				F16D614E1B474ACD00C80F63 /* UMBarcodeScanViewController.h */,
+				F1ABD19E1B48002100C80F63 /* UMBarcodeGenerator.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -335,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1ABD1981B47FFC900C80F63 /* UMBarcodeGenerator.m in Sources */,
 				F16D613C1B47421700C80F63 /* UMBarcodeScanUtilities.m in Sources */,
 				F16D613F1B47421700C80F63 /* UMBarcodeViewController.m in Sources */,
 				F16D61501B474ADB00C80F63 /* UMBarcodeScanViewController.m in Sources */,

@@ -5,6 +5,8 @@
 //  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+
 enum _UMBarcodeScanMode
 {
     kUMBarcodeScanMode_NONE = 0,
@@ -20,8 +22,13 @@ enum _UMBarcodeScanMode
 };
 typedef enum _UMBarcodeScanMode UMBarcodeScanMode_t;
 
+#ifndef API_EXPORT
 #define API_EXPORT  __attribute__((visibility("default")))
+#endif
+
+#ifndef EXT_EXPORT
 #define EXT_EXPORT  extern __attribute__((visibility("default")))
+#endif
 
 EXT_EXPORT NSString* const kUMBarcodeTypeUPCACode;
 EXT_EXPORT NSString* const kUMBarcodeTypeUPCECode;
