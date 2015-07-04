@@ -1,1 +1,26 @@
-summarize all efforts of the barcode scanning for iOS under the unified single umbrella controller
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+libBarcodes — static library which summarizes all efforts of the barcode scanning for iOS
+under the unified single umbrella controller
+
+Some work derived & base ideas of scan controller are borrowed from CardIO library, by
+the courtesy of eBay Software Foundation. see below for more info
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+Scanning
+-----------------------------------------------------------------------------------------
+
+libBarcodes aggregates three ways of barcode scanning with 3rd party components:
+
+ * iOS system approach (iOS7+)
+ * ZXing (used ZXingObjC port)
+ * ZBar (curtsy to ultrafast and stable library ever)
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+Generating
+-----------------------------------------------------------------------------------------
+
+At this moment libBarcodes uses ZXingObjC to generate barcodes
+

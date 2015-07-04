@@ -19,6 +19,7 @@
 #import "ZXImage.h"
 #endif
 
+
 @implementation UMBarcodeGenerator
 
 + (UIImage*)imageWithData:(NSString*)data encoding:(CFStringEncoding)encoding barcodeType:(NSString*)type imageSize:(CGSize)size whiteOpaque:(BOOL)opaque error:(NSError**)error

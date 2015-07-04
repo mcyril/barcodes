@@ -5,6 +5,9 @@
 //  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
 //
 
+//  some work derived & base ideas of scan controller are borrowed from CardIO library,
+//  the courtesy of eBay Software Foundation. see LICENSE & README files for more info
+
 #import "UMBarcodeViewController.h"
 
 #import "UMBarcodeScanViewControllerPvt.h"
@@ -158,8 +161,8 @@
     [super viewWillLayoutSubviews];
 
     self.barcodeView.frame = self.view.bounds;
-//  if (!UMBarcodeScan_isOS7())
-        [self.barcodeView setNeedsLayout]; // ++Cyril for iOS6
+
+    [self.barcodeView setNeedsLayout]; // nice for iOS6
 
     // Only muck around with the status bar at all if we're in full screen modal style
     if (self.navigationController.modalPresentationStyle == UIModalPresentationFullScreen && [UMBarcodeScanUtilities appHasViewControllerBasedStatusBar] && !self.originalStatusBarHiddenStatus)

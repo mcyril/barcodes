@@ -5,6 +5,9 @@
 //  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
 //
 
+//  some work derived & base ideas of scan controller are borrowed from CardIO library,
+//  the courtesy of eBay Software Foundation. see LICENSE & README files for more info
+
 #import <UIKit/UIKit.h>
 
 enum _UMBarcodeScanMode
