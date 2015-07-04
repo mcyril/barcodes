@@ -1,6 +1,5 @@
 //
 //  UMBarcodeScanViewController.h
-//  UMZebraTest
 //
 //  Created by Cyril Murzin on 02/07/15.
 //  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
@@ -25,7 +24,10 @@ typedef enum _UMBarcodeScanMode UMBarcodeScanMode_t;
 
 @class UMBarcodeScanContext;
 
-@interface UMBarcodeScanViewController : UINavigationController
+#define API_EXPORT  __attribute__((visibility("default")))
+#define EXT_EXPORT  extern __attribute__((visibility("default")))
+
+API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
 {
 @private
     UMBarcodeScanContext* _context;
@@ -58,17 +60,17 @@ typedef enum _UMBarcodeScanMode UMBarcodeScanMode_t;
 
 @end
 
-extern NSString* const kUMBarcodeScanTypeUPCACode;
-extern NSString* const kUMBarcodeScanTypeUPCECode;
-extern NSString* const kUMBarcodeScanTypeCode39Code;
-extern NSString* const kUMBarcodeScanTypeCode39Mod43Code;
-extern NSString* const kUMBarcodeScanTypeEAN13Code;
-extern NSString* const kUMBarcodeScanTypeEAN8Code;
-extern NSString* const kUMBarcodeScanTypeCode93Code;
-extern NSString* const kUMBarcodeScanTypeCode128Code;
-extern NSString* const kUMBarcodeScanTypePDF417Code;
-extern NSString* const kUMBarcodeScanTypeAztecCode;
-extern NSString* const kUMBarcodeScanTypeQRCode;
-extern NSString* const kUMBarcodeScanTypeInterleaved2of5Code;
-extern NSString* const kUMBarcodeScanTypeITF14Code;
-extern NSString* const kUMBarcodeScanTypeDataMatrixCode;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeUPCACode;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeUPCECode;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeCode39Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeCode39Mod43Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeEAN13Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeEAN8Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeCode93Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeCode128Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypePDF417Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeAztecCode;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeQRCode;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeInterleaved2of5Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeITF14Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeDataMatrixCode;
