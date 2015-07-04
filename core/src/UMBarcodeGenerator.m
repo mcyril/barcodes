@@ -17,8 +17,21 @@
 #import "ZXMultiFormatWriter.h"
 #import "ZXBitMatrix.h"
 #import "ZXImage.h"
+#else
+#import "aztecgen.h"
 #endif
 
+
+static void freeRawData(void* info, const void* data, size_t size)
+{
+    free((void*)data);
+}
+
+@interface UMBarcodeGenerator ()
+#if !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
++ (UIImage*)_imageSquareWithPixels:(unsigned char*)pixels width:(int)width margin:(int)margin constrains:(int)cwidth opaque:(BOOL)opaque;
+#endif
+@end
 
 @implementation UMBarcodeGenerator
 
@@ -55,8 +68,101 @@
         return [UIImage imageWithCGImage:image.cgimage];
     }
     else
-#endif
         return nil;
+#else
+    // without ZXing we're supporting only limited set of barcodes to generate.. why? 'cause I need only these two
+
+    if ([type isEqualToString:kUMBarcodeTypeAztecCode])
+    {
+        NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
+        if (string == nil)
+            return nil;
+
+        UIImage* image = nil;
+
+        ag_settings settings;
+        settings.mask = AG_SF_SYMBOL_FORMAT;
+        settings.symbol_format = AG_FULL_FORMAT;
+
+        ag_matrix* barcode = NULL;
+        const int gen_result = ag_generate(&barcode, [string bytes], [string length], &settings);
+        if (gen_result == AG_SUCCESS)
+            image = [[self class] _imageSquareWithPixels:barcode->data width:(int)barcode->width margin:4 constrains:ceilf(size.width) opaque:opaque];
+
+        ag_release_matrix(barcode);
+
+        return image;
+    }
+    else
+        return nil;
+#endif
 }
+
+#if !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
++ (UIImage*)_imageSquareWithPixels:(unsigned char*)pixels width:(int)width margin:(int)margin constrains:(int)cwidth opaque:(BOOL)opaque
+{
+    int len = width * width;
+
+    // Set bit-fiddling variables
+    int bytesPerPixel = 4;
+    int pixelPerDot = cwidth / width;
+    if (pixelPerDot < 4)
+        return nil;
+
+    // increase image size by margins
+    cwidth += 2 * margin * pixelPerDot;
+
+    int bytesPerLine = bytesPerPixel * cwidth;
+    int rawDataSize = bytesPerLine * cwidth;
+
+    int offset = (int)((cwidth - pixelPerDot * width) / 2);
+
+    // Allocate raw image buffer
+    unsigned char* rawData = (unsigned char*)malloc(rawDataSize);
+    memset(rawData, opaque ? 0xff : 0x00, rawDataSize);
+
+    // Fill raw image buffer with image data from QR code matrix
+    for (int i = 0; i < len; i++)
+    {
+        char intensity = (pixels[i] & 1) != 0 ? 0 : 0xff;
+
+        int y = i / width;
+        int x = i - (y * width);
+
+        int startX = pixelPerDot * x * bytesPerPixel + (bytesPerPixel * offset);
+        int startY = pixelPerDot * y + offset;
+
+        int endX = startX + pixelPerDot * bytesPerPixel;
+        int endY = startY + pixelPerDot;
+
+        for (int my = startY; my < endY; my++)
+            for (int mx = startX; mx < endX; mx += bytesPerPixel)
+            {
+                if (opaque)
+                {
+                    rawData[bytesPerLine * my + mx    ] = intensity;        // red
+                    rawData[bytesPerLine * my + mx + 1] = intensity;        // green
+                    rawData[bytesPerLine * my + mx + 2] = intensity;        // blue
+                }
+                else
+                    rawData[bytesPerLine * my + mx + 3] = 0xff - intensity; // alpha
+            }
+    }
+
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, rawData, rawDataSize, freeRawData);
+
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGImageRef imageRef = CGImageCreate(cwidth, cwidth, 8, 8 * bytesPerPixel, bytesPerLine, colorSpaceRef, kCGBitmapByteOrderDefault|kCGImageAlphaLast, provider, NULL, false, kCGRenderingIntentDefault);
+    CGColorSpaceRelease(colorSpaceRef);
+
+    CGDataProviderRelease(provider);
+
+    UIImage* image = [UIImage imageWithCGImage:imageRef];
+
+    CGImageRelease(imageRef);
+
+    return image;
+}
+#endif
 
 @end

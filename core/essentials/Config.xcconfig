@@ -18,7 +18,7 @@ GCC_PREFIX_HEADER = essentials/PrefixHeader.pch
 
 ALWAYS_SEARCH_USER_PATHS = NO
 
-HEADER_SEARCH_PATHS = $(SRCROOT)/lib/zxing/ZXingObjC/** $(SRCROOT)/lib/zbar/include $(SRCROOT)/lib/zbar/iphone/include/ZBarSDK
+HEADER_SEARCH_PATHS = $(SRCROOT)/lib/zxing/ZXingObjC/** $(SRCROOT)/lib/zbar/include $(SRCROOT)/lib/zbar/iphone/include/ZBarSDK $(SRCROOT)/lib/aztec/include
 
 GCC_SYMBOLS_PRIVATE_EXTERN = YES
 GCC_INLINES_ARE_PRIVATE_EXTERN = YES

@@ -4,5 +4,5 @@
 
 
 void wrapping_clockwise(symbol_matrix *mtx,
-	const bit_vector_type &data, unsigned char layer_width,
-	unsigned char first_layer_height);
+    const bit_vector_type &data, unsigned char layer_width,
+    unsigned char first_layer_height);
