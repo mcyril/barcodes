@@ -114,7 +114,7 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
     [_zbScanner release];
 #endif
 
-    [_viewFinderLayers release];
+    [_viewfinderLayers release];
     [_videoPreviewLayer release];
     [_captureSession release];
     [_videoInput release];
@@ -313,21 +313,26 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
     [self.layer insertSublayer:_videoPreviewLayer atIndex:0];
 
-    _viewFinderLayers = [[NSMutableArray alloc] initWithCapacity:0];
+    _viewfinderLayers = [[NSMutableArray alloc] initWithCapacity:0];
 
     if ([_context.delegate respondsToSelector:@selector(scanViewController:addLayerAtIndex:)])
     {
+        // add customized viewfinder layers
+
         for (NSUInteger index = 0; ; index++)
         {
             CALayer* layer = [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self] addLayerAtIndex:index];
             if (layer == nil)
                 break;
             else
-                [_viewFinderLayers addObject:layer];
+                [_viewfinderLayers addObject:layer];
         }
     }
     else
     {
+        // add default viewfinder layers
+
+        // viewfinder frame
         {
             CAShapeLayer* layer = [CAShapeLayer layer];
             layer.name = kUMViewfinderLayerName;
@@ -338,9 +343,10 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
             layer.lineJoin = kCALineJoinMiter;
             layer.lineCap = kCALineCapSquare;
 
-            [_viewFinderLayers addObject:layer];
+            [_viewfinderLayers addObject:layer];
         }
 
+        // aim cross
         {
             CAShapeLayer* layer = [CAShapeLayer layer];
             layer.name = kUMAimCrossLayerName;
@@ -350,11 +356,11 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
             layer.lineCap = kCALineCapSquare;
 
-            [_viewFinderLayers addObject:layer];
+            [_viewfinderLayers addObject:layer];
         }
     }
 
-    for (CALayer* layer in _viewFinderLayers)
+    for (CALayer* layer in _viewfinderLayers)
         [self.layer addSublayer:layer];
 
     return YES;
@@ -566,12 +572,16 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
         if ([_context.delegate respondsToSelector:@selector(scanViewController:layoutLayer:viewRect:)])
         {
-            for (CALayer* layer in _viewFinderLayers)
+            // layout/setup customized layers
+
+            for (CALayer* layer in _viewfinderLayers)
                 [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self] layoutLayer:layer viewRect:r];
         }
         else
         {
-            for (CALayer* layer in _viewFinderLayers)
+            // layout/setup default layers
+
+            for (CALayer* layer in _viewfinderLayers)
             {
                 if ([layer.name isEqualToString:kUMViewfinderLayerName])
                 {
@@ -623,34 +633,7 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 - (void)_didReceiveDeviceOrientationNotification:(NSNotification*)notification
 {
     if ([[_videoPreviewLayer connection] isVideoOrientationSupported])
-    {
-#if 1
         [[_videoPreviewLayer connection] setVideoOrientation:(AVCaptureVideoOrientation)[UIApplication sharedApplication].statusBarOrientation];
-#else
-        AVCaptureVideoOrientation captureVideoOrientation;
-
-        switch ([UIApplication sharedApplication].statusBarOrientation /*_context.initialInterfaceOrientationForViewcontroller*/)
-        {
-        case UIInterfaceOrientationPortrait:
-            captureVideoOrientation = AVCaptureVideoOrientationPortrait;
-            break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-            captureVideoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
-            break;
-        case UIInterfaceOrientationLandscapeRight:
-            captureVideoOrientation = AVCaptureVideoOrientationLandscapeRight;
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-            captureVideoOrientation = AVCaptureVideoOrientationLandscapeLeft;
-            break;
-        default:
-            captureVideoOrientation = AVCaptureVideoOrientationPortrait;
-            break;
-        }
-
-        [[_videoPreviewLayer connection] setVideoOrientation:captureVideoOrientation];
-#endif
-    }
 }
 
 - (void)_didReadNewCode:(id)obj
