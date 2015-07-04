@@ -23,10 +23,12 @@
 #endif
 
 
+#if !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
 static void freeRawData(void* info, const void* data, size_t size)
 {
     free((void*)data);
 }
+#endif
 
 @interface UMBarcodeGenerator ()
 #if !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
