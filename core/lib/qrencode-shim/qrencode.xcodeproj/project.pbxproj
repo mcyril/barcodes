@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F12AD1FE1B48830F00C80F63 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = F12AD1EA1B48830F00C80F63 /* bitstream.c */; };
+		F12AD1FF1B48830F00C80F63 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = F12AD1EC1B48830F00C80F63 /* mask.c */; };
+		F12AD2001B48830F00C80F63 /* mmask.c in Sources */ = {isa = PBXBuildFile; fileRef = F12AD1EE1B48830F00C80F63 /* mmask.c */; };
+		F12AD2011B48830F00C80F63 /* mqrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = F12AD1F01B48830F00C80F63 /* mqrspec.c */; };
+		F12AD2031B48830F00C80F63 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = F12AD1F41B48830F00C80F63 /* qrencode.c */; };
+		F12AD2041B48830F00C80F63 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = F12AD1F61B48830F00C80F63 /* qrinput.c */; };
+		F12AD2051B48830F00C80F63 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = F12AD1F81B48830F00C80F63 /* qrspec.c */; };
+		F12AD2061B48830F00C80F63 /* rsecc.c in Sources */ = {isa = PBXBuildFile; fileRef = F12AD1FA1B48830F00C80F63 /* rsecc.c */; };
+		F12AD2071B48830F00C80F63 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = F12AD1FC1B48830F00C80F63 /* split.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F12AD1C71B48827100C80F63 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F12AD1C91B48827100C80F63 /* libqrencode.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libqrencode.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F12AD1E41B4882BC00C80F63 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		F12AD1E51B4882BC00C80F63 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		F12AD1E61B4882BC00C80F63 /* Distribution.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Distribution.xcconfig; sourceTree = "<group>"; };
+		F12AD1E71B4882BC00C80F63 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		F12AD1E81B4882BC00C80F63 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		F12AD1EA1B48830F00C80F63 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bitstream.c; path = ../qrencode/bitstream.c; sourceTree = "<group>"; };
+		F12AD1EB1B48830F00C80F63 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitstream.h; path = ../qrencode/bitstream.h; sourceTree = "<group>"; };
+		F12AD1EC1B48830F00C80F63 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mask.c; path = ../qrencode/mask.c; sourceTree = "<group>"; };
+		F12AD1ED1B48830F00C80F63 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mask.h; path = ../qrencode/mask.h; sourceTree = "<group>"; };
+		F12AD1EE1B48830F00C80F63 /* mmask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mmask.c; path = ../qrencode/mmask.c; sourceTree = "<group>"; };
+		F12AD1EF1B48830F00C80F63 /* mmask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mmask.h; path = ../qrencode/mmask.h; sourceTree = "<group>"; };
+		F12AD1F01B48830F00C80F63 /* mqrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mqrspec.c; path = ../qrencode/mqrspec.c; sourceTree = "<group>"; };
+		F12AD1F11B48830F00C80F63 /* mqrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mqrspec.h; path = ../qrencode/mqrspec.h; sourceTree = "<group>"; };
+		F12AD1F31B48830F00C80F63 /* qrencode_inner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = qrencode_inner.h; path = ../qrencode/qrencode_inner.h; sourceTree = "<group>"; };
+		F12AD1F41B48830F00C80F63 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = qrencode.c; path = ../qrencode/qrencode.c; sourceTree = "<group>"; };
+		F12AD1F51B48830F00C80F63 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = qrencode.h; path = ../qrencode/qrencode.h; sourceTree = "<group>"; };
+		F12AD1F61B48830F00C80F63 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = qrinput.c; path = ../qrencode/qrinput.c; sourceTree = "<group>"; };
+		F12AD1F71B48830F00C80F63 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = qrinput.h; path = ../qrencode/qrinput.h; sourceTree = "<group>"; };
+		F12AD1F81B48830F00C80F63 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = qrspec.c; path = ../qrencode/qrspec.c; sourceTree = "<group>"; };
+		F12AD1F91B48830F00C80F63 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = qrspec.h; path = ../qrencode/qrspec.h; sourceTree = "<group>"; };
+		F12AD1FA1B48830F00C80F63 /* rsecc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rsecc.c; path = ../qrencode/rsecc.c; sourceTree = "<group>"; };
+		F12AD1FB1B48830F00C80F63 /* rsecc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rsecc.h; path = ../qrencode/rsecc.h; sourceTree = "<group>"; };
+		F12AD1FC1B48830F00C80F63 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = split.c; path = ../qrencode/split.c; sourceTree = "<group>"; };
+		F12AD1FD1B48830F00C80F63 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = split.h; path = ../qrencode/split.h; sourceTree = "<group>"; };
+		F12AD2081B48848A00C80F63 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F12AD1C61B48827100C80F63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F12AD1C01B48827100C80F63 = {
+			isa = PBXGroup;
+			children = (
+				F12AD1E31B4882BC00C80F63 /* essentials */,
+				F12AD1E91B4882E800C80F63 /* sources */,
+				F12AD1CA1B48827100C80F63 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F12AD1CA1B48827100C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F12AD1C91B48827100C80F63 /* libqrencode.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F12AD1E31B4882BC00C80F63 /* essentials */ = {
+			isa = PBXGroup;
+			children = (
+				F12AD1E71B4882BC00C80F63 /* Config.xcconfig */,
+				F12AD1E81B4882BC00C80F63 /* Debug.xcconfig */,
+				F12AD1E41B4882BC00C80F63 /* Release.xcconfig */,
+				F12AD1E61B4882BC00C80F63 /* Distribution.xcconfig */,
+				F12AD1E51B4882BC00C80F63 /* PrefixHeader.pch */,
+				F12AD2081B48848A00C80F63 /* config.h */,
+			);
+			path = essentials;
+			sourceTree = "<group>";
+		};
+		F12AD1E91B4882E800C80F63 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				F12AD1EA1B48830F00C80F63 /* bitstream.c */,
+				F12AD1EB1B48830F00C80F63 /* bitstream.h */,
+				F12AD1EC1B48830F00C80F63 /* mask.c */,
+				F12AD1ED1B48830F00C80F63 /* mask.h */,
+				F12AD1EE1B48830F00C80F63 /* mmask.c */,
+				F12AD1EF1B48830F00C80F63 /* mmask.h */,
+				F12AD1F01B48830F00C80F63 /* mqrspec.c */,
+				F12AD1F11B48830F00C80F63 /* mqrspec.h */,
+				F12AD1F31B48830F00C80F63 /* qrencode_inner.h */,
+				F12AD1F41B48830F00C80F63 /* qrencode.c */,
+				F12AD1F51B48830F00C80F63 /* qrencode.h */,
+				F12AD1F61B48830F00C80F63 /* qrinput.c */,
+				F12AD1F71B48830F00C80F63 /* qrinput.h */,
+				F12AD1F81B48830F00C80F63 /* qrspec.c */,
+				F12AD1F91B48830F00C80F63 /* qrspec.h */,
+				F12AD1FA1B48830F00C80F63 /* rsecc.c */,
+				F12AD1FB1B48830F00C80F63 /* rsecc.h */,
+				F12AD1FC1B48830F00C80F63 /* split.c */,
+				F12AD1FD1B48830F00C80F63 /* split.h */,
+			);
+			name = sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F12AD1C81B48827100C80F63 /* qrencode */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F12AD1DD1B48827100C80F63 /* Build configuration list for PBXNativeTarget "qrencode" */;
+			buildPhases = (
+				F12AD1C51B48827100C80F63 /* Sources */,
+				F12AD1C61B48827100C80F63 /* Frameworks */,
+				F12AD1C71B48827100C80F63 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = qrencode;
+			productName = qrencode;
+			productReference = F12AD1C91B48827100C80F63 /* libqrencode.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F12AD1C11B48827100C80F63 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Ravel Developers Group";
+				TargetAttributes = {
+					F12AD1C81B48827100C80F63 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = F12AD1C41B48827100C80F63 /* Build configuration list for PBXProject "qrencode" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F12AD1C01B48827100C80F63;
+			productRefGroup = F12AD1CA1B48827100C80F63 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F12AD1C81B48827100C80F63 /* qrencode */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F12AD1C51B48827100C80F63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F12AD2061B48830F00C80F63 /* rsecc.c in Sources */,
+				F12AD2031B48830F00C80F63 /* qrencode.c in Sources */,
+				F12AD2041B48830F00C80F63 /* qrinput.c in Sources */,
+				F12AD2001B48830F00C80F63 /* mmask.c in Sources */,
+				F12AD2011B48830F00C80F63 /* mqrspec.c in Sources */,
+				F12AD1FE1B48830F00C80F63 /* bitstream.c in Sources */,
+				F12AD1FF1B48830F00C80F63 /* mask.c in Sources */,
+				F12AD2071B48830F00C80F63 /* split.c in Sources */,
+				F12AD2051B48830F00C80F63 /* qrspec.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F12AD1DB1B48827100C80F63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F12AD1E81B4882BC00C80F63 /* Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+			};
+			name = Debug;
+		};
+		F12AD1DC1B48827100C80F63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F12AD1E41B4882BC00C80F63 /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F12AD1DE1B48827100C80F63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F12AD1DF1B48827100C80F63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F12AD2091B48852E00C80F63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F12AD1E61B4882BC00C80F63 /* Distribution.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		F12AD20A1B48852E00C80F63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SKIP_INSTALL = YES;
+			};
+			name = Distribution;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F12AD1C41B48827100C80F63 /* Build configuration list for PBXProject "qrencode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F12AD1DB1B48827100C80F63 /* Debug */,
+				F12AD1DC1B48827100C80F63 /* Release */,
+				F12AD2091B48852E00C80F63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F12AD1DD1B48827100C80F63 /* Build configuration list for PBXNativeTarget "qrencode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F12AD1DE1B48827100C80F63 /* Debug */,
+				F12AD1DF1B48827100C80F63 /* Release */,
+				F12AD20A1B48852E00C80F63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F12AD1C11B48827100C80F63 /* Project object */;
+}

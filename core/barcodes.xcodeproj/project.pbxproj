@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F12AD21B1B4886D600C80F63 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F12AD2131B4886B600C80F63 /* libqrencode.a */; };
 		F14148CB1B48630D00C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
 		F14148CC1B48630D00C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
 		F14148CD1B48630D00C80F63 /* UMBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */; };
@@ -32,6 +33,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F12AD2121B4886B600C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F12AD20E1B4886B600C80F63 /* qrencode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F12AD1C91B48827100C80F63;
+			remoteInfo = qrencode;
+		};
+		F12AD2191B4886CB00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F12AD20E1B4886B600C80F63 /* qrencode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F12AD1C81B48827100C80F63;
+			remoteInfo = qrencode;
+		};
 		F14148C91B48630D00C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
@@ -149,6 +164,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F12AD20E1B4886B600C80F63 /* qrencode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = qrencode.xcodeproj; path = "lib/qrencode-shim/qrencode.xcodeproj"; sourceTree = "<group>"; };
 		F14148D91B48630D00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F14148F31B48634B00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F14149621B48703300C80F63 /* aztec.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = aztec.xcodeproj; path = "lib/aztec-shim/aztec.xcodeproj"; sourceTree = "<group>"; };
@@ -189,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F12AD21B1B4886D600C80F63 /* libqrencode.a in Frameworks */,
 				F141496F1B48705F00C80F63 /* libaztec.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +222,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F12AD20F1B4886B600C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F12AD2131B4886B600C80F63 /* libqrencode.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F14149631B48703300C80F63 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +265,7 @@
 				F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */,
 				F16D61F11B4756E900C80F63 /* zbar.xcodeproj */,
 				F14149621B48703300C80F63 /* aztec.xcodeproj */,
+				F12AD20E1B4886B600C80F63 /* qrencode.xcodeproj */,
 			);
 			name = subprojects;
 			sourceTree = "<group>";
@@ -337,6 +363,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F12AD21A1B4886CB00C80F63 /* PBXTargetDependency */,
 				F141496E1B48705000C80F63 /* PBXTargetDependency */,
 			);
 			name = "barcodes-system";
@@ -393,6 +420,10 @@
 					ProjectRef = F14149621B48703300C80F63 /* aztec.xcodeproj */;
 				},
 				{
+					ProductGroup = F12AD20F1B4886B600C80F63 /* Products */;
+					ProjectRef = F12AD20E1B4886B600C80F63 /* qrencode.xcodeproj */;
+				},
+				{
 					ProductGroup = F16D61F21B4756E900C80F63 /* Products */;
 					ProjectRef = F16D61F11B4756E900C80F63 /* zbar.xcodeproj */;
 				},
@@ -411,6 +442,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		F12AD2131B4886B600C80F63 /* libqrencode.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libqrencode.a;
+			remoteRef = F12AD2121B4886B600C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F14149671B48703300C80F63 /* libaztec.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -512,6 +550,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F12AD21A1B4886CB00C80F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = qrencode;
+			targetProxy = F12AD2191B4886CB00C80F63 /* PBXContainerItemProxy */;
+		};
 		F14148C81B48630D00C80F63 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ZXingObjC-iOS";
