@@ -21,6 +21,8 @@ typedef enum _UMBarcodeScanState UMBarcodeScanState_t;
     UMBarcodeScanState_t _state;
 
 @private
+    UMBarcodeScanMode_t _allowedScanModes[kUMBarcodeScanMode_COUNT + 1];
+    
     id<UMBarcodeScanDelegate> _delegate;
 
     NSString* _cancelButtonText;
@@ -37,6 +39,8 @@ typedef enum _UMBarcodeScanState UMBarcodeScanState_t;
     UIInterfaceOrientation _initialInterfaceOrientationForViewcontroller;
     BOOL _allowFreelyRotatingGuide;
 }
+@property (nonatomic, readonly) UMBarcodeScanMode_t* allowedScanModes;
+
 @property (nonatomic, assign) id<UMBarcodeScanDelegate> delegate;
 
 @property (nonatomic, retain) NSString* cancelButtonText;

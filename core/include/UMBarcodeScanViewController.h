@@ -9,7 +9,7 @@
 
 enum _UMBarcodeScanMode
 {
-    kUMBarcodeScanMode_START = 0,
+    kUMBarcodeScanMode_NONE = 0,
     kUMBarcodeScanMode_System,  // fast, reliable enough, but iOS7+ (some codes iOS8+)
 #if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
     kUMBarcodeScanMode_ZBar,    // ultrafast, reliable enough, but has limited set of formats
@@ -22,10 +22,25 @@ enum _UMBarcodeScanMode
 };
 typedef enum _UMBarcodeScanMode UMBarcodeScanMode_t;
 
-@class UMBarcodeScanContext;
-
 #define API_EXPORT  __attribute__((visibility("default")))
 #define EXT_EXPORT  extern __attribute__((visibility("default")))
+
+EXT_EXPORT NSString* const kUMBarcodeScanTypeUPCACode;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeUPCECode;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeCode39Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeCode39Mod43Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeEAN13Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeEAN8Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeCode93Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeCode128Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypePDF417Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeAztecCode;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeQRCode;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeInterleaved2of5Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeITF14Code;
+EXT_EXPORT NSString* const kUMBarcodeScanTypeDataMatrixCode;
+
+@class UMBarcodeScanContext;
 
 API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
 {
@@ -40,6 +55,7 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
 @property (nonatomic, retain) NSString* helpButtonText;
 @property (nonatomic, retain) NSString* hintText;
 
+@property (nonatomic, readonly) UMBarcodeScanMode_t* allowedScanModes;
 @property (nonatomic, assign) UMBarcodeScanMode_t scanMode;
 @property (nonatomic, retain) NSArray* barcodeTypes;
 
@@ -59,18 +75,3 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
 + (BOOL)canReadBarcodeWithCamera;
 
 @end
-
-EXT_EXPORT NSString* const kUMBarcodeScanTypeUPCACode;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeUPCECode;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeCode39Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeCode39Mod43Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeEAN13Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeEAN8Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeCode93Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeCode128Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypePDF417Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeAztecCode;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeQRCode;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeInterleaved2of5Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeITF14Code;
-EXT_EXPORT NSString* const kUMBarcodeScanTypeDataMatrixCode;

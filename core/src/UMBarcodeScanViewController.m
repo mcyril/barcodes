@@ -18,6 +18,7 @@
 @dynamic cancelButtonText;
 @dynamic helpButtonText;
 @dynamic hintText;
+@dynamic allowedScanModes;
 @dynamic scanMode;
 @dynamic barcodeTypes;
 @dynamic allowFreelyRotatingGuide;
@@ -148,6 +149,11 @@
 
 #pragma mark -
 
+- (UMBarcodeScanMode_t*)allowedScanModes
+{
+    return _context.allowedScanModes;
+}
+
 - (UMBarcodeScanMode_t)scanMode
 {
     return _context.scanMode;
@@ -155,7 +161,8 @@
 
 - (void)setScanMode:(UMBarcodeScanMode_t)scanMode
 {
-    NSAssert(scanMode > kUMBarcodeScanMode_START && scanMode < kUMBarcodeScanMode_COUNT, @"*** UNDEFINED SCAN MODE");
+    NSAssert(scanMode > kUMBarcodeScanMode_NONE && scanMode < kUMBarcodeScanMode_COUNT, @"*** UNDEFINED SCAN MODE");
+    NSAssert(scanMode != kUMBarcodeScanMode_System || UMBarcodeScan_isOS7(), @"*** iOS 6 HAS NO SCANNING CAPABILITIES");
 
     _context.scanMode = scanMode;
 }

@@ -28,6 +28,7 @@ NSString* const kUMBarcodeScanTypeDataMatrixCode = @"kUMBarcodeScanTypeDataMatri
 NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContextChangedOrientation";
 
 @implementation UMBarcodeScanContext
+@dynamic allowedScanModes;
 @synthesize delegate = _delegate;
 
 @synthesize cancelButtonText = _cancelButtonText;
@@ -54,6 +55,17 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
         _initialInterfaceOrientationForViewcontroller = UIInterfaceOrientationUnknown;
         _allowFreelyRotatingGuide = YES;
         _showFoundCodePoints = NO;
+        
+        int index = 0;
+        if (UMBarcodeScan_isOS7())
+            _allowedScanModes[index++] = kUMBarcodeScanMode_System;
+#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+        _allowedScanModes[index++] = kUMBarcodeScanMode_ZXing;
+#endif
+#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+        _allowedScanModes[index++] = kUMBarcodeScanMode_ZBar;
+#endif
+        _allowedScanModes[index++] = kUMBarcodeScanMode_NONE;
     }
 
     return self;
@@ -73,6 +85,11 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
 }
 
 #pragma mark -
+
+- (UMBarcodeScanMode_t*)allowedScanModes
+{
+    return _allowedScanModes;
+}
 
 - (UIInterfaceOrientation)initialInterfaceOrientationForViewcontroller
 {
