@@ -8,11 +8,14 @@
 #import "ViewController.h"
 
 #import "UMBarcodeScanViewController.h"
+#import "UMBarcodeGenerator.h"
 
 #import <AVFoundation/AVFoundation.h>
 
 
 @interface ViewController () <UMBarcodeScanDelegate>
+@property (nonatomic, retain) IBOutlet UIImageView* barcodeImage;
+
 @property (nonatomic, retain) IBOutlet UIButton* scanSystem;
 @property (nonatomic, retain) IBOutlet UIButton* scanZXing;
 @property (nonatomic, retain) IBOutlet UIButton* scanZBar;
@@ -21,12 +24,15 @@
 @end
 
 @implementation ViewController
+@synthesize barcodeImage = _barcodeImage;
 @synthesize scanSystem = _scanSystem;
 @synthesize scanZXing = _scanZXing;
 @synthesize scanZBar = _scanZBar;
 
 - (void)dealloc
 {
+    [_barcodeImage release];
+
     [_scanSystem release];
     [_scanZXing release];
     [_scanZBar release];
@@ -39,7 +45,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    _barcodeImage.clipsToBounds = YES;
+    _barcodeImage.contentMode = UIViewContentModeScaleAspectFit;
+
     UMBarcodeScanMode_t* scanModes = [UMBarcodeScanViewController allowedScanModes];
     for (int index = 0; scanModes[index] != kUMBarcodeScanMode_NONE; index++)
     {
@@ -131,6 +140,8 @@
 {
     NSLog(@"### SCAN: %@ (%@)", barcodeData, barcodeType);
 
+    _barcodeImage.image = [UMBarcodeGenerator imageWithData:barcodeData encoding:kCFStringEncodingUTF8 barcodeType:barcodeType imageSize:_barcodeImage.bounds.size whiteOpaque:YES error:nil];
+
 #if 0
     if ([scanViewController isSuspended])   // recognized code suspends scanner
         [scanViewController resume];        //  so we have to resume to continue scanning
@@ -150,6 +161,8 @@
 - (void)scanViewControllerDidPressHelpButton:(UMBarcodeScanViewController*)scanViewController
 {
     NSLog(@"### SCAN WANTS HELP");
+
+    _barcodeImage.image = nil;
 }
 
 @end

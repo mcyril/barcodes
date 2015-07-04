@@ -8,6 +8,8 @@
 @interface ViewController : UIViewController
 {
 @private
+    UIImageView* _barcodeImage;
+
     UIButton* _scanSystem;
     UIButton* _scanZXing;
     UIButton* _scanZBar;
