@@ -20,6 +20,7 @@
 		F14148E81B48634B00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
 		F14148E91B48634B00C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
 		F14148EA1B48634B00C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
+		F141496F1B48705F00C80F63 /* libaztec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F14149671B48703300C80F63 /* libaztec.a */; };
 		F16D613B1B47421700C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
 		F16D613C1B47421700C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
 		F16D613E1B47421700C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
@@ -37,6 +38,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 25403CB2166A96FA00E13304;
 			remoteInfo = "ZXingObjC-iOS";
+		};
+		F14149661B48703300C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F14149621B48703300C80F63 /* aztec.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F14149071B486B5600C80F63;
+			remoteInfo = aztec;
+		};
+		F141496D1B48705000C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F14149621B48703300C80F63 /* aztec.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F14149061B486B5600C80F63;
+			remoteInfo = aztec;
 		};
 		F16D611E1B47405400C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -136,6 +151,7 @@
 /* Begin PBXFileReference section */
 		F14148D91B48630D00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F14148F31B48634B00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F14149621B48703300C80F63 /* aztec.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = aztec.xcodeproj; path = "lib/aztec-shim/aztec.xcodeproj"; sourceTree = "<group>"; };
 		F16D60FA1B473E3E00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZXingObjC.xcodeproj; path = lib/zxing/ZXingObjC.xcodeproj; sourceTree = "<group>"; };
 		F16D612E1B47421700C80F63 /* UMBarcodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeView.h; sourceTree = "<group>"; };
@@ -173,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F141496F1B48705F00C80F63 /* libaztec.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +205,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F14149631B48703300C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F14149671B48703300C80F63 /* libaztec.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F16D60F11B473E3E00C80F63 = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +239,7 @@
 			children = (
 				F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */,
 				F16D61F11B4756E900C80F63 /* zbar.xcodeproj */,
+				F14149621B48703300C80F63 /* aztec.xcodeproj */,
 			);
 			name = subprojects;
 			sourceTree = "<group>";
@@ -311,6 +337,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F141496E1B48705000C80F63 /* PBXTargetDependency */,
 			);
 			name = "barcodes-system";
 			productName = barcodes;
@@ -362,6 +389,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = F14149631B48703300C80F63 /* Products */;
+					ProjectRef = F14149621B48703300C80F63 /* aztec.xcodeproj */;
+				},
+				{
 					ProductGroup = F16D61F21B4756E900C80F63 /* Products */;
 					ProjectRef = F16D61F11B4756E900C80F63 /* zbar.xcodeproj */;
 				},
@@ -380,6 +411,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		F14149671B48703300C80F63 /* libaztec.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libaztec.a;
+			remoteRef = F14149661B48703300C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -478,6 +516,11 @@
 			isa = PBXTargetDependency;
 			name = "ZXingObjC-iOS";
 			targetProxy = F14148C91B48630D00C80F63 /* PBXContainerItemProxy */;
+		};
+		F141496E1B48705000C80F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = aztec;
+			targetProxy = F141496D1B48705000C80F63 /* PBXContainerItemProxy */;
 		};
 		F16D61481B47477200C80F63 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

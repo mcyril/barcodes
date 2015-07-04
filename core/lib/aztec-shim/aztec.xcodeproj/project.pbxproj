@@ -1,0 +1,388 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F141494B1B486CC600C80F63 /* add_reed_solomon_checkwords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14149311B486CC600C80F63 /* add_reed_solomon_checkwords.cpp */; };
+		F141494C1B486CC600C80F63 /* aztecgen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14149331B486CC600C80F63 /* aztecgen.cpp */; };
+		F141494D1B486CC600C80F63 /* choose_aztec_symbol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14149341B486CC600C80F63 /* choose_aztec_symbol.cpp */; };
+		F141494E1B486CC600C80F63 /* generate_bulls_eye.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14149391B486CC600C80F63 /* generate_bulls_eye.cpp */; };
+		F141494F1B486CC600C80F63 /* generate_codeword_stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F141493B1B486CC600C80F63 /* generate_codeword_stream.cpp */; };
+		F14149501B486CC600C80F63 /* generate_data_message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F141493D1B486CC600C80F63 /* generate_data_message.cpp */; };
+		F14149511B486CC600C80F63 /* generate_mode_message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F141493F1B486CC600C80F63 /* generate_mode_message.cpp */; };
+		F14149521B486CC600C80F63 /* generate_single_barcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14149411B486CC600C80F63 /* generate_single_barcode.cpp */; };
+		F14149531B486CC600C80F63 /* generate_symbol_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14149431B486CC600C80F63 /* generate_symbol_info.cpp */; };
+		F14149541B486CC600C80F63 /* generator_exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14149451B486CC600C80F63 /* generator_exception.cpp */; };
+		F14149551B486CC600C80F63 /* symbol_matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14149471B486CC600C80F63 /* symbol_matrix.cpp */; };
+		F14149561B486CC600C80F63 /* wrapping_clockwise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14149491B486CC600C80F63 /* wrapping_clockwise.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F14149051B486B5600C80F63 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F14149071B486B5600C80F63 /* libaztec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaztec.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F14149221B486BAE00C80F63 /* Distribution.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Distribution.xcconfig; sourceTree = "<group>"; };
+		F14149231B486BAE00C80F63 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		F14149241B486BAE00C80F63 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		F14149251B486BAE00C80F63 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		F14149261B486BAE00C80F63 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		F14149281B486C8200C80F63 /* ag_matrix_ptr_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ag_matrix_ptr_def.h; path = ../aztec/include/ag_matrix_ptr_def.h; sourceTree = "<group>"; };
+		F14149291B486C8200C80F63 /* ag_matrix_ptr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ag_matrix_ptr.h; path = ../aztec/include/ag_matrix_ptr.h; sourceTree = "<group>"; };
+		F141492A1B486C8200C80F63 /* aztecgen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = aztecgen.h; path = ../aztec/include/aztecgen.h; sourceTree = "<group>"; };
+		F141492D1B486CB200C80F63 /* bin_dec_conversion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = bin_dec_conversion.h; path = ../aztec/src/base/bin_dec_conversion.h; sourceTree = "<group>"; };
+		F141492E1B486CB200C80F63 /* matrix_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = matrix_def.h; path = ../aztec/src/base/matrix_def.h; sourceTree = "<group>"; };
+		F141492F1B486CB200C80F63 /* matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = matrix.h; path = ../aztec/src/base/matrix.h; sourceTree = "<group>"; };
+		F14149301B486CB200C80F63 /* rs_encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = rs_encode.h; path = ../aztec/src/base/rs_encode.h; sourceTree = "<group>"; };
+		F14149311B486CC600C80F63 /* add_reed_solomon_checkwords.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = add_reed_solomon_checkwords.cpp; path = ../aztec/src/add_reed_solomon_checkwords.cpp; sourceTree = "<group>"; };
+		F14149321B486CC600C80F63 /* add_reed_solomon_checkwords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = add_reed_solomon_checkwords.h; path = ../aztec/src/add_reed_solomon_checkwords.h; sourceTree = "<group>"; };
+		F14149331B486CC600C80F63 /* aztecgen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = aztecgen.cpp; path = ../aztec/src/aztecgen.cpp; sourceTree = "<group>"; };
+		F14149341B486CC600C80F63 /* choose_aztec_symbol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = choose_aztec_symbol.cpp; path = ../aztec/src/choose_aztec_symbol.cpp; sourceTree = "<group>"; };
+		F14149351B486CC600C80F63 /* choose_aztec_symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = choose_aztec_symbol.h; path = ../aztec/src/choose_aztec_symbol.h; sourceTree = "<group>"; };
+		F14149361B486CC600C80F63 /* common_definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common_definitions.h; path = ../aztec/src/common_definitions.h; sourceTree = "<group>"; };
+		F14149371B486CC600C80F63 /* generate_barcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generate_barcode.h; path = ../aztec/src/generate_barcode.h; sourceTree = "<group>"; };
+		F14149381B486CC600C80F63 /* generate_bit_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generate_bit_stream.h; path = ../aztec/src/generate_bit_stream.h; sourceTree = "<group>"; };
+		F14149391B486CC600C80F63 /* generate_bulls_eye.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = generate_bulls_eye.cpp; path = ../aztec/src/generate_bulls_eye.cpp; sourceTree = "<group>"; };
+		F141493A1B486CC600C80F63 /* generate_bulls_eye.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generate_bulls_eye.h; path = ../aztec/src/generate_bulls_eye.h; sourceTree = "<group>"; };
+		F141493B1B486CC600C80F63 /* generate_codeword_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = generate_codeword_stream.cpp; path = ../aztec/src/generate_codeword_stream.cpp; sourceTree = "<group>"; };
+		F141493C1B486CC600C80F63 /* generate_codeword_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generate_codeword_stream.h; path = ../aztec/src/generate_codeword_stream.h; sourceTree = "<group>"; };
+		F141493D1B486CC600C80F63 /* generate_data_message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = generate_data_message.cpp; path = ../aztec/src/generate_data_message.cpp; sourceTree = "<group>"; };
+		F141493E1B486CC600C80F63 /* generate_data_message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generate_data_message.h; path = ../aztec/src/generate_data_message.h; sourceTree = "<group>"; };
+		F141493F1B486CC600C80F63 /* generate_mode_message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = generate_mode_message.cpp; path = ../aztec/src/generate_mode_message.cpp; sourceTree = "<group>"; };
+		F14149401B486CC600C80F63 /* generate_mode_message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generate_mode_message.h; path = ../aztec/src/generate_mode_message.h; sourceTree = "<group>"; };
+		F14149411B486CC600C80F63 /* generate_single_barcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = generate_single_barcode.cpp; path = ../aztec/src/generate_single_barcode.cpp; sourceTree = "<group>"; };
+		F14149421B486CC600C80F63 /* generate_single_barcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generate_single_barcode.h; path = ../aztec/src/generate_single_barcode.h; sourceTree = "<group>"; };
+		F14149431B486CC600C80F63 /* generate_symbol_info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = generate_symbol_info.cpp; path = ../aztec/src/generate_symbol_info.cpp; sourceTree = "<group>"; };
+		F14149441B486CC600C80F63 /* generate_symbol_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generate_symbol_info.h; path = ../aztec/src/generate_symbol_info.h; sourceTree = "<group>"; };
+		F14149451B486CC600C80F63 /* generator_exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = generator_exception.cpp; path = ../aztec/src/generator_exception.cpp; sourceTree = "<group>"; };
+		F14149461B486CC600C80F63 /* generator_exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generator_exception.h; path = ../aztec/src/generator_exception.h; sourceTree = "<group>"; };
+		F14149471B486CC600C80F63 /* symbol_matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = symbol_matrix.cpp; path = ../aztec/src/symbol_matrix.cpp; sourceTree = "<group>"; };
+		F14149481B486CC600C80F63 /* symbol_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = symbol_matrix.h; path = ../aztec/src/symbol_matrix.h; sourceTree = "<group>"; };
+		F14149491B486CC600C80F63 /* wrapping_clockwise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapping_clockwise.cpp; path = ../aztec/src/wrapping_clockwise.cpp; sourceTree = "<group>"; };
+		F141494A1B486CC600C80F63 /* wrapping_clockwise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrapping_clockwise.h; path = ../aztec/src/wrapping_clockwise.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F14149041B486B5600C80F63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F14148FE1B486B5600C80F63 = {
+			isa = PBXGroup;
+			children = (
+				F14149211B486BAE00C80F63 /* essentials */,
+				F14149271B486C6B00C80F63 /* include */,
+				F141492B1B486C8F00C80F63 /* sources */,
+				F14149081B486B5600C80F63 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F14149081B486B5600C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F14149071B486B5600C80F63 /* libaztec.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F14149211B486BAE00C80F63 /* essentials */ = {
+			isa = PBXGroup;
+			children = (
+				F14149231B486BAE00C80F63 /* Config.xcconfig */,
+				F14149251B486BAE00C80F63 /* Debug.xcconfig */,
+				F14149241B486BAE00C80F63 /* Release.xcconfig */,
+				F14149221B486BAE00C80F63 /* Distribution.xcconfig */,
+				F14149261B486BAE00C80F63 /* PrefixHeader.pch */,
+			);
+			path = essentials;
+			sourceTree = "<group>";
+		};
+		F14149271B486C6B00C80F63 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				F14149281B486C8200C80F63 /* ag_matrix_ptr_def.h */,
+				F14149291B486C8200C80F63 /* ag_matrix_ptr.h */,
+				F141492A1B486C8200C80F63 /* aztecgen.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		F141492B1B486C8F00C80F63 /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				F141492C1B486CA400C80F63 /* base */,
+				F14149311B486CC600C80F63 /* add_reed_solomon_checkwords.cpp */,
+				F14149321B486CC600C80F63 /* add_reed_solomon_checkwords.h */,
+				F14149331B486CC600C80F63 /* aztecgen.cpp */,
+				F14149341B486CC600C80F63 /* choose_aztec_symbol.cpp */,
+				F14149351B486CC600C80F63 /* choose_aztec_symbol.h */,
+				F14149361B486CC600C80F63 /* common_definitions.h */,
+				F14149371B486CC600C80F63 /* generate_barcode.h */,
+				F14149381B486CC600C80F63 /* generate_bit_stream.h */,
+				F14149391B486CC600C80F63 /* generate_bulls_eye.cpp */,
+				F141493A1B486CC600C80F63 /* generate_bulls_eye.h */,
+				F141493B1B486CC600C80F63 /* generate_codeword_stream.cpp */,
+				F141493C1B486CC600C80F63 /* generate_codeword_stream.h */,
+				F141493D1B486CC600C80F63 /* generate_data_message.cpp */,
+				F141493E1B486CC600C80F63 /* generate_data_message.h */,
+				F141493F1B486CC600C80F63 /* generate_mode_message.cpp */,
+				F14149401B486CC600C80F63 /* generate_mode_message.h */,
+				F14149411B486CC600C80F63 /* generate_single_barcode.cpp */,
+				F14149421B486CC600C80F63 /* generate_single_barcode.h */,
+				F14149431B486CC600C80F63 /* generate_symbol_info.cpp */,
+				F14149441B486CC600C80F63 /* generate_symbol_info.h */,
+				F14149451B486CC600C80F63 /* generator_exception.cpp */,
+				F14149461B486CC600C80F63 /* generator_exception.h */,
+				F14149471B486CC600C80F63 /* symbol_matrix.cpp */,
+				F14149481B486CC600C80F63 /* symbol_matrix.h */,
+				F14149491B486CC600C80F63 /* wrapping_clockwise.cpp */,
+				F141494A1B486CC600C80F63 /* wrapping_clockwise.h */,
+			);
+			name = sources;
+			sourceTree = "<group>";
+		};
+		F141492C1B486CA400C80F63 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				F141492D1B486CB200C80F63 /* bin_dec_conversion.h */,
+				F141492E1B486CB200C80F63 /* matrix_def.h */,
+				F141492F1B486CB200C80F63 /* matrix.h */,
+				F14149301B486CB200C80F63 /* rs_encode.h */,
+			);
+			name = base;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F14149061B486B5600C80F63 /* aztec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F141491B1B486B5600C80F63 /* Build configuration list for PBXNativeTarget "aztec" */;
+			buildPhases = (
+				F14149031B486B5600C80F63 /* Sources */,
+				F14149041B486B5600C80F63 /* Frameworks */,
+				F14149051B486B5600C80F63 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = aztec;
+			productName = aztec;
+			productReference = F14149071B486B5600C80F63 /* libaztec.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F14148FF1B486B5600C80F63 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Ravel Developers Group";
+				TargetAttributes = {
+					F14149061B486B5600C80F63 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = F14149021B486B5600C80F63 /* Build configuration list for PBXProject "aztec" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F14148FE1B486B5600C80F63;
+			productRefGroup = F14149081B486B5600C80F63 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F14149061B486B5600C80F63 /* aztec */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F14149031B486B5600C80F63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F14149501B486CC600C80F63 /* generate_data_message.cpp in Sources */,
+				F141494D1B486CC600C80F63 /* choose_aztec_symbol.cpp in Sources */,
+				F14149551B486CC600C80F63 /* symbol_matrix.cpp in Sources */,
+				F141494F1B486CC600C80F63 /* generate_codeword_stream.cpp in Sources */,
+				F141494E1B486CC600C80F63 /* generate_bulls_eye.cpp in Sources */,
+				F141494C1B486CC600C80F63 /* aztecgen.cpp in Sources */,
+				F14149511B486CC600C80F63 /* generate_mode_message.cpp in Sources */,
+				F141494B1B486CC600C80F63 /* add_reed_solomon_checkwords.cpp in Sources */,
+				F14149531B486CC600C80F63 /* generate_symbol_info.cpp in Sources */,
+				F14149521B486CC600C80F63 /* generate_single_barcode.cpp in Sources */,
+				F14149561B486CC600C80F63 /* wrapping_clockwise.cpp in Sources */,
+				F14149541B486CC600C80F63 /* generator_exception.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F14149191B486B5600C80F63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F14149251B486BAE00C80F63 /* Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+			};
+			name = Debug;
+		};
+		F141491A1B486B5600C80F63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F14149241B486BAE00C80F63 /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F141491C1B486B5600C80F63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F141491D1B486B5600C80F63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F14149571B486D1500C80F63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F14149221B486BAE00C80F63 /* Distribution.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		F14149581B486D1500C80F63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SKIP_INSTALL = YES;
+			};
+			name = Distribution;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F14149021B486B5600C80F63 /* Build configuration list for PBXProject "aztec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F14149191B486B5600C80F63 /* Debug */,
+				F141491A1B486B5600C80F63 /* Release */,
+				F14149571B486D1500C80F63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F141491B1B486B5600C80F63 /* Build configuration list for PBXNativeTarget "aztec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F141491C1B486B5600C80F63 /* Debug */,
+				F141491D1B486B5600C80F63 /* Release */,
+				F14149581B486D1500C80F63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F14148FF1B486B5600C80F63 /* Project object */;
+}
