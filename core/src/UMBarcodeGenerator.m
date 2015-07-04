@@ -19,6 +19,7 @@
 #import "ZXImage.h"
 #else
 #import "aztecgen.h"
+#import "qrencode.h"
 #endif
 
 
@@ -90,6 +91,24 @@ static void freeRawData(void* info, const void* data, size_t size)
             image = [[self class] _imageSquareWithPixels:barcode->data width:(int)barcode->width margin:4 constrains:ceilf(size.width) opaque:opaque];
 
         ag_release_matrix(barcode);
+
+        return image;
+    }
+    else if ([type isEqualToString:kUMBarcodeTypeQRCode])
+    {
+        NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
+        if (string == nil)
+            return nil;
+
+        UIImage* image = nil;
+
+        QRcode* resultCode = QRcode_encodeData((int)[string length], [string bytes], 0, QR_ECLEVEL_M);
+        if (resultCode != NULL)
+        {
+            image = [[self class] _imageSquareWithPixels:resultCode->data width:resultCode->width margin:4 constrains:ceilf(size.width) opaque:opaque];
+
+            QRcode_free(resultCode);
+        }
 
         return image;
     }
