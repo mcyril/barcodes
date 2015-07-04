@@ -114,7 +114,6 @@
     [_viewFinderLayer release];
     [_viewAimLayer release];
     [_videoPreviewLayer release];
-    [_pointsLayer release];
     [_captureSession release];
     [_videoInput release];
     [_camera release];
@@ -311,16 +310,6 @@
     [self _didReceiveDeviceOrientationNotification:nil];
 
     [self.layer insertSublayer:_videoPreviewLayer atIndex:0];
-
-    if (_context.showFoundCodePoints)
-    {
-        _pointsLayer = [[CAShapeLayer layer] retain];
-        _pointsLayer.strokeColor = [UIColor orangeColor].CGColor;
-        _pointsLayer.fillColor = [UIColor clearColor].CGColor;
-        _pointsLayer.lineWidth = 3.;
-
-        [self.layer addSublayer:_pointsLayer];
-    }
 
     _viewFinderLayer = [[CAShapeLayer layer] retain];
     _viewFinderLayer.strokeColor = [UIColor greenColor].CGColor;
@@ -542,8 +531,6 @@
         CGRect r = CGRectInset(self.bounds, kViewFinderMargin, kViewFinderMargin);
 
         _videoPreviewLayer.frame = r;
-        if (_context.showFoundCodePoints)
-            _pointsLayer.frame = r;
 
         // fill the entire screen, without this we get empty areas at the long sides
         [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
@@ -685,8 +672,6 @@
     {
         @autoreleasepool
         {
-            BOOL updatePoints = NO;
-
             AVMetadataMachineReadableCodeObject* code = nil;
             for (AVMetadataMachineReadableCodeObject* object in metadataObjects)
                 if ([object isKindOfClass:[AVMetadataMachineReadableCodeObject class]])
@@ -699,48 +684,8 @@
             {
                 OSAtomicXor32Barrier(PAUSED, &_context->_state); // suspend and notify
 
-                if (_context.showFoundCodePoints)
-                {
-                    NSArray* corners = ((AVMetadataMachineReadableCodeObject*)[_videoPreviewLayer transformedMetadataObjectForMetadataObject:code]).corners;
-
-                    CGMutablePathRef path = CGPathCreateMutable();
-
-                    BOOL start = YES;
-                    for (NSDictionary* corner in corners)
-                    {
-                        CGPoint pt;
-                        if (CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)corner, &pt))
-                        {
-                            if (start)
-                                CGPathMoveToPoint(path, NULL, pt.x, pt.y);
-                            else
-                                CGPathAddLineToPoint(path, NULL, pt.x, pt.y);
-
-                            start = NO;
-                        }
-                    }
-
-                    if (!CGPathIsEmpty(path))
-                    {
-                        CGPathCloseSubpath(path);
-
-                        _pointsLayer.path = path;
-                        updatePoints = YES;
-                    }
-
-                    CGPathRelease(path);
-                }
-
                 [self performSelectorOnMainThread: @selector(_didReadNewCode:) withObject:code waitUntilDone:NO];
             }
-            else if (_context.showFoundCodePoints && _pointsLayer.path != NULL)
-            {
-                _pointsLayer.path = NULL;
-                updatePoints = YES;
-            }
-
-            if (updatePoints)
-                [_pointsLayer performSelectorOnMainThread:@selector(display) withObject:nil waitUntilDone:NO];
         }
     }
 }
@@ -760,7 +705,6 @@
         @autoreleasepool
         {
             BOOL resume = YES;
-            BOOL updatePoints = NO;
 
             OSAtomicXor32Barrier(PAUSED, &_context->_state); // suspend
 
@@ -799,39 +743,6 @@
                     if (result != nil)
                     {
                         resume = NO;
-#if 0 // defunct
-                        if (_context.showFoundCodePoints)
-                        {
-                            CGAffineTransform m = CGAffineTransformMakeScale(self.cameraPreviewFrame.size.width / bitmap.width, self.cameraPreviewFrame.size.height / bitmap.height);
-                    //      m = CGAffineTransformRotate(m, M_PI_2);
-
-                            CGMutablePathRef path = CGPathCreateMutable();
-
-                            BOOL start = YES;
-                            for (ZXResultPoint* pt in result.resultPoints)
-                            {
-                                if (![pt isKindOfClass:[ZXResultPoint class]])
-                                    continue;
-
-                                if (start)
-                                    CGPathMoveToPoint(path, &m, pt.x, pt.y);
-                                else
-                                    CGPathAddLineToPoint(path, &m, pt.x, pt.y);
-
-                                start = NO;
-                            }
-
-                            if (!CGPathIsEmpty(path))
-                            {
-                                CGPathCloseSubpath(path);
-
-                                _pointsLayer.path = path;
-                                updatePoints = YES;
-                            }
-
-                            CGPathRelease(path);
-                        }
-#endif
 
                         [self performSelectorOnMainThread: @selector(_didReadNewCode:) withObject:result waitUntilDone:NO];
                     }
@@ -880,15 +791,6 @@
 #endif
 
             } while (0);
-
-            if (resume && _context.showFoundCodePoints && _pointsLayer.path != NULL)
-            {
-                _pointsLayer.path = NULL;
-                updatePoints = YES;
-            }
-
-            if (updatePoints)
-                [_pointsLayer performSelectorOnMainThread:@selector(display) withObject:nil waitUntilDone:NO];
 
             if (resume)
                 OSAtomicAnd32Barrier(~PAUSED, &_context->_state);

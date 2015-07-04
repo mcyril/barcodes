@@ -42,7 +42,6 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
 
 @dynamic initialInterfaceOrientationForViewcontroller;
 @synthesize allowFreelyRotatingGuide = _allowFreelyRotatingGuide;
-@synthesize showFoundCodePoints = _showFoundCodePoints;
 
 - (instancetype)init
 {
@@ -53,7 +52,6 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
 
         _initialInterfaceOrientationForViewcontroller = UIInterfaceOrientationUnknown;
         _allowFreelyRotatingGuide = YES;
-        _showFoundCodePoints = NO;
     }
 
     return self;

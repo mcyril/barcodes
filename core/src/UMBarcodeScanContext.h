@@ -52,7 +52,6 @@ typedef enum _UMBarcodeScanState UMBarcodeScanState_t;
 
 @property (nonatomic, assign) UIInterfaceOrientation initialInterfaceOrientationForViewcontroller;
 @property (nonatomic, assign) BOOL allowFreelyRotatingGuide;
-@property (nonatomic, assign) BOOL showFoundCodePoints;
 
 @end
 

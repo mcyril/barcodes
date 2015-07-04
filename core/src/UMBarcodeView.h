@@ -51,7 +51,6 @@
 
     CAShapeLayer* _viewFinderLayer;
     CAShapeLayer* _viewAimLayer;
-    CAShapeLayer* _pointsLayer;
 
     NSError* _error;
 }

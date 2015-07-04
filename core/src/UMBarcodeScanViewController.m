@@ -20,8 +20,6 @@
 @dynamic hintText;
 @dynamic scanMode;
 @dynamic barcodeTypes;
-@dynamic allowFreelyRotatingGuide;
-@dynamic showFoundCodePoints;
 
 @synthesize context = _context;
 @synthesize shouldStoreStatusBarStyle = _shouldStoreStatusBarStyle;
@@ -230,16 +228,6 @@
 - (void)setAllowFreelyRotatingGuide:(BOOL)allowFreelyRotatingGuide
 {
     _context.allowFreelyRotatingGuide = allowFreelyRotatingGuide;
-}
-
-- (BOOL)showFoundCodePoints
-{
-    return _context.showFoundCodePoints;
-}
-
-- (void)setShowFoundCodePoints:(BOOL)showFoundCodePoints
-{
-    _context.showFoundCodePoints = showFoundCodePoints;
 }
 
 - (BOOL)keepStatusBarStyle

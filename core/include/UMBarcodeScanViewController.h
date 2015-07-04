@@ -79,7 +79,6 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
 @property (nonatomic, retain) UIColor* navigationBarTintColor;
 
 @property (nonatomic, assign) BOOL allowFreelyRotatingGuide;
-@property (nonatomic, assign) BOOL showFoundCodePoints;
 
 - (instancetype)initWithScanDelegate:(id<UMBarcodeScanDelegate>)delegate;
 
