@@ -18,7 +18,6 @@
 @dynamic cancelButtonText;
 @dynamic helpButtonText;
 @dynamic hintText;
-@dynamic allowedScanModes;
 @dynamic scanMode;
 @dynamic barcodeTypes;
 @dynamic allowFreelyRotatingGuide;
@@ -148,11 +147,6 @@
 }
 
 #pragma mark -
-
-- (UMBarcodeScanMode_t*)allowedScanModes
-{
-    return _context.allowedScanModes;
-}
 
 - (UMBarcodeScanMode_t)scanMode
 {
@@ -385,6 +379,11 @@
 + (BOOL)canReadBarcodeWithCamera
 {
     return [UMBarcodeScanUtilities _canReadBarcodeWithCamera];
+}
+
++ (UMBarcodeScanMode_t*)allowedScanModes
+{
+    return [UMBarcodeScanUtilities _allowedScanModes];
 }
 
 @end

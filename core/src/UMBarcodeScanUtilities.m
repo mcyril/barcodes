@@ -7,8 +7,6 @@
 
 #import "UMBarcodeScanUtilities.h"
 
-#import "UMBarcodeScanViewControllerPvt.h"
-
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -259,7 +257,7 @@ static dispatch_once_t onceToken;
 }
 #endif
 
-+ (BOOL)hasVideoCamera
++ (BOOL)_hasVideoCamera
 {
     // check for a camera
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -310,7 +308,7 @@ static ScanAvailabilityStatus cachedScanAvailabilityStatus = ScanAvailabilityUnk
         // In particular, this rules out the iPhone 3G but lets in the 3GS, which
         // we know to be the iPhone cutoff. This lets through iPod touch 4, which
         // is the only iPod touch generation to have a camera (see http://en.wikipedia.org/wiki/IPod_Touch).
-        if (![[self class] hasVideoCamera])
+        if (![[self class] _hasVideoCamera])
         {
             cachedScanAvailabilityStatus = ScanAvailabilityNever;
 
@@ -348,6 +346,28 @@ static ScanAvailabilityStatus cachedScanAvailabilityStatus = ScanAvailabilityUnk
     }
 
     return YES;
+}
+
++ (UMBarcodeScanMode_t*)_allowedScanModes
+{
+static dispatch_once_t _once;
+static UMBarcodeScanMode_t _allowedScanModes[kUMBarcodeScanMode_COUNT + 1];
+
+    dispatch_once(&_once, ^
+        {
+            int index = 0;
+            if (UMBarcodeScan_isOS7())
+                _allowedScanModes[index++] = kUMBarcodeScanMode_System;
+#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+            _allowedScanModes[index++] = kUMBarcodeScanMode_ZXing;
+#endif
+#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+            _allowedScanModes[index++] = kUMBarcodeScanMode_ZBar;
+#endif
+            _allowedScanModes[index++] = kUMBarcodeScanMode_NONE;
+        });
+
+    return _allowedScanModes;
 }
 
 @end

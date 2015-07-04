@@ -5,6 +5,8 @@
 //  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
 //
 
+#import "UMBarcodeScanViewControllerPvt.h"
+
 #if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
 #import "ZXingObjC.h"
 #endif
@@ -30,8 +32,9 @@
 + (NSString*)zb2umBarcodeType:(zbar_symbol_type_t)zbBarcodeType;
 #endif
 
-+ (BOOL)hasVideoCamera;
++ (BOOL)_hasVideoCamera;
 + (BOOL)_canReadBarcodeWithCamera;
++ (UMBarcodeScanMode_t*)_allowedScanModes;
 
 @end
 

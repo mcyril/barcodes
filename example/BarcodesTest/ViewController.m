@@ -36,6 +36,32 @@
 
 #pragma mark -
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UMBarcodeScanMode_t* scanModes = [UMBarcodeScanViewController allowedScanModes];
+    for (int index = 0; scanModes[index] != kUMBarcodeScanMode_NONE; index++)
+    {
+        switch (scanModes[index])
+        {
+        case kUMBarcodeScanMode_System:
+            _scanSystem.hidden = NO;
+            break;
+        case kUMBarcodeScanMode_ZXing:
+            _scanZXing.hidden = NO;
+            break;
+        case kUMBarcodeScanMode_ZBar:
+            _scanZBar.hidden = NO;
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+#pragma mark -
+
 - (IBAction)_scan:(id)sender
 {
     NSLog(@"### SCAN");
@@ -48,7 +74,10 @@
         scanViewController.scanMode = kUMBarcodeScanMode_ZXing;
     else if (sender == _scanZBar)
         scanViewController.scanMode = kUMBarcodeScanMode_ZBar;
-    // else never happens, though UMBarcodeScanViewController will choose mode based on system: iOS6 — ZXing, iOS7+ — System
+    // else never happens here
+    //  though in this case UMBarcodeScanViewController will choose mode based on system:
+    //  iOS6    — ZXing
+    //  iOS7+   — System
 
     scanViewController.cancelButtonText = @"Cancel";
     scanViewController.helpButtonText = @"Help";
@@ -84,7 +113,18 @@
     if (error != nil)
         NSLog(@"### SCAN ERROR: %@", error);
 
-    [scanViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [scanViewController.presentingViewController dismissViewControllerAnimated:YES
+                                                                    completion:^
+                                                                            {
+                                                                                if (error != nil)
+                                                                                {
+                                                                                    [[[[UIAlertView alloc] initWithTitle:@"ERROR"
+                                                                                                                 message:[error localizedDescription]
+                                                                                                                delegate:nil
+                                                                                                       cancelButtonTitle:@"OK"
+                                                                                                       otherButtonTitles:nil] autorelease] show];
+                                                                                }
+                                                                            }];
 }
 
 - (void)scanViewController:(UMBarcodeScanViewController*)scanViewController didScanString:(NSString*)barcodeData ofBarcodeType:(NSString*)barcodeType
@@ -92,8 +132,8 @@
     NSLog(@"### SCAN: %@ (%@)", barcodeData, barcodeType);
 
 #if 0
-    if ([scanViewController isSuspended]) // recognized code suspends scanner
-        [scanViewController resume];
+    if ([scanViewController isSuspended])   // recognized code suspends scanner
+        [scanViewController resume];        //  so we have to resume to continue scanning
 #else
     [scanViewController.presentingViewController dismissViewControllerAnimated:YES
                                                                     completion:^

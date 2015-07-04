@@ -55,7 +55,6 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
 @property (nonatomic, retain) NSString* helpButtonText;
 @property (nonatomic, retain) NSString* hintText;
 
-@property (nonatomic, readonly) UMBarcodeScanMode_t* allowedScanModes;
 @property (nonatomic, assign) UMBarcodeScanMode_t scanMode;
 @property (nonatomic, retain) NSArray* barcodeTypes;
 
@@ -73,5 +72,6 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
 - (void)resume;
 
 + (BOOL)canReadBarcodeWithCamera;
++ (UMBarcodeScanMode_t*)allowedScanModes;
 
 @end

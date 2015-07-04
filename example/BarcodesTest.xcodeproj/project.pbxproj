@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F139F75E1B477BAC00C80F63 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139F75D1B477BAC00C80F63 /* ImageIO.framework */; };
 		F1567C5F1B44CEA500C80F63 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1567C5E1B44CEA500C80F63 /* main.m */; };
 		F1567C621B44CEA500C80F63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1567C611B44CEA500C80F63 /* AppDelegate.m */; };
 		F1567C651B44CEA500C80F63 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1567C641B44CEA500C80F63 /* ViewController.m */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F139F75D1B477BAC00C80F63 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		F1567C591B44CEA500C80F63 /* BarcodesTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarcodesTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1567C5D1B44CEA500C80F63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1567C5E1B44CEA500C80F63 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				F19A8E831B47636700C80F63 /* CoreFoundation.framework in Frameworks */,
 				F19A8E881B47638E00C80F63 /* UIKit.framework in Frameworks */,
 				F19A8E861B47638400C80F63 /* CoreGraphics.framework in Frameworks */,
+				F139F75E1B477BAC00C80F63 /* ImageIO.framework in Frameworks */,
 				F19A8E8E1B47640000C80F63 /* QuartzCore.framework in Frameworks */,
 				F19A8E821B47636700C80F63 /* AVFoundation.framework in Frameworks */,
 				F19A8E8A1B4763A700C80F63 /* CoreVideo.framework in Frameworks */,
@@ -128,14 +131,15 @@
 				F1567C5E1B44CEA500C80F63 /* main.m */,
 				F1D359801B454DA000C80F63 /* PrefixHeader.pch */,
 				F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */,
-				F19A8E8D1B47640000C80F63 /* QuartzCore.framework */,
-				F19A8E8B1B4763B800C80F63 /* CoreMedia.framework */,
-				F19A8E891B4763A700C80F63 /* CoreVideo.framework */,
+				F19A8E811B47636700C80F63 /* Foundation.framework */,
+				F19A8E801B47636700C80F63 /* CoreFoundation.framework */,
 				F19A8E871B47638E00C80F63 /* UIKit.framework */,
 				F19A8E851B47638400C80F63 /* CoreGraphics.framework */,
+				F139F75D1B477BAC00C80F63 /* ImageIO.framework */,
+				F19A8E8D1B47640000C80F63 /* QuartzCore.framework */,
 				F19A8E7F1B47636700C80F63 /* AVFoundation.framework */,
-				F19A8E801B47636700C80F63 /* CoreFoundation.framework */,
-				F19A8E811B47636700C80F63 /* Foundation.framework */,
+				F19A8E891B4763A700C80F63 /* CoreVideo.framework */,
+				F19A8E8B1B4763B800C80F63 /* CoreMedia.framework */,
 				F19A8E731B47627100C80F63 /* MobileCoreServices.framework */,
 				F1C69A3C1B45A0E300C80F63 /* libiconv.dylib */,
 			);
@@ -367,6 +371,7 @@
 				INFOPLIST_FILE = BarcodesTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -386,6 +391,7 @@
 				INFOPLIST_FILE = BarcodesTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
