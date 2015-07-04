@@ -33,6 +33,9 @@
 
 #define kMinimalTorchLevel  .05
 
+static NSString* const kUMViewfinderLayerName = @"$UM$-viewfinder";
+static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
+
 @interface UMBarcodeView () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 @property (nonatomic, readwrite) BOOL enableCapture;
 @property (nonatomic, retain) NSError* error;
@@ -111,8 +114,7 @@
     [_zbScanner release];
 #endif
 
-    [_viewFinderLayer release];
-    [_viewAimLayer release];
+    [_viewFinderLayers release];
     [_videoPreviewLayer release];
     [_captureSession release];
     [_videoInput release];
@@ -311,24 +313,49 @@
 
     [self.layer insertSublayer:_videoPreviewLayer atIndex:0];
 
-    _viewFinderLayer = [[CAShapeLayer layer] retain];
-    _viewFinderLayer.strokeColor = [UIColor greenColor].CGColor;
-    _viewFinderLayer.fillColor = [UIColor clearColor].CGColor;
-    _viewFinderLayer.lineWidth = 3.;
+    _viewFinderLayers = [[NSMutableArray alloc] initWithCapacity:0];
 
-    _viewFinderLayer.lineJoin = kCALineJoinMiter;
-    _viewFinderLayer.lineCap = kCALineCapSquare;
+    if ([_context.delegate respondsToSelector:@selector(scanViewController:addLayerAtIndex:)])
+    {
+        for (NSUInteger index = 0; ; index++)
+        {
+            CALayer* layer = [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self] addLayerAtIndex:index];
+            if (layer == nil)
+                break;
+            else
+                [_viewFinderLayers addObject:layer];
+        }
+    }
+    else
+    {
+        {
+            CAShapeLayer* layer = [CAShapeLayer layer];
+            layer.name = kUMViewfinderLayerName;
+            layer.strokeColor = [UIColor greenColor].CGColor;
+            layer.fillColor = [UIColor clearColor].CGColor;
+            layer.lineWidth = 3.;
 
-    [self.layer addSublayer:_viewFinderLayer];
+            layer.lineJoin = kCALineJoinMiter;
+            layer.lineCap = kCALineCapSquare;
 
-    _viewAimLayer = [[CAShapeLayer layer] retain];
-    _viewAimLayer.strokeColor = [UIColor redColor].CGColor;
-    _viewAimLayer.fillColor = [UIColor clearColor].CGColor;
-    _viewAimLayer.lineWidth = 1.;
+            [_viewFinderLayers addObject:layer];
+        }
 
-    _viewAimLayer.lineCap = kCALineCapSquare;
+        {
+            CAShapeLayer* layer = [CAShapeLayer layer];
+            layer.name = kUMAimCrossLayerName;
+            layer.strokeColor = [UIColor redColor].CGColor;
+            layer.fillColor = [UIColor clearColor].CGColor;
+            layer.lineWidth = 1.;
 
-    [self.layer addSublayer:_viewAimLayer];
+            layer.lineCap = kCALineCapSquare;
+
+            [_viewFinderLayers addObject:layer];
+        }
+    }
+
+    for (CALayer* layer in _viewFinderLayers)
+        [self.layer addSublayer:layer];
 
     return YES;
 }
@@ -537,46 +564,56 @@
 
         r = CGRectInset(r, kViewFinderFrameMargin, kViewFinderFrameMargin);
 
+        if ([_context.delegate respondsToSelector:@selector(scanViewController:layoutLayer:viewRect:)])
         {
-            CGMutablePathRef path = CGPathCreateMutable();
-
-            CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r) + kViewFinderFrameSize);
-            CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r));
-            CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderFrameSize, CGRectGetMinY(r));
-
-            CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r) + kViewFinderFrameSize);
-            CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r));
-            CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderFrameSize, CGRectGetMinY(r));
-
-            CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r) - kViewFinderFrameSize);
-            CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r));
-            CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderFrameSize, CGRectGetMaxY(r));
-
-            CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r) - kViewFinderFrameSize);
-            CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r));
-            CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderFrameSize, CGRectGetMaxY(r));
-
-            _viewFinderLayer.path = path;
-
-            [_viewFinderLayer display];
-
-            CGPathRelease(path);
+            for (CALayer* layer in _viewFinderLayers)
+                [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self] layoutLayer:layer viewRect:r];
         }
-
+        else
         {
-            CGMutablePathRef path = CGPathCreateMutable();
+            for (CALayer* layer in _viewFinderLayers)
+            {
+                if ([layer.name isEqualToString:kUMViewfinderLayerName])
+                {
+                    CGMutablePathRef path = CGPathCreateMutable();
 
-            CGPathMoveToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMinY(r) + kViewFinderFrameSize);
-            CGPathAddLineToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMaxY(r) - kViewFinderFrameSize);
+                    CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r) + kViewFinderFrameSize);
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r));
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderFrameSize, CGRectGetMinY(r));
 
-            CGPathMoveToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderFrameSize, CGRectGetMidY(r));
-            CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderFrameSize, CGRectGetMidY(r));
+                    CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r) + kViewFinderFrameSize);
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r));
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderFrameSize, CGRectGetMinY(r));
 
-            _viewAimLayer.path = path;
+                    CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r) - kViewFinderFrameSize);
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r));
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderFrameSize, CGRectGetMaxY(r));
 
-            [_viewAimLayer display];
+                    CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r) - kViewFinderFrameSize);
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r));
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderFrameSize, CGRectGetMaxY(r));
 
-            CGPathRelease(path);
+                    ((CAShapeLayer*)layer).path = path;
+
+                    CGPathRelease(path);
+                }
+                else if ([layer.name isEqualToString:kUMAimCrossLayerName])
+                {
+                    CGMutablePathRef path = CGPathCreateMutable();
+
+                    CGPathMoveToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMinY(r) + kViewFinderFrameSize);
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMaxY(r) - kViewFinderFrameSize);
+
+                    CGPathMoveToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderFrameSize, CGRectGetMidY(r));
+                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderFrameSize, CGRectGetMidY(r));
+
+                    ((CAShapeLayer*)layer).path = path;
+
+                    CGPathRelease(path);
+                }
+
+                [layer display];
+            }
         }
     }
 }

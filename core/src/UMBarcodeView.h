@@ -49,8 +49,7 @@
 #endif
     AVCaptureVideoPreviewLayer* _videoPreviewLayer;
 
-    CAShapeLayer* _viewFinderLayer;
-    CAShapeLayer* _viewAimLayer;
+    NSMutableArray* _viewFinderLayers;
 
     NSError* _error;
 }

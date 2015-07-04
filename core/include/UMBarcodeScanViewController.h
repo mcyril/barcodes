@@ -53,7 +53,12 @@ EXT_EXPORT NSString* const kUMBarcodeTypeDataMatrixCode;
 - (void)scanViewController:(UMBarcodeScanViewController*)scanViewController didScanString:(NSString*)barcodeData ofBarcodeType:(NSString*)barcodeType;
 
 @optional
+// optional help screen invocation, please take care on suspend/resume of scanning session
 - (void)scanViewControllerDidPressHelpButton:(UMBarcodeScanViewController*)scanViewController;
+
+// optional customized viefinder layers
+- (CALayer*)scanViewController:(UMBarcodeScanViewController*)scanViewController addLayerAtIndex:(NSUInteger)index; // returns nil when all layers created
+- (void)scanViewController:(UMBarcodeScanViewController*)scanViewController layoutLayer:(CALayer*)layer viewRect:(CGRect)rect;
 @end
 
 @class UMBarcodeScanContext;
