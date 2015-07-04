@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F14148CB1B48630D00C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
+		F14148CC1B48630D00C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
+		F14148CD1B48630D00C80F63 /* UMBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */; };
+		F14148CE1B48630D00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
+		F14148CF1B48630D00C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
+		F14148D01B48630D00C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
+		F14148D31B48630D00C80F63 /* libZXingObjC-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */; };
+		F14148E51B48634B00C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
+		F14148E61B48634B00C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
+		F14148E71B48634B00C80F63 /* UMBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */; };
+		F14148E81B48634B00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
+		F14148E91B48634B00C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
+		F14148EA1B48634B00C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
 		F16D613B1B47421700C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
 		F16D613C1B47421700C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
 		F16D613E1B47421700C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
@@ -18,6 +31,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F14148C91B48630D00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 25403CB2166A96FA00E13304;
+			remoteInfo = "ZXingObjC-iOS";
+		};
 		F16D611E1B47405400C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
@@ -84,6 +104,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F14148D41B48630D00C80F63 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F14148EE1B48634B00C80F63 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F16D60F81B473E3E00C80F63 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,6 +134,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F14148D91B48630D00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F14148F31B48634B00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F16D60FA1B473E3E00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZXingObjC.xcodeproj; path = lib/zxing/ZXingObjC.xcodeproj; sourceTree = "<group>"; };
 		F16D612E1B47421700C80F63 /* UMBarcodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeView.h; sourceTree = "<group>"; };
@@ -121,6 +161,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F14148D11B48630D00C80F63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F14148D31B48630D00C80F63 /* libZXingObjC-iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F14148EB1B48634B00C80F63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F16D60F71B473E3E00C80F63 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,6 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				F16D60FA1B473E3E00C80F63 /* libbarcodes.a */,
+				F14148D91B48630D00C80F63 /* libbarcodes.a */,
+				F14148F31B48634B00C80F63 /* libbarcodes.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,9 +282,44 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F16D60F91B473E3E00C80F63 /* barcodes */ = {
+		F14148C51B48630D00C80F63 /* barcodes-no-zbar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes" */;
+			buildConfigurationList = F14148D51B48630D00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-no-zbar" */;
+			buildPhases = (
+				F14148CA1B48630D00C80F63 /* Sources */,
+				F14148D11B48630D00C80F63 /* Frameworks */,
+				F14148D41B48630D00C80F63 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F14148C81B48630D00C80F63 /* PBXTargetDependency */,
+			);
+			name = "barcodes-no-zbar";
+			productName = barcodes;
+			productReference = F14148D91B48630D00C80F63 /* libbarcodes.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F14148DF1B48634B00C80F63 /* barcodes-system */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F14148EF1B48634B00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-system" */;
+			buildPhases = (
+				F14148E41B48634B00C80F63 /* Sources */,
+				F14148EB1B48634B00C80F63 /* Frameworks */,
+				F14148EE1B48634B00C80F63 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "barcodes-system";
+			productName = barcodes;
+			productReference = F14148F31B48634B00C80F63 /* libbarcodes.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F16D60F91B473E3E00C80F63 /* barcodes-all */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-all" */;
 			buildPhases = (
 				F16D60F61B473E3E00C80F63 /* Sources */,
 				F16D60F71B473E3E00C80F63 /* Frameworks */,
@@ -239,7 +331,7 @@
 				F16D61F81B4756FB00C80F63 /* PBXTargetDependency */,
 				F16D61481B47477200C80F63 /* PBXTargetDependency */,
 			);
-			name = barcodes;
+			name = "barcodes-all";
 			productName = barcodes;
 			productReference = F16D60FA1B473E3E00C80F63 /* libbarcodes.a */;
 			productType = "com.apple.product-type.library.static";
@@ -280,7 +372,9 @@
 			);
 			projectRoot = "";
 			targets = (
-				F16D60F91B473E3E00C80F63 /* barcodes */,
+				F16D60F91B473E3E00C80F63 /* barcodes-all */,
+				F14148C51B48630D00C80F63 /* barcodes-no-zbar */,
+				F14148DF1B48634B00C80F63 /* barcodes-system */,
 			);
 		};
 /* End PBXProject section */
@@ -338,6 +432,32 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F14148CA1B48630D00C80F63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F14148CB1B48630D00C80F63 /* UMBarcodeGenerator.m in Sources */,
+				F14148CC1B48630D00C80F63 /* UMBarcodeScanUtilities.m in Sources */,
+				F14148CD1B48630D00C80F63 /* UMBarcodeViewController.m in Sources */,
+				F14148CE1B48630D00C80F63 /* UMBarcodeScanViewController.m in Sources */,
+				F14148CF1B48630D00C80F63 /* UMBarcodeScanContext.m in Sources */,
+				F14148D01B48630D00C80F63 /* UMBarcodeView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F14148E41B48634B00C80F63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F14148E51B48634B00C80F63 /* UMBarcodeGenerator.m in Sources */,
+				F14148E61B48634B00C80F63 /* UMBarcodeScanUtilities.m in Sources */,
+				F14148E71B48634B00C80F63 /* UMBarcodeViewController.m in Sources */,
+				F14148E81B48634B00C80F63 /* UMBarcodeScanViewController.m in Sources */,
+				F14148E91B48634B00C80F63 /* UMBarcodeScanContext.m in Sources */,
+				F14148EA1B48634B00C80F63 /* UMBarcodeView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F16D60F61B473E3E00C80F63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -354,6 +474,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F14148C81B48630D00C80F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ZXingObjC-iOS";
+			targetProxy = F14148C91B48630D00C80F63 /* PBXContainerItemProxy */;
+		};
 		F16D61481B47477200C80F63 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ZXingObjC-iOS";
@@ -367,6 +492,54 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		F14148D61B48630D00C80F63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F14148D71B48630D00C80F63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F14148D81B48630D00C80F63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0";
+				SKIP_INSTALL = YES;
+			};
+			name = Distribution;
+		};
+		F14148F01B48634B00C80F63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=0";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F14148F11B48634B00C80F63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=0";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F14148F21B48634B00C80F63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=0";
+				SKIP_INSTALL = YES;
+			};
+			name = Distribution;
+		};
 		F16D610C1B473E3E00C80F63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F16D61531B474DCB00C80F63 /* Debug.xcconfig */;
@@ -474,6 +647,26 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F14148D51B48630D00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-no-zbar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F14148D61B48630D00C80F63 /* Debug */,
+				F14148D71B48630D00C80F63 /* Release */,
+				F14148D81B48630D00C80F63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F14148EF1B48634B00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-system" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F14148F01B48634B00C80F63 /* Debug */,
+				F14148F11B48634B00C80F63 /* Release */,
+				F14148F21B48634B00C80F63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F16D60F51B473E3E00C80F63 /* Build configuration list for PBXProject "barcodes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -484,7 +677,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes" */ = {
+		F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-all" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F16D610F1B473E3E00C80F63 /* Debug */,

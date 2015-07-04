@@ -1,7 +1,12 @@
 #/bin/sh
 
-USE_ZXING=1
-USE_ZBAR=0
+if [ $# -eq 1 ] ; then
+	MODEL=$1
+else
+	MODEL="all"
+fi
+
+TARGET_MODEL="-target barcodes-$MODEL"
 
 #simulator
 
@@ -12,7 +17,7 @@ EXECUTABLE_NAME=`xcodebuild -sdk iphonesimulator -arch i386 -arch x86_64 -showBu
 
 echo "building simulator library..."
 
-xcodebuild -sdk iphonesimulator -arch i386 -arch x86_64 GCC_PREPROCESSOR_DEFINITIONS_BASE="UMBARCODE_SCAN_ZXING=$USE_ZXING UMBARCODE_SCAN_ZBAR=$USE_ZBAR" clean build > /dev/null
+xcodebuild -sdk iphonesimulator -arch i386 -arch x86_64 $TARGET_MODEL clean build > /dev/null
 
 SIMULATOR_TARGET_PATH="$TARGET_BUILD_DIR/$EXECUTABLE_NAME"
 
@@ -25,7 +30,7 @@ EXECUTABLE_NAME=`xcodebuild -sdk iphoneos -arch armv7 -arch arm64 -showBuildSett
 
 echo "building device library..."
 
-xcodebuild -sdk iphoneos -arch armv7 -arch arm64 GCC_PREPROCESSOR_DEFINITIONS_BASE="UMBARCODE_SCAN_ZXING=$USE_ZXING UMBARCODE_SCAN_ZBAR=$USE_ZBAR" clean build > /dev/null
+xcodebuild -sdk iphoneos -arch armv7 -arch arm64 $TARGET_MODEL clean build > /dev/null
 
 DEVICE_TARGET_PATH="$TARGET_BUILD_DIR/$EXECUTABLE_NAME"
 
