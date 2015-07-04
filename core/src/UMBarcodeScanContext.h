@@ -22,7 +22,7 @@ typedef enum _UMBarcodeScanState UMBarcodeScanState_t;
 
 @private
     UMBarcodeScanMode_t _allowedScanModes[kUMBarcodeScanMode_COUNT + 1];
-    
+
     id<UMBarcodeScanDelegate> _delegate;
 
     NSString* _cancelButtonText;

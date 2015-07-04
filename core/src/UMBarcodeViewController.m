@@ -357,7 +357,7 @@
     default:
         break;
     }
-    
+
     // show controls for the rest (they created hidden)
     self.cancelButton.hidden = NO;
     self.helpButton.hidden = NO;

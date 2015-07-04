@@ -30,7 +30,7 @@
     [_scanSystem release];
     [_scanZXing release];
     [_scanZBar release];
-    
+
     [super dealloc];
 }
 
@@ -41,7 +41,7 @@
     NSLog(@"### SCAN");
 
     UMBarcodeScanViewController* scanViewController = [[[UMBarcodeScanViewController alloc] initWithScanDelegate:self] autorelease];
-    
+
     if (sender == _scanSystem)
         scanViewController.scanMode = kUMBarcodeScanMode_System;
     else if (sender == _scanZXing)
@@ -49,7 +49,7 @@
     else if (sender == _scanZBar)
         scanViewController.scanMode = kUMBarcodeScanMode_ZBar;
     // else never happens, though UMBarcodeScanViewController will choose mode based on system: iOS6 — ZXing, iOS7+ — System
-    
+
     scanViewController.cancelButtonText = @"Cancel";
     scanViewController.helpButtonText = @"Help";
     scanViewController.hintText = [NSString stringWithFormat:@"Place barcode inside viewfinder to scan with %@", scanViewController.scanMode == kUMBarcodeScanMode_ZXing ? @"ZXing" : (scanViewController.scanMode == kUMBarcodeScanMode_ZBar ? @"ZBar" : @"Syztem")];

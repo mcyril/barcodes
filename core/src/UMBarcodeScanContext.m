@@ -55,7 +55,7 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
         _initialInterfaceOrientationForViewcontroller = UIInterfaceOrientationUnknown;
         _allowFreelyRotatingGuide = YES;
         _showFoundCodePoints = NO;
-        
+
         int index = 0;
         if (UMBarcodeScan_isOS7())
             _allowedScanModes[index++] = kUMBarcodeScanMode_System;
