@@ -32,6 +32,7 @@
     ZXEncodeHints* hints = [ZXEncodeHints hints];
     hints.encoding = CFStringConvertEncodingToNSStringEncoding(encoding);
     hints.errorCorrectionLevel = (format == kBarcodeFormatAztec ? [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelQ] : [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelM]);
+    hints.margin = [NSNumber numberWithInt:4];
 
     ZXBitMatrix* result = [[ZXMultiFormatWriter writer] encode:data format:format width:ceilf(size.width) height:ceilf(size.height) hints:hints error:error];
     if (result != nil)

@@ -220,7 +220,7 @@ static dispatch_once_t onceToken;
     else if ([umBarcodeType isEqualToString:kUMBarcodeTypePDF417Code])
         return ZBAR_PDF417;
 #endif
-    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeAztecCode])
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeQRCode])
         return ZBAR_QRCODE;
     else if ([umBarcodeType isEqualToString:kUMBarcodeTypeInterleaved2of5Code])
         return ZBAR_I25;
