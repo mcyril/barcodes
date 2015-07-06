@@ -1,28 +1,34 @@
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
-libBarcodes — static library which summarizes most of efforts of the barcode scanning for
-iOS under the unified single umbrella controller
+libBarcodes — library which summarises several efforts of the scanning and
+generating of barcodes for iOS under the unified single umbrella controller
 
 Some portions of scan controller are acknowledged from CardIO library, by the courtesy
 of eBay Software Foundation. See LICENSE file
-
 -----------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
-Scanning
------------------------------------------------------------------------------------------
-
 libBarcodes aggregates three ways of barcode scanning with 3rd party components:
 
  * iOS system approach (iOS7+)
  * ZXing (https://github.com/TheLevelUp/ZXingObjC ; ZXingObjC port)
  * ZBar (http://zbar.sourceforge.net ; curtsy to ultrafast scanning library ever)
 
+libBarcodes uses ZXingObjC to generate barcodes in default build configuration. Build
+configuration without ZXingObjC uses aztecgen (http://aztecgen.sourceforge.net/) and
+qrencode (http://fukuchi.org/works/qrencode/)
 -----------------------------------------------------------------------------------------
+Building:
+  
+  barcodes/core/build.sh [cfg]
+  
+  where cfg is
+    all     - build with all scanners (default)
+    no-zbar - build without zbar scanner
+    system  - build only with system scanner (iOS7+)
 -----------------------------------------------------------------------------------------
-Generating
------------------------------------------------------------------------------------------
+Using:
 
-libBarcodes uses ZXingObjC to generate barcodes
+  see barcodes/example for sample project
 
-Build configurations without ZXingObjC use aztecgen (http://aztecgen.sourceforge.net/)
-and qrencode (http://fukuchi.org/works/qrencode/)
+Basically you need to build library and copy it with headers to your project, i.e.:
+
+  barcodes/core/libbarcodes.a
+  barcodes/core/include/UMBarcodeGenerator.h
+  barcodes/core/include/UMBarcodeScanViewController.h

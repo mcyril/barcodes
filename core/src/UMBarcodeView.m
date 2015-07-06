@@ -1,8 +1,8 @@
 //
 //  UMBarcodeView.m
 //
-//  Created by Cyril Murzin on 02/07/15.
 //  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
+//  Created by Cyril Murzin
 //
 
 //  some work derived & base ideas of scan controller are borrowed from CardIO library,
@@ -39,7 +39,11 @@
 static NSString* const kUMViewfinderLayerName = @"$UM$-viewfinder";
 static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
-@interface UMBarcodeView () <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface UMBarcodeView () <AVCaptureMetadataOutputObjectsDelegate
+#if (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
+                                                                    , AVCaptureVideoDataOutputSampleBufferDelegate
+#endif
+                                                                                                                    >
 @property (nonatomic, readwrite) BOOL enableCapture;
 @property (nonatomic, retain) NSError* error;
 
@@ -713,6 +717,7 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
     }
 }
 
+#if (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
 - (void)captureOutput:(AVCaptureOutput*)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection*)connection
 {
     if ((OSAtomicOr32Barrier(0, &_context->_state) & (PAUSED|RUNNING)) != RUNNING) // bypass if suspended
@@ -820,5 +825,6 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
         }
     }
 }
+#endif
 
 @end
