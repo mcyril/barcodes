@@ -16,7 +16,8 @@ qrencode (http://fukuchi.org/works/qrencode/)
 -----------------------------------------------------------------------------------------
 Building:
   
-  barcodes/core/build.sh [cfg]
+  cd barcodes/core
+  ./build.sh [cfg]
   
   where cfg is
     all     - build with all scanners (default)
@@ -27,8 +28,9 @@ Using:
 
   see barcodes/example for sample project
 
-Basically you need to build library and copy it with headers to your project, i.e.:
+Basically you need to build library and copy it with headers to your project, so required
+files are:
 
   barcodes/core/libbarcodes.a
-  barcodes/core/include/UMBarcodeGenerator.h
-  barcodes/core/include/UMBarcodeScanViewController.h
+  barcodes/core/include/UMBarcodeGenerator.h (for barcodes generating)
+  barcodes/core/include/UMBarcodeScanViewController.h (for barcodes scanning)
