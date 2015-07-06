@@ -34,4 +34,3 @@ files are:
   barcodes/core/libbarcodes.a
   barcodes/core/include/UMBarcodeGenerator.h (for barcodes generating)
   barcodes/core/include/UMBarcodeScanViewController.h (for barcodes scanning)
-
