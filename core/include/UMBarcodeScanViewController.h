@@ -14,12 +14,8 @@ enum _UMBarcodeScanMode
 {
     kUMBarcodeScanMode_NONE = 0,
     kUMBarcodeScanMode_System,  // fast, reliable enough, but iOS7+ (some codes iOS8+)
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
     kUMBarcodeScanMode_ZBar,    // ultrafast, reliable enough, but has limited set of formats
-#endif
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
     kUMBarcodeScanMode_ZXing,   // slow, sometimes glitchy, but has good set of formats
-#endif
 
     kUMBarcodeScanMode_COUNT
 };

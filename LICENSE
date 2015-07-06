@@ -58,5 +58,5 @@ libBarcodes uses 3rd party libraries and components, namely
     zbar       (http://zbar.sourceforge.net)
     ZXingObjC  (https://github.com/TheLevelUp/ZXingObjC)
 
-which are and licensed. See appropriate LICENSE and/or README files in subrepos
+which are licensed. See appropriate LICENSE and/or README files in subrepos
 -----------------------------------------------------------------------------------------

@@ -156,10 +156,17 @@
 
 - (void)setScanMode:(UMBarcodeScanMode_t)scanMode
 {
-    NSAssert(scanMode > kUMBarcodeScanMode_NONE && scanMode < kUMBarcodeScanMode_COUNT, @"*** UNDEFINED SCAN MODE");
     NSAssert(scanMode != kUMBarcodeScanMode_System || UMBarcodeScan_isOS7(), @"*** iOS 6 HAS NO SCANNING CAPABILITIES");
+    
+    UMBarcodeScanMode_t* scanModes = [UMBarcodeScanUtilities _allowedScanModes];
+    for (int index = 0; scanModes[index] != kUMBarcodeScanMode_NONE; index++)
+        if (scanModes[index] == scanMode)
+        {
+            _context.scanMode = scanMode;
+            return;
+        }
 
-    _context.scanMode = scanMode;
+    NSAssert(NO, @"*** UNDEFINED SCAN MODE");
 }
 
 - (NSArray*)barcodeTypes
