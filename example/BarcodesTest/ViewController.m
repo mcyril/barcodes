@@ -110,11 +110,7 @@
                                                     kUMBarcodeTypeDataMatrixCode,
                                                 nil];
 
-    UIViewController* parent = self.presentedViewController;
-    if (parent == nil)
-        parent = self;
-
-    [parent presentViewController:scanViewController animated:YES completion:nil];
+    [self presentViewController:scanViewController animated:YES completion:nil];
 }
 
 - (void)scanViewController:(UMBarcodeScanViewController*)scanViewController didCancelWithError:(NSError*)error

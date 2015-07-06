@@ -15,10 +15,10 @@ configuration without ZXingObjC uses aztecgen (http://aztecgen.sourceforge.net/)
 qrencode (http://fukuchi.org/works/qrencode/)
 ----------------------------------------------------------------------------------------
 Building:
-  
+
   cd barcodes/core
   ./build.sh [cfg]
-  
+
   where cfg is
     all     - build with all scanners (default)
     no-zbar - build without zbar scanner
@@ -28,8 +28,8 @@ Using:
 
   see barcodes/example for sample project
 
-Basically you need to build library and copy it with headers to your project, so required
-files are:
+Basically you need to build library and copy it with headers to your project, so 
+required files are:
 
   barcodes/core/libbarcodes.a
   barcodes/core/include/UMBarcodeGenerator.h (for barcodes generating)
@@ -38,3 +38,14 @@ files are:
 Note to github.com mirror users:
 
   use https://bitbucket.org/ravel/barcodes (zbar subrepo is missing after the sync)
+----------------------------------------------------------------------------------------
+Preventing FAQ:
+
+  Q: What about ARC?
+  A: Your project doesn't care which memory management used inside libBarcodes
+
+  Q: No, really, why no ARC in libBarcodes?
+  A: Go away
+
+  Q: What about CocoaPods?
+  A: Certainly, go away
