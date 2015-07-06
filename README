@@ -3,7 +3,7 @@ generating of barcodes for iOS under the unified single umbrella controller
 
 Some portions of scan controller are acknowledged from CardIO library, by the courtesy
 of eBay Software Foundation. See LICENSE file
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 libBarcodes aggregates three ways of barcode scanning with 3rd party components:
 
  * iOS system approach (iOS7+)
@@ -13,7 +13,7 @@ libBarcodes aggregates three ways of barcode scanning with 3rd party components:
 libBarcodes uses ZXingObjC to generate barcodes in default build configuration. Build
 configuration without ZXingObjC uses aztecgen (http://aztecgen.sourceforge.net/) and
 qrencode (http://fukuchi.org/works/qrencode/)
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 Building:
   
   cd barcodes/core
@@ -23,7 +23,7 @@ Building:
     all     - build with all scanners (default)
     no-zbar - build without zbar scanner
     system  - build only with system scanner (iOS7+)
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 Using:
 
   see barcodes/example for sample project
@@ -34,3 +34,7 @@ files are:
   barcodes/core/libbarcodes.a
   barcodes/core/include/UMBarcodeGenerator.h (for barcodes generating)
   barcodes/core/include/UMBarcodeScanViewController.h (for barcodes scanning)
+----------------------------------------------------------------------------------------
+Note to github.com mirror users:
+
+  use https://bitbucket.org/ravel/barcodes (zbar subrepo is missing after the sync)
