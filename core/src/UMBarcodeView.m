@@ -39,16 +39,23 @@
 static NSString* const kUMViewfinderLayerName = @"$UM$-viewfinder";
 static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
-@interface UMBarcodeView () <AVCaptureMetadataOutputObjectsDelegate
+@interface UMBarcodeView ()
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+                            <AVCaptureMetadataOutputObjectsDelegate
 #if (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
                                                                     , AVCaptureVideoDataOutputSampleBufferDelegate
 #endif
                                                                                                                     >
+#endif
+
 @property (nonatomic, readwrite) BOOL enableCapture;
 @property (nonatomic, retain) NSError* error;
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (void)_initializeAVBowels;
+#endif
 - (BOOL)_initializeViewFinder;
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (BOOL)_initializeSystemOutput;
 #if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
 - (BOOL)_initializeSystemZXingOutput;
@@ -56,11 +63,14 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 #if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
 - (BOOL)_initializeSystemZBar;
 #endif
+#endif
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (BOOL)_changeCameraConfiguration:(BOOL(^)(NSError** error))changeBlock error:(NSError**)outError;
 - (void)_refocus;
 - (void)_autofocusOnce;
 - (void)_resumeContinuousAutofocusing;
+#endif
 
 - (void)_didReceiveDeviceOrientationNotification:(NSNotification*)notification;
 
@@ -83,9 +93,11 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
         self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         self.backgroundColor = [UIColor clearColor];
-
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
         [self _initializeAVBowels];
-
+#else
+        [self _initializeViewFinder];
+#endif
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didReceiveDeviceOrientationNotification:) name:kUMBarcodeScanContextChangedOrientation object:_context];
     }
 
@@ -96,6 +108,7 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     if (_queue != NULL)
     {
         [_metaDataOutput setMetadataObjectsDelegate:nil queue:_queue];
@@ -120,25 +133,31 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
     [_zbImage release];
     [_zbScanner release];
 #endif
+#endif /* !simulator */
 
     [_viewfinderLayers release];
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     [_videoPreviewLayer release];
     [_captureSession release];
     [_videoInput release];
     [_camera release];
+#endif
 
     [_error release];
 
     [_context release];
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     if (_configurationSemaphore != NULL)
         dispatch_release(_configurationSemaphore);
+#endif
 
     [super dealloc];
 }
 
 #pragma mark -
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (BOOL)_changeCameraConfiguration:(BOOL(^)(NSError** error))changeBlock error:(NSError**)outError
 {
     dispatch_semaphore_wait(_configurationSemaphore, DISPATCH_TIME_FOREVER);
@@ -163,7 +182,9 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
     return success;
 }
+#endif
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (void)_refocus
 {
     [self _autofocusOnce];
@@ -171,7 +192,9 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_resumeContinuousAutofocusing) object:nil];
     [self performSelector:@selector(_resumeContinuousAutofocusing) withObject:nil afterDelay:.1];
 }
+#endif
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (void)_autofocusOnce
 {
     [self _changeCameraConfiguration:^BOOL(NSError** error)
@@ -183,7 +206,9 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
                                 }
                               error:NULL];
 }
+#endif
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (void)_resumeContinuousAutofocusing
 {
     [self _changeCameraConfiguration:^BOOL(NSError** error)
@@ -200,7 +225,9 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
                                 }
                               error:NULL];
 }
+#endif
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (void)_initializeAVBowels
 {
     _configurationSemaphore = dispatch_semaphore_create(1);
@@ -308,17 +335,22 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
         self.error = error;
     }
 }
+#endif
 
 - (BOOL)_initializeViewFinder
 {
     // create a preview layer
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     if (_videoPreviewLayer == nil)
         return NO;
+#endif
 
     [self _didReceiveDeviceOrientationNotification:nil];
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     [self.layer insertSublayer:_videoPreviewLayer atIndex:0];
+#endif
 
     _viewfinderLayers = [[NSMutableArray alloc] initWithCapacity:0];
 
@@ -373,6 +405,7 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
     return YES;
 }
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (BOOL)_initializeSystemOutput
 {
     _metaDataOutput = [[AVCaptureMetadataOutput alloc] init];
@@ -409,8 +442,9 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
     return YES;
 }
+#endif
 
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if (!defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR) && (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING)
 - (BOOL)_initializeSystemZXingOutput
 {
     _zxReader = [[ZXMultiFormatReader reader] retain];
@@ -455,7 +489,7 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 }
 #endif
 
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+#if (!defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR) && (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
 - (BOOL)_initializeSystemZBar
 {
     _zbImage = [[ZBarImage alloc] init];
@@ -508,7 +542,9 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
             [self performSelectorOnMainThread: @selector(_didReadNewCode:) withObject:nil waitUntilDone:NO];
         else
         {
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
             [_captureSession startRunning];
+#endif
             self.enableCapture = YES;
         }
     }
@@ -519,7 +555,9 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
     if (self.enableCapture)
     {
         self.enableCapture = NO;
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
         [_captureSession stopRunning];
+#endif
     }
 }
 
@@ -540,7 +578,14 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
 - (CGRect)cameraPreviewFrame
 {
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     return _videoPreviewLayer.frame;
+#else
+    if (!CGRectIsEmpty(self.bounds))
+        return CGRectInset(self.bounds, kViewFinderMargin, kViewFinderMargin);
+    else
+        return CGRectZero;
+#endif
 }
 
 #pragma mark -
@@ -570,11 +615,12 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
     {
         CGRect r = CGRectInset(self.bounds, kViewFinderMargin, kViewFinderMargin);
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
         _videoPreviewLayer.frame = r;
 
         // fill the entire screen, without this we get empty areas at the long sides
         [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-
+#endif
         r = CGRectInset(r, kViewFinderFrameMargin, kViewFinderFrameMargin);
 
         if ([_context.delegate respondsToSelector:@selector(scanViewController:layoutLayer:viewRect:)])
@@ -639,8 +685,10 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
 - (void)_didReceiveDeviceOrientationNotification:(NSNotification*)notification
 {
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     if ([[_videoPreviewLayer connection] isVideoOrientationSupported])
         [[_videoPreviewLayer connection] setVideoOrientation:(AVCaptureVideoOrientation)[UIApplication sharedApplication].statusBarOrientation];
+#endif
 }
 
 - (void)_didReadNewCode:(id)obj
@@ -685,6 +733,7 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 
 #pragma mark -
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (void)captureOutput:(AVCaptureOutput*)captureOutput didOutputMetadataObjects:(NSArray*)metadataObjects fromConnection:(AVCaptureConnection*)connection
 {
     if ((OSAtomicOr32Barrier(0, &_context->_state) & (PAUSED|RUNNING)) != RUNNING) // bypass if suspended
@@ -716,8 +765,9 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
         }
     }
 }
+#endif
 
-#if (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
+#if (!defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR) && ((defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR))
 - (void)captureOutput:(AVCaptureOutput*)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection*)connection
 {
     if ((OSAtomicOr32Barrier(0, &_context->_state) & (PAUSED|RUNNING)) != RUNNING) // bypass if suspended

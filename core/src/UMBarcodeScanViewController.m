@@ -24,6 +24,13 @@
 @dynamic scanMode;
 @dynamic barcodeTypes;
 
+@dynamic keepStatusBarStyle;
+@dynamic navigationBarStyle;
+@dynamic navigationBarTintColor;
+@dynamic allowFreelyRotatingGuide;
+
+@dynamic interfaceOrientationForScan;
+
 @synthesize context = _context;
 @synthesize shouldStoreStatusBarStyle = _shouldStoreStatusBarStyle;
 @synthesize statusBarWasOriginallyHidden = _statusBarWasOriginallyHidden;
@@ -228,6 +235,11 @@
     {
         OSAtomicAnd32Barrier(~PAUSED, &_context->_state); // resume if clean
     }
+}
+
+- (UIInterfaceOrientation)interfaceOrientationForScan
+{
+    return _context.initialInterfaceOrientationForViewcontroller;
 }
 
 - (BOOL)allowFreelyRotatingGuide

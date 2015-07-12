@@ -87,7 +87,7 @@ EXT_EXPORT NSString* const kUMBarcodeTypeDataMatrixCode;
 - (void)scanViewControllerDidPressHelpButton:(UMBarcodeScanViewController*)scanViewController;
 
 /**
- *    optional customized viefinder layer creation
+ *    optional customized viewfinder layer creation
  *
  *    @param scanViewController own controller
  *    @param index              sequential number of layer to be created
@@ -97,7 +97,7 @@ EXT_EXPORT NSString* const kUMBarcodeTypeDataMatrixCode;
 - (CALayer*)scanViewController:(UMBarcodeScanViewController*)scanViewController addLayerAtIndex:(NSUInteger)index;
 
 /**
- *    optional customized viefinder layer layout
+ *    optional customized viewfinder layer layout
  *
  *    @param scanViewController own controller
  *    @param layer              layer created with scanViewController:addLayerAtIndex:
@@ -178,6 +178,11 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
  *    Set to NO to follow standard iOS constraints. Defaults to YES. (Does not affect the manual entry screen.)
  */
 @property (nonatomic, assign) BOOL allowFreelyRotatingGuide;
+
+/**
+ *    current interface orientation of scan controller
+ */
+@property (nonatomic, readonly) UIInterfaceOrientation interfaceOrientationForScan;
 
 /**
  *    primary (and only) way to initialize controller

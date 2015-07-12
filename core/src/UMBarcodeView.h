@@ -29,6 +29,7 @@
 @private
     UMBarcodeScanContext* _context;
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     dispatch_queue_t _queue;
     dispatch_semaphore_t _configurationSemaphore;
 
@@ -48,6 +49,7 @@
     ZBarImageScanner* _zbScanner;
 #endif
     AVCaptureVideoPreviewLayer* _videoPreviewLayer;
+#endif /* !simulator */
 
     NSMutableArray* _viewfinderLayers;
 
