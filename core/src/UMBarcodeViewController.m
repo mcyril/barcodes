@@ -129,19 +129,25 @@
     [self.view addSubview:self.barcodeView];
 
     self.cancelButton = [self _makeButtonWithTitle:_context.cancelButtonText withSelector:@selector(_cancel:)];
+    self.cancelButton.center = self.view.center;
     self.cancelButtonFrameSize = self.cancelButton.frame.size;
+
     [self.view addSubview:self.cancelButton];
 
     if ([_context.helpButtonText length] > 0)
     {
         self.helpButton = [self _makeButtonWithTitle:_context.helpButtonText withSelector:@selector(_help:)];
+        self.helpButton.center = self.view.center;
         self.helpButtonFrameSize = self.helpButton.frame.size;
+
         [self.view addSubview:self.helpButton];
     }
 
     if ([_context.hintLabelText length] > 0)
     {
         self.hintLabel = [self _makeLabelWithTitle:_context.hintLabelText];
+        self.hintLabel.center = self.view.center;
+
         [self.view addSubview:self.hintLabel];
     }
 
@@ -282,35 +288,30 @@
         return;
     }
 
-    InterfaceToDeviceOrientationDelta delta = orientationDelta([UIApplication sharedApplication].statusBarOrientation, self.deviceOrientation);
+    // - When setting each button's frame, it's simplest to do that without any rotational transform applied to the button.
+    //   So immediately prior to setting the frame, we set `button.transform = CGAffineTransformIdentity`.
+    // - Later in this method we set a new transform for each button.
+    // - We call [CATransaction setDisableActions:YES] to suppress the visible animation to the
+    //   CGAffineTransformIdentity position; for reasons we haven't explored, this is only desirable for the
+    //   InterfaceToDeviceOrientationRotatedClockwise and InterfaceToDeviceOrientationRotatedCounterclockwise rotations.
+    //   (Thanks to https://github.com/card-io/card.io-iOS-source/issues/30 for the [CATransaction setDisableActions:YES] suggestion.)
 
-    if (delta == InterfaceToDeviceOrientationRotatedClockwise || delta == InterfaceToDeviceOrientationRotatedCounterclockwise)
+    InterfaceToDeviceOrientationDelta delta = orientationDelta([UIApplication sharedApplication].statusBarOrientation, self.deviceOrientation);
+    BOOL disableTransactionActions = (delta == InterfaceToDeviceOrientationRotatedClockwise || delta == InterfaceToDeviceOrientationRotatedCounterclockwise);
+
+    if (disableTransactionActions)
     {
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
     }
 
-    // - When setting each button's frame, it's simplest to do that without any rotational transform applied to the button.
-    //   So immediately prior to setting the frame, we set `button.transform = CGAffineTransformIdentity`.
-    // - Later in this method we set a new transform for each button.
-    // - When this method is called within a animateWithDuration:animations: block, I would have thought everything would be
-    //   cool. It shouldn't matter that the transform has been set to TransformIdentity for a few CPU cycles.
-    // - However, for reasons I fail to understand, we must restore the previous transform before setting the new transform;
-    //   if we don't restore it, then the onscreen button visibly flips to its TransformIdentity rotation before subsequently
-    //   animating to its new transform.
-    CGAffineTransform previousTransform;
-
-    previousTransform = self.cancelButton.transform;
     self.cancelButton.transform = CGAffineTransformIdentity;
     self.cancelButton.frame = CGRectWithXYAndSize(cameraPreviewFrame.origin.x + kViewFinderFrameMargin, CGRectGetMaxY(cameraPreviewFrame) - self.cancelButtonFrameSize.height - kViewFinderFrameMargin, self.cancelButtonFrameSize);
-    self.cancelButton.transform = previousTransform;
 
     if (self.helpButton != nil)
     {
-        previousTransform = self.helpButton.transform;
         self.helpButton.transform = CGAffineTransformIdentity;
         self.helpButton.frame = CGRectWithXYAndSize(CGRectGetMaxX(cameraPreviewFrame) - self.helpButtonFrameSize.width - kViewFinderFrameMargin, CGRectGetMaxY(cameraPreviewFrame) - self.helpButtonFrameSize.height - kViewFinderFrameMargin, self.helpButtonFrameSize);
-        self.helpButton.transform = previousTransform;
     }
 
     CGSize hintLabelSize = CGSizeZero;
@@ -319,13 +320,11 @@
     {
         hintLabelSize = [self.hintLabel.attributedText boundingRectWithSize:CGSizeMake(MIN(cameraPreviewFrame.size.width, cameraPreviewFrame.size.height) - 2. * kButtonSizeOutset, 32000.) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
 
-        previousTransform = self.hintLabel.transform;
         self.hintLabel.transform = CGAffineTransformIdentity;
         self.hintLabel.frame = CGRectWithXYAndSize(CGRectGetMidX(cameraPreviewFrame) - hintLabelSize.width / 2., CGRectGetMidY(cameraPreviewFrame) - hintLabelSize.height / 2., hintLabelSize);
-        self.hintLabel.transform = previousTransform;
     }
 
-    if (delta == InterfaceToDeviceOrientationRotatedClockwise || delta == InterfaceToDeviceOrientationRotatedCounterclockwise)
+    if (disableTransactionActions)
         [CATransaction commit];
 
     CGFloat rotation = -rotationForOrientationDelta(delta); // undo the orientation delta
@@ -514,7 +513,7 @@
     buttonTitleSize.height = ceilf(buttonTitleSize.height);
     buttonTitleSize.width = ceilf(buttonTitleSize.width);
 
-    button.bounds = CGRectMake(.0, .0, buttonTitleSize.width + kButtonSizeOutset, buttonTitleSize.height + kButtonSizeOutset);
+    button.frame = CGRectMake(.0, .0, buttonTitleSize.width + kButtonSizeOutset, buttonTitleSize.height + kButtonSizeOutset);
 
     [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
 
@@ -531,7 +530,6 @@
     label.numberOfLines = 0;
 
     NSMutableDictionary* attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                                                                      [NSNumber numberWithFloat:-1.], NSStrokeWidthAttributeName,
                                                                         [UIFont systemFontOfSize:18.], NSFontAttributeName,
                                                                         [UIColor colorWithWhite:1. alpha:.8], NSForegroundColorAttributeName,
                                                                         [UIColor clearColor], NSBackgroundColorAttributeName,
@@ -539,11 +537,11 @@
 
     label.attributedText = [[[NSAttributedString alloc] initWithString:title attributes:attributes] autorelease];
 
-    CGSize labelTitleSize = [label.attributedText size];
+    CGSize labelTitleSize = [label.attributedText boundingRectWithSize:CGSizeMake(MIN(self.view.bounds.size.width, self.view.bounds.size.height) - 2. * kButtonSizeOutset, 32000.) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     labelTitleSize.height = ceilf(labelTitleSize.height);
     labelTitleSize.width = ceilf(labelTitleSize.width);
 
-    label.bounds = CGRectMake(.0, .0, labelTitleSize.width + kButtonSizeOutset, labelTitleSize.height + kButtonSizeOutset);
+    label.frame = CGRectMake(.0, .0, labelTitleSize.width + kButtonSizeOutset, labelTitleSize.height + kButtonSizeOutset);
 
     return label;
 }

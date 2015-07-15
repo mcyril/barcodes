@@ -211,6 +211,13 @@
 
             r = CGRectMake(CGRectGetMidX(r) - size / 2., CGRectGetMidY(r) - size / 2., size, size);
         }
+        else
+        {
+            if (CGRectGetWidth(r) > CGRectGetHeight(r))
+                r = CGRectInset(r, 16., 48.);
+            else
+                r = CGRectInset(r, 48., 16.);
+        }
 
         CGMutablePathRef path = CGPathCreateMutable();
 
