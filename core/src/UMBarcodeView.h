@@ -63,7 +63,3 @@
 - (void)scanStop;
 
 @end
-
-#define kViewFinderMargin       20.
-#define kViewFinderFrameSize    20.
-#define kViewFinderFrameMargin  10.

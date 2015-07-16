@@ -13,6 +13,8 @@
 #import <AVFoundation/AVFoundation.h>
 
 
+#define kViewFinderAimMargin    16.
+
 @interface ViewController () <UMBarcodeScanDelegate>
 @property (nonatomic, retain) IBOutlet UIImageView* barcodeImage;
 
@@ -90,7 +92,9 @@
 
     scanViewController.cancelButtonText = @"Cancel";
     scanViewController.helpButtonText = @"Help";
-    scanViewController.hintText = [NSString stringWithFormat:@"Place barcode inside viewfinder to scan with %@", scanViewController.scanMode == kUMBarcodeScanMode_ZXing ? @"ZXing" : (scanViewController.scanMode == kUMBarcodeScanMode_ZBar ? @"ZBar" : @"Syztem")];
+    scanViewController.hintText = [NSString stringWithFormat:@"Place barcode inside viewfinder to scan with %@",
+                                                                            scanViewController.scanMode == kUMBarcodeScanMode_ZXing ? @"ZXing" :
+                                                                                (scanViewController.scanMode == kUMBarcodeScanMode_ZBar ? @"ZBar" : @"System")];
 
     // set of formats depends on scan mode
     scanViewController.barcodeTypes = [NSArray arrayWithObjects:
@@ -161,35 +165,29 @@
     _barcodeImage.image = nil;
 }
 
-#if 1 /* example of viewfinder override with animation */
+/* example of viewfinder override with animation */
+/* since UMBarcodeScanViewController has no built-in viewfinder anymore it would be wise idea to borrow the code below to own project */
 - (CALayer*)scanViewController:(UMBarcodeScanViewController*)scanViewController addLayerAtIndex:(NSUInteger)index
 {
     CAShapeLayer* layer = nil;
 
     switch (index)
     {
-    case 0:
+    case 0: // viewfinder frame
         {
             layer = [CAShapeLayer layer];
             layer.name = @"layer-0";
             layer.strokeColor = [UIColor greenColor].CGColor;
-            layer.fillColor = [UIColor clearColor].CGColor;
             layer.lineWidth = 4.;
-
-            layer.lineJoin = kCALineJoinMiter;
-            layer.lineCap = kCALineCapSquare;
         }
         break;
 
-    case 1:
+    case 1: // barcode red-line "scanner"
         {
             layer = [CAShapeLayer layer];
             layer.name = @"layer-1";
             layer.strokeColor = [UIColor redColor].CGColor;
-            layer.fillColor = [UIColor clearColor].CGColor;
-            layer.lineWidth = 1.;
-
-            layer.lineCap = kCALineCapSquare;
+            layer.lineWidth = 1.5;
         }
         break;
 
@@ -200,78 +198,105 @@
     return layer;
 }
 
-- (void)scanViewController:(UMBarcodeScanViewController*)scanViewController layoutLayer:(CALayer*)layer viewRect:(CGRect)r
+- (void)scanViewController:(UMBarcodeScanViewController*)scanViewController layoutLayer:(CALayer*)layer atIndex:(NSUInteger)index viewRect:(CGRect)r
 {
-    if ([layer.name isEqualToString:@"layer-0"])
+    switch (index)
     {
-        // show square viewfinder in portrait orientation
-        if (UIInterfaceOrientationIsPortrait(scanViewController.interfaceOrientationForScan))
+    case 0:
         {
-            CGFloat size = MIN(CGRectGetWidth(r), CGRectGetHeight(r));
+            // show square viewfinder in portrait orientation
 
-            r = CGRectMake(CGRectGetMidX(r) - size / 2., CGRectGetMidY(r) - size / 2., size, size);
-        }
-        else
-        {
-            if (CGRectGetWidth(r) > CGRectGetHeight(r))
-                r = CGRectInset(r, 16., 48.);
+            if (UIInterfaceOrientationIsPortrait(scanViewController.interfaceOrientationForScan))
+            {
+                CGFloat size = MIN(CGRectGetWidth(r), CGRectGetHeight(r)) - 2. * kViewFinderAimMargin;
+
+                r = CGRectMake(CGRectGetMidX(r) - size / 2., CGRectGetMidY(r) - size / 2., size, size);
+            }
             else
-                r = CGRectInset(r, 48., 16.);
-        }
+            {
+                if (CGRectGetWidth(r) > CGRectGetHeight(r))
+                    r = CGRectInset(r, kViewFinderAimMargin, 3. * kViewFinderAimMargin);
+                else
+                    r = CGRectInset(r, 3. * kViewFinderAimMargin, kViewFinderAimMargin);
+            }
 
-        CGMutablePathRef path = CGPathCreateMutable();
-
-        CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r) + 16.);
-        CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r));
-        CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + 16., CGRectGetMinY(r));
-
-        CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r) + 16.);
-        CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r));
-        CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - 16., CGRectGetMinY(r));
-
-        CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r) - 16.);
-        CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r));
-        CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - 16., CGRectGetMaxY(r));
-
-        CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r) - 16.);
-        CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r));
-        CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + 16., CGRectGetMaxY(r));
-
-        if (((CAShapeLayer*)layer).path != NULL)
-        {
-            CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"path"];
-            animation.toValue = (id)path;
-            animation.duration = .2;
-            animation.fillMode = kCAFillModeForwards;
-            animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-            animation.removedOnCompletion = NO; // keep it until manual finale path set
-            animation.delegate = self;
-
-            [animation setValue:layer forKey:@"layer"]; // propagate owner layer to delegate
-
-            [layer addAnimation:animation forKey:animation.keyPath];
-        }
-        else
-            ((CAShapeLayer*)layer).path = path;
-
-        CGPathRelease(path);
-    }
-    else if ([layer.name isEqualToString:@"layer-1"])
-    {
-        // show red line "scanner" in landscape orientation
-        if (UIInterfaceOrientationIsLandscape(scanViewController.interfaceOrientationForScan))
-        {
             CGMutablePathRef path = CGPathCreateMutable();
 
-            CGPathMoveToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMinY(r) + 16.);
-            CGPathAddLineToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMaxY(r) - 16.);
+            CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r) + kViewFinderAimMargin);
+            CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r));
+            CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderAimMargin, CGRectGetMinY(r));
 
-            ((CAShapeLayer*)layer).path = path;
+            CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r) + kViewFinderAimMargin);
+            CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r));
+            CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderAimMargin, CGRectGetMinY(r));
+
+            CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r) - kViewFinderAimMargin);
+            CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r));
+            CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderAimMargin, CGRectGetMaxY(r));
+
+            CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r) - kViewFinderAimMargin);
+            CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r));
+            CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderAimMargin, CGRectGetMaxY(r));
+
+            if (((CAShapeLayer*)layer).path != NULL)
+            {
+                CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"path"];
+                animation.toValue = (id)path;
+                animation.duration = scanViewController.orientationAnimationDuration;
+                animation.fillMode = kCAFillModeForwards;
+                animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+                animation.removedOnCompletion = NO; // keep it until manual finale path set
+                animation.delegate = self;
+
+                [animation setValue:layer forKey:@"layer"]; // propagate owner layer to delegate
+
+                [layer addAnimation:animation forKey:animation.keyPath];
+            }
+            else
+                ((CAShapeLayer*)layer).path = path;
 
             CGPathRelease(path);
         }
-        else
-            ((CAShapeLayer*)layer).path = NULL;
+        break;
+
+    case 1:
+        {
+            // show red-line "scanner" in landscape orientation
+
+            float opacity = UIInterfaceOrientationIsLandscape(scanViewController.interfaceOrientationForScan) ? 1. : .0;
+
+            if (((CAShapeLayer*)layer).path != NULL)
+            {
+                CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+                animation.toValue = [NSNumber numberWithFloat:opacity];
+                animation.duration = scanViewController.orientationAnimationDuration;
+                animation.fillMode = kCAFillModeForwards;
+                animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+                animation.removedOnCompletion = NO; // keep it until manual finale path set
+                animation.delegate = self;
+
+                [animation setValue:layer forKey:@"layer"]; // propagate owner layer to delegate
+
+                [layer addAnimation:animation forKey:animation.keyPath];
+            }
+            else
+            {
+                CGMutablePathRef path = CGPathCreateMutable();
+
+                CGPathMoveToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMinY(r) + kViewFinderAimMargin);
+                CGPathAddLineToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMaxY(r) - kViewFinderAimMargin);
+
+                ((CAShapeLayer*)layer).path = path;
+
+                CGPathRelease(path);
+
+                layer.opacity = opacity;
+            }
+        }
+        break;
+
+    default:
+        break;
     }
 }
 
@@ -284,12 +309,12 @@
         {
             if ([layer.name isEqualToString:@"layer-0"])
                 ((CAShapeLayer*)layer).path = (CGPathRef)((CABasicAnimation*)animation).toValue;
+            else if ([layer.name isEqualToString:@"layer-1"])
+                layer.opacity = [((CABasicAnimation*)animation).toValue floatValue];
 
             [layer removeAnimationForKey:((CABasicAnimation*)animation).keyPath];
         }
     }
 }
-
-#endif
 
 @end
