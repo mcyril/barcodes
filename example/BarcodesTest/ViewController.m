@@ -248,9 +248,11 @@
                 animation.removedOnCompletion = NO; // keep it until manual finale path set
                 animation.delegate = self;
 
-                [animation setValue:layer forKey:@"layer"]; // propagate owner layer to delegate
+                // propagate values to delegate
+                [animation setValue:layer forKey:@"layer"];
+                [animation setValue:(id)path forKey:@"path"];
 
-                [layer addAnimation:animation forKey:animation.keyPath];
+                [layer addAnimation:animation forKey:layer.name];
             }
             else
                 ((CAShapeLayer*)layer).path = path;
@@ -265,33 +267,45 @@
 
             float opacity = UIInterfaceOrientationIsLandscape(scanViewController.interfaceOrientationForScan) ? 1. : .0;
 
+            CGMutablePathRef path = CGPathCreateMutable();
+
+            CGFloat delta = kViewFinderAimMargin + (CGRectGetHeight(r) - 2. * kViewFinderAimMargin) / 2. * (1. - opacity);
+
+            CGPathMoveToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMinY(r) + delta);
+            CGPathAddLineToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMaxY(r) - delta);
+
             if (((CAShapeLayer*)layer).path != NULL)
             {
-                CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-                animation.toValue = [NSNumber numberWithFloat:opacity];
-                animation.duration = scanViewController.orientationAnimationDuration;
+                CABasicAnimation* animation1 = [CABasicAnimation animationWithKeyPath:@"path"];
+                animation1.toValue = (id)path;
+
+                CABasicAnimation* animation2 = [CABasicAnimation animationWithKeyPath:@"opacity"];
+                animation2.toValue = [NSNumber numberWithFloat:opacity];
+
+                CAAnimationGroup* animation = [CAAnimationGroup animation];
+                animation.animations = [NSArray arrayWithObjects:animation1, animation2, nil];
                 animation.fillMode = kCAFillModeForwards;
+                animation.duration = scanViewController.orientationAnimationDuration;
                 animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+                animation.repeatCount = 1.;
                 animation.removedOnCompletion = NO; // keep it until manual finale path set
                 animation.delegate = self;
 
-                [animation setValue:layer forKey:@"layer"]; // propagate owner layer to delegate
+                // propagate values to delegate
+                [animation setValue:layer forKey:@"layer"];
+                [animation setValue:(id)path forKey:@"path"];
+                [animation setValue:[NSNumber numberWithFloat:opacity] forKey:@"opacity"];
 
-                [layer addAnimation:animation forKey:animation.keyPath];
+                [layer addAnimation:animation forKey:layer.name];
             }
             else
             {
-                CGMutablePathRef path = CGPathCreateMutable();
-
-                CGPathMoveToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMinY(r) + kViewFinderAimMargin);
-                CGPathAddLineToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMaxY(r) - kViewFinderAimMargin);
-
                 ((CAShapeLayer*)layer).path = path;
-
-                CGPathRelease(path);
 
                 layer.opacity = opacity;
             }
+
+            CGPathRelease(path);
         }
         break;
 
@@ -308,11 +322,16 @@
         if (layer != nil)
         {
             if ([layer.name isEqualToString:@"layer-0"])
-                ((CAShapeLayer*)layer).path = (CGPathRef)((CABasicAnimation*)animation).toValue;
+            {
+                ((CAShapeLayer*)layer).path = (CGPathRef)[animation valueForKey:@"path"];
+            }
             else if ([layer.name isEqualToString:@"layer-1"])
-                layer.opacity = [((CABasicAnimation*)animation).toValue floatValue];
+            {
+                ((CAShapeLayer*)layer).path = (CGPathRef)[animation valueForKey:@"path"];
+                layer.opacity = [[animation valueForKey:@"opacity"] floatValue];
+            }
 
-            [layer removeAnimationForKey:((CABasicAnimation*)animation).keyPath];
+            [layer removeAnimationForKey:layer.name];
         }
     }
 }
