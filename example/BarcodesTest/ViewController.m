@@ -178,6 +178,7 @@
             layer = [CAShapeLayer layer];
             layer.name = @"layer-0";
             layer.strokeColor = [UIColor greenColor].CGColor;
+            layer.fillColor = [UIColor clearColor].CGColor;
             layer.lineWidth = 4.;
         }
         break;
@@ -187,6 +188,7 @@
             layer = [CAShapeLayer layer];
             layer.name = @"layer-1";
             layer.strokeColor = [UIColor redColor].CGColor;
+            layer.fillColor = [UIColor clearColor].CGColor;
             layer.lineWidth = 1.5;
         }
         break;
