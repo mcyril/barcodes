@@ -51,6 +51,7 @@ typedef enum _UMBarcodeScanState UMBarcodeScanState_t;
 @property(nonatomic, retain) UIColor* navigationBarTintColor;
 
 @property (nonatomic, assign) UIInterfaceOrientation initialInterfaceOrientationForViewcontroller;
+@property (nonatomic, readonly) NSTimeInterval orientationAnimationDuration;
 @property (nonatomic, assign) BOOL allowFreelyRotatingGuide;
 
 @end

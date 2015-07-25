@@ -34,10 +34,10 @@
 #import <libkern/OSAtomic.h>
 
 
-#define kMinimalTorchLevel  .05
+#define kMinimalTorchLevel      .05
 
-static NSString* const kUMViewfinderLayerName = @"$UM$-viewfinder";
-static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
+#define kViewFinderMargin       20.
+#define kViewFinderFrameMargin  8.
 
 @interface UMBarcodeView ()
 #if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
@@ -367,37 +367,6 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
                 [_viewfinderLayers addObject:layer];
         }
     }
-    else
-    {
-        // add default viewfinder layers
-
-        // viewfinder frame
-        {
-            CAShapeLayer* layer = [CAShapeLayer layer];
-            layer.name = kUMViewfinderLayerName;
-            layer.strokeColor = [UIColor greenColor].CGColor;
-            layer.fillColor = [UIColor clearColor].CGColor;
-            layer.lineWidth = 3.;
-
-            layer.lineJoin = kCALineJoinMiter;
-            layer.lineCap = kCALineCapSquare;
-
-            [_viewfinderLayers addObject:layer];
-        }
-
-        // aim cross
-        {
-            CAShapeLayer* layer = [CAShapeLayer layer];
-            layer.name = kUMAimCrossLayerName;
-            layer.strokeColor = [UIColor redColor].CGColor;
-            layer.fillColor = [UIColor clearColor].CGColor;
-            layer.lineWidth = 1.;
-
-            layer.lineCap = kCALineCapSquare;
-
-            [_viewfinderLayers addObject:layer];
-        }
-    }
 
     for (CALayer* layer in _viewfinderLayers)
         [self.layer addSublayer:layer];
@@ -623,59 +592,16 @@ static NSString* const kUMAimCrossLayerName = @"$UM$-aimcross";
 #endif
         r = CGRectInset(r, kViewFinderFrameMargin, kViewFinderFrameMargin);
 
-        if ([_context.delegate respondsToSelector:@selector(scanViewController:layoutLayer:viewRect:)])
+        if ([_context.delegate respondsToSelector:@selector(scanViewController:layoutLayer:atIndex:viewRect:)])
         {
             // layout/setup customized layers
 
-            for (CALayer* layer in _viewfinderLayers)
-                [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self] layoutLayer:layer viewRect:r];
-        }
-        else
-        {
-            // layout/setup default layers
-
+            NSUInteger index = 0;
             for (CALayer* layer in _viewfinderLayers)
             {
-                if ([layer.name isEqualToString:kUMViewfinderLayerName])
-                {
-                    CGMutablePathRef path = CGPathCreateMutable();
+                [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self] layoutLayer:layer atIndex:index viewRect:r];
 
-                    CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r) + kViewFinderFrameSize);
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMinY(r));
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderFrameSize, CGRectGetMinY(r));
-
-                    CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r) + kViewFinderFrameSize);
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMinY(r));
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderFrameSize, CGRectGetMinY(r));
-
-                    CGPathMoveToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r) - kViewFinderFrameSize);
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r), CGRectGetMaxY(r));
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderFrameSize, CGRectGetMaxY(r));
-
-                    CGPathMoveToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r) - kViewFinderFrameSize);
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r), CGRectGetMaxY(r));
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderFrameSize, CGRectGetMaxY(r));
-
-                    ((CAShapeLayer*)layer).path = path;
-
-                    CGPathRelease(path);
-                }
-                else if ([layer.name isEqualToString:kUMAimCrossLayerName])
-                {
-                    CGMutablePathRef path = CGPathCreateMutable();
-
-                    CGPathMoveToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMinY(r) + kViewFinderFrameSize);
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMidX(r), CGRectGetMaxY(r) - kViewFinderFrameSize);
-
-                    CGPathMoveToPoint(path, NULL, CGRectGetMinX(r) + kViewFinderFrameSize, CGRectGetMidY(r));
-                    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(r) - kViewFinderFrameSize, CGRectGetMidY(r));
-
-                    ((CAShapeLayer*)layer).path = path;
-
-                    CGPathRelease(path);
-                }
-
-                [layer display];
+                index++;
             }
         }
     }

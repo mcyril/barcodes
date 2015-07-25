@@ -16,14 +16,13 @@
 #import "UMBarcodeScanUtilities.h"
 
 
-#define kButtonSizeOutset 20.
+#define kButtonSizeOutset   20.
+#define kButtonMargin       8.
 
-#define kDropShadowRadius 3.
+#define kDropShadowRadius   3.
 #define kShadowInsets UIEdgeInsetsMake(-kDropShadowRadius, -kDropShadowRadius, -kDropShadowRadius, -kDropShadowRadius)
 
-#define kRotationAnimationDuration .2
 #define kButtonRotationDelay (kRotationAnimationDuration + .1)
-
 
 @interface UMBarcodeViewController ()
 @property (nonatomic, retain) UMBarcodeView* barcodeView;
@@ -306,12 +305,12 @@
     }
 
     self.cancelButton.transform = CGAffineTransformIdentity;
-    self.cancelButton.frame = CGRectWithXYAndSize(cameraPreviewFrame.origin.x + kViewFinderFrameMargin, CGRectGetMaxY(cameraPreviewFrame) - self.cancelButtonFrameSize.height - kViewFinderFrameMargin, self.cancelButtonFrameSize);
+    self.cancelButton.frame = CGRectWithXYAndSize(cameraPreviewFrame.origin.x + kButtonMargin, CGRectGetMaxY(cameraPreviewFrame) - self.cancelButtonFrameSize.height - kButtonMargin, self.cancelButtonFrameSize);
 
     if (self.helpButton != nil)
     {
         self.helpButton.transform = CGAffineTransformIdentity;
-        self.helpButton.frame = CGRectWithXYAndSize(CGRectGetMaxX(cameraPreviewFrame) - self.helpButtonFrameSize.width - kViewFinderFrameMargin, CGRectGetMaxY(cameraPreviewFrame) - self.helpButtonFrameSize.height - kViewFinderFrameMargin, self.helpButtonFrameSize);
+        self.helpButton.frame = CGRectWithXYAndSize(CGRectGetMaxX(cameraPreviewFrame) - self.helpButtonFrameSize.width - kButtonMargin, CGRectGetMaxY(cameraPreviewFrame) - self.helpButtonFrameSize.height - kButtonMargin, self.helpButtonFrameSize);
     }
 
     CGSize hintLabelSize = CGSizeZero;
@@ -473,7 +472,11 @@
         }
         else
         {
-            [UIView animateWithDuration:kRotationAnimationDuration animations:^{[self _layoutButtonsForCameraPreviewFrame:cameraPreviewFrame];}];
+            [UIView animateWithDuration:_context.orientationAnimationDuration
+                             animations:^
+                                    {
+                                        [self _layoutButtonsForCameraPreviewFrame:cameraPreviewFrame];
+                                    }];
         }
     }
 }

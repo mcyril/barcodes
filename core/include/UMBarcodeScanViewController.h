@@ -92,7 +92,7 @@ EXT_EXPORT NSString* const kUMBarcodeTypeDataMatrixCode;
  *    @param scanViewController own controller
  *    @param index              sequential number of layer to be created
  *
- *    @return                   created layer (don't forget to name it), or nil when all layers created
+ *    @return                   created layer, or nil when all layers created
  */
 - (CALayer*)scanViewController:(UMBarcodeScanViewController*)scanViewController addLayerAtIndex:(NSUInteger)index;
 
@@ -101,9 +101,9 @@ EXT_EXPORT NSString* const kUMBarcodeTypeDataMatrixCode;
  *
  *    @param scanViewController own controller
  *    @param layer              layer created with scanViewController:addLayerAtIndex:
- *    @param rect               viewfinder area rectangle
+ *    @param rect               viewfinder area rectangle (orientation independant)
  */
-- (void)scanViewController:(UMBarcodeScanViewController*)scanViewController layoutLayer:(CALayer*)layer viewRect:(CGRect)rect;
+- (void)scanViewController:(UMBarcodeScanViewController*)scanViewController layoutLayer:(CALayer*)layer atIndex:(NSUInteger)index viewRect:(CGRect)rect;
 @end
 
 @class UMBarcodeScanContext;
@@ -183,6 +183,11 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
  *    current interface orientation of scan controller
  */
 @property (nonatomic, readonly) UIInterfaceOrientation interfaceOrientationForScan;
+
+/**
+ *    duration of the interface orientation changing
+ */
+@property (nonatomic, readonly) NSTimeInterval orientationAnimationDuration;
 
 /**
  *    primary (and only) way to initialize controller

@@ -13,6 +13,8 @@
 #import "UMBarcodeScanUtilities.h"
 
 
+#define kRotationAnimationDuration .2
+
 NSString* const kUMBarcodeTypeUPCACode              = @"UPCA";
 NSString* const kUMBarcodeTypeUPCECode              = @"UPCE";
 NSString* const kUMBarcodeTypeCode39Code            = @"Code39";
@@ -44,6 +46,7 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
 @synthesize navigationBarTintColor = _navigationBarTintColor;
 
 @dynamic initialInterfaceOrientationForViewcontroller;
+@dynamic orientationAnimationDuration;
 @synthesize allowFreelyRotatingGuide = _allowFreelyRotatingGuide;
 
 - (instancetype)init
@@ -88,6 +91,11 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
 
         [[NSNotificationCenter defaultCenter] postNotificationName:kUMBarcodeScanContextChangedOrientation object:self];
     }
+}
+
+- (NSTimeInterval)orientationAnimationDuration
+{
+    return kRotationAnimationDuration;
 }
 
 @end

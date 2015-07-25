@@ -30,6 +30,7 @@
 @dynamic allowFreelyRotatingGuide;
 
 @dynamic interfaceOrientationForScan;
+@dynamic orientationAnimationDuration;
 
 @synthesize context = _context;
 @synthesize shouldStoreStatusBarStyle = _shouldStoreStatusBarStyle;
@@ -240,6 +241,11 @@
 - (UIInterfaceOrientation)interfaceOrientationForScan
 {
     return _context.initialInterfaceOrientationForViewcontroller;
+}
+
+- (NSTimeInterval)orientationAnimationDuration
+{
+    return _context.orientationAnimationDuration;
 }
 
 - (BOOL)allowFreelyRotatingGuide
