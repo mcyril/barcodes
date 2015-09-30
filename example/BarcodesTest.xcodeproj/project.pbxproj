@@ -28,6 +28,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F119CAF31BBBBA9700C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F14148D91B48630D00C80F63;
+			remoteInfo = "barcodes-no-zbar";
+		};
+		F119CAF51BBBBA9700C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F14148F31B48634B00C80F63;
+			remoteInfo = "barcodes-system";
+		};
 		F19A8E641B47609400C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */;
@@ -150,6 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				F19A8E651B47609400C80F63 /* libbarcodes.a */,
+				F119CAF41BBBBA9700C80F63 /* libbarcodes.a */,
+				F119CAF61BBBBA9700C80F63 /* libbarcodes.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,7 +197,7 @@
 		F1567C511B44CEA500C80F63 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Ravel Developers Group";
 				TargetAttributes = {
 					F1567C581B44CEA500C80F63 = {
@@ -214,6 +230,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		F119CAF41BBBBA9700C80F63 /* libbarcodes.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbarcodes.a;
+			remoteRef = F119CAF31BBBBA9700C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F119CAF61BBBBA9700C80F63 /* libbarcodes.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbarcodes.a;
+			remoteRef = F119CAF51BBBBA9700C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F19A8E651B47609400C80F63 /* libbarcodes.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;

@@ -143,7 +143,7 @@
     return [self _isBeingPresentedModally];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UMInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([self _isBeingPresentedModally])
     {

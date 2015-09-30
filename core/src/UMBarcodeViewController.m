@@ -256,7 +256,7 @@
     return [self.navigationController shouldAutorotate];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UMInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [self.navigationController supportedInterfaceOrientations];
 }
