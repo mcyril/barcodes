@@ -41,11 +41,7 @@
 
 @interface UMBarcodeView ()
 #if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
-                            <AVCaptureMetadataOutputObjectsDelegate
-#if (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
-                                                                    , AVCaptureVideoDataOutputSampleBufferDelegate
-#endif
-                                                                                                                    >
+                            <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 #endif
 
 @property (nonatomic, readwrite) BOOL enableCapture;
@@ -79,6 +75,9 @@
 
 @implementation UMBarcodeView
 @dynamic cameraPreviewFrame;
+@dynamic hasTorch;
+@dynamic isTorchOn;
+
 @dynamic enableCapture;
 @synthesize error = _error;
 
@@ -112,15 +111,11 @@
     if (_queue != NULL)
     {
         [_metaDataOutput setMetadataObjectsDelegate:nil queue:_queue];
-#if (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
         [_videoDataOutput setSampleBufferDelegate:nil queue:_queue];
-#endif
     }
 
     [_metaDataOutput release];
-#if (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
     [_videoDataOutput release];
-#endif
 
     if (_queue != NULL)
         dispatch_release(_queue);
@@ -245,27 +240,26 @@
         // configure camera, no _captureSession atm
         if (![self _changeCameraConfiguration:^BOOL(NSError** error)
                                             {
-                                                BOOL success = YES;
-
-                                                // Exposure: Continuous
+                                                // exposure: continuous
                                                 if ([_camera isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure])
                                                     _camera.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
 
-                                                // White Balance: Continuous
+                                                // white balance: continuous
                                                 if ([_camera isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance])
                                                     _camera.whiteBalanceMode = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
 
-                                                // Torch
-                                                if (_camera.hasTorch)
+                                                // torch
+                                                if (_camera.hasTorch && _context.torchMode != kUMBarcodeScanTorchMode_OFF)
                                                 {
-                                                    if ([_camera isTorchModeSupported:AVCaptureTorchModeAuto])
-                                                        _camera.torchMode = AVCaptureTorchModeAuto;
-
+                                                    BOOL success = NO;
                                                     if ([_camera respondsToSelector:@selector(setTorchModeOnWithLevel:error:)])
                                                         success = [_camera setTorchModeOnWithLevel:kMinimalTorchLevel error:error];
+
+                                                    if (!success && [_camera isTorchModeSupported:AVCaptureTorchModeOn])
+                                                        _camera.torchMode = AVCaptureTorchModeOn;
                                                 }
 
-                                                return success;
+                                                return YES;
                                             }
                                        error:&error])
         {
@@ -297,6 +291,7 @@
         if([_camera isFocusModeSupported:AVCaptureFocusModeAutoFocus])
             [self addGestureRecognizer:[[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_refocus)] autorelease]];
 
+        // prepare view-finder gfx
         if (![self _initializeViewFinder])
             break;
 
@@ -408,6 +403,19 @@
 
     _queue = dispatch_queue_create(NULL, NULL);
     [_metaDataOutput setMetadataObjectsDelegate:self queue:_queue];
+
+    // uglu hack: the torch mode auto works only when we have video data output capture, doh...
+    if (_context.torchMode != kUMBarcodeScanTorchMode_OFF)
+    {
+        _videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
+        if (_videoDataOutput != nil)
+        {
+            [_videoDataOutput setSampleBufferDelegate:self queue:_queue];
+
+            if ([_captureSession canAddOutput:_videoDataOutput])
+                [_captureSession addOutput:_videoDataOutput];
+        }
+    }
 
     return YES;
 }
@@ -557,6 +565,42 @@
 #endif
 }
 
+- (BOOL)hasTorch
+{
+    return _camera.hasTorch;
+}
+
+- (BOOL)isTorchOn
+{
+    return _camera.hasTorch && _camera.torchMode != AVCaptureTorchModeOff;
+}
+
+- (void)setTorch:(BOOL)onOff
+{
+    NSError* error = nil;
+
+    [self _changeCameraConfiguration:^BOOL(NSError** error)
+                                {
+                                    if (_camera.hasTorch && _context.torchMode != kUMBarcodeScanTorchMode_OFF)
+                                    {
+                                        if (onOff)
+                                        {
+                                            BOOL success = NO;
+                                            if ([_camera respondsToSelector:@selector(setTorchModeOnWithLevel:error:)])
+                                                success = [_camera setTorchModeOnWithLevel:kMinimalTorchLevel error:error];
+
+                                            if (!success && [_camera isTorchModeSupported:AVCaptureTorchModeOn])
+                                                _camera.torchMode = AVCaptureTorchModeOn;
+                                        }
+                                        else if ([_camera isTorchModeSupported:AVCaptureTorchModeOff])
+                                            _camera.torchMode = AVCaptureTorchModeOff;
+                                    }
+
+                                    return YES;
+                                }
+                               error:&error];
+}
+
 #pragma mark -
 
 - (void)setHidden:(BOOL)hidden
@@ -693,7 +737,6 @@
 }
 #endif
 
-#if (!defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR) && ((defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR))
 - (void)captureOutput:(AVCaptureOutput*)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection*)connection
 {
     if ((OSAtomicOr32Barrier(0, &_context->_state) & (PAUSED|RUNNING)) != RUNNING) // bypass if suspended
@@ -801,6 +844,5 @@
         }
     }
 }
-#endif
 
 @end

@@ -25,6 +25,12 @@
     UIButton* _helpButton;
     CGSize _helpButtonFrameSize;
 
+    UIButton* _torchButton;
+    UIImage* _torchIconOn;
+    UIImage* _torchIconOnPressed;
+    UIImage* _torchIconOff;
+    UIImage* _torchIconOffPressed;
+
     UILabel* _hintLabel;
 
     UMBarcodeView* _barcodeView;

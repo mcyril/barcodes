@@ -24,6 +24,16 @@ enum _UMBarcodeScanMode
 };
 typedef enum _UMBarcodeScanMode UMBarcodeScanMode_t;
 
+/**
+ *    torch modes
+ */
+enum _UMBarcodeScanTorchMode
+{
+    kUMBarcodeScanTorchMode_OFF = 0,
+    kUMBarcodeScanTorchMode_MANUAL
+};
+typedef enum _UMBarcodeScanTorchMode UMBarcodeScanTorchMode_t;
+
 #ifndef API_EXPORT
 #define API_EXPORT  __attribute__((visibility("default")))
 #endif
@@ -147,6 +157,11 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
 @property (nonatomic, retain) NSArray* barcodeTypes;
 
 /**
+ *    torch mode
+ */
+@property (nonatomic, assign) UMBarcodeScanTorchMode_t torchMode;
+
+/**
  *    as per CardIO:
  *    If YES, the status bar's style will be kept as whatever your app has set it to.
  *    If NO, the status bar style will be set to the default style.
@@ -175,7 +190,7 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
  *     All four orientations are permitted, regardless of any app or viewcontroller constraints.
  *    If you wish, the card guide and buttons can instead obey standard iOS constraints, including
  *     the UISupportedInterfaceOrientations settings in your app's plist.
- *    Set to NO to follow standard iOS constraints. Defaults to YES. (Does not affect the manual entry screen.)
+ *    Set to NO to follow standard iOS constraints. Defaults to YES.
  */
 @property (nonatomic, assign) BOOL allowFreelyRotatingGuide;
 
@@ -183,7 +198,6 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
  *    current interface orientation of scan controller
  */
 @property (nonatomic, readonly) UIInterfaceOrientation interfaceOrientationForScan;
-
 /**
  *    duration of the interface orientation changing
  */

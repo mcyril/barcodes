@@ -40,6 +40,7 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
 @synthesize hintLabelText = _hintLabelText;
 @synthesize scanMode = _scanMode;
 @synthesize barcodeTypes = _barcodeTypes;
+@synthesize torchMode = _torchMode;
 
 @synthesize keepStatusBarStyle = _keepStatusBarStyle;
 @synthesize navigationBarStyle = _navigationBarStyle;
@@ -58,6 +59,8 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
 
         _initialInterfaceOrientationForViewcontroller = UIInterfaceOrientationUnknown;
         _allowFreelyRotatingGuide = YES;
+
+        _torchMode = kUMBarcodeScanTorchMode_OFF;
     }
 
     return self;

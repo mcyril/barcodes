@@ -15,6 +15,8 @@
 #import "UMBarcodeScanContext.h"
 #import "UMBarcodeScanUtilities.h"
 
+#import "PocketSVG.h"
+
 
 #define kButtonSizeOutset   20.
 #define kButtonMargin       8.
@@ -34,13 +36,15 @@
 
 @property (nonatomic, assign) UIDeviceOrientation deviceOrientation;
 
-@property(nonatomic, retain) UIButton* cancelButton;
-@property(nonatomic, assign) CGSize cancelButtonFrameSize;
+@property (nonatomic, retain) UIButton* cancelButton;
+@property (nonatomic, assign) CGSize cancelButtonFrameSize;
 
-@property(nonatomic, retain) UIButton* helpButton;
-@property(nonatomic, assign) CGSize helpButtonFrameSize;
+@property (nonatomic, retain) UIButton* helpButton;
+@property (nonatomic, assign) CGSize helpButtonFrameSize;
 
-@property(nonatomic, retain) UILabel* hintLabel;
+@property (nonatomic, retain) UIButton* torchButton;
+
+@property (nonatomic, retain) UILabel* hintLabel;
 
 - (void)_layoutButtonsForCameraPreviewFrame:(CGRect)cameraPreviewFrame;
 
@@ -54,7 +58,11 @@
 - (void)_help:(id)sender;
 
 - (UIButton*)_makeButtonWithTitle:(NSString*)title withSelector:(SEL)selector;
+- (UIButton*)_makeImageButtonWithSelector:(SEL)selector;
 - (UILabel*)_makeLabelWithTitle:(NSString*)title;
+
+- (void)_createTorchImages;
+- (void)_updateTorchButton;
 
 @end
 
@@ -72,6 +80,7 @@
 @synthesize cancelButtonFrameSize = _cancelButtonFrameSize;
 @synthesize helpButton = _helpButton;
 @synthesize helpButtonFrameSize = _helpButtonFrameSize;
+@synthesize torchButton = _torchButton;
 @synthesize hintLabel = _hintLabel;
 
 - (instancetype)initWithContext:(UMBarcodeScanContext*)aContext
@@ -107,7 +116,13 @@
 
     [_cancelButton release];
     [_helpButton release];
+    [_torchButton release];
     [_hintLabel release];
+
+    [_torchIconOn release];
+    [_torchIconOnPressed release];
+    [_torchIconOff release];
+    [_torchIconOffPressed release];
 
     [_context release];
 
@@ -140,6 +155,16 @@
         self.helpButtonFrameSize = self.helpButton.frame.size;
 
         [self.view addSubview:self.helpButton];
+    }
+
+    if (_context.torchMode == kUMBarcodeScanTorchMode_MANUAL)
+    {
+        [self _createTorchImages];
+
+        self.torchButton = [self _makeImageButtonWithSelector:@selector(_torch:)];
+        self.torchButton.center = self.view.center;
+
+        [self.view addSubview:self.torchButton];
     }
 
     if ([_context.hintLabelText length] > 0)
@@ -212,6 +237,11 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
+    dispatch_async(dispatch_get_main_queue(), ^
+                {
+                    [self _updateTorchButton];
+                });
 
     if (self.changeStatusBarHiddenStatus)
     {
@@ -313,6 +343,11 @@
         self.helpButton.frame = CGRectWithXYAndSize(CGRectGetMaxX(cameraPreviewFrame) - self.helpButtonFrameSize.width - kButtonMargin, CGRectGetMaxY(cameraPreviewFrame) - self.helpButtonFrameSize.height - kButtonMargin, self.helpButtonFrameSize);
     }
 
+    {
+        self.torchButton.transform = CGAffineTransformIdentity;
+        self.torchButton.frame = CGRectWithXYAndSize(CGRectGetMaxX(cameraPreviewFrame) - self.torchButton.bounds.size.width - kButtonMargin, CGRectGetMinY(cameraPreviewFrame) + kButtonMargin, self.torchButton.bounds.size);
+    }
+
     CGSize hintLabelSize = CGSizeZero;
 
     if (self.hintLabel != nil)
@@ -336,6 +371,7 @@
         {
             self.cancelButton.transform = r;
             self.helpButton.transform = r;
+            self.torchButton.transform = r;
             self.hintLabel.transform = r;
         }
         break;
@@ -352,6 +388,7 @@
 
             self.cancelButton.transform = CGAffineTransformTranslate(r, cancelDelta, -cancelDelta);
             self.helpButton.transform = CGAffineTransformTranslate(r, helpDelta, helpDelta);
+            self.torchButton.transform = r;
             self.hintLabel.transform = r;
         }
         break;
@@ -362,6 +399,7 @@
     // show controls for the rest (they created hidden)
     self.cancelButton.hidden = NO;
     self.helpButton.hidden = NO;
+    self.torchButton.hidden = !self.barcodeView.hasTorch;
     self.hintLabel.hidden = NO;
 }
 
@@ -494,6 +532,16 @@
         [_context.delegate scanViewControllerDidPressHelpButton:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self]];
 }
 
+- (void)_torch:(id)sender
+{
+    [self.barcodeView setTorch:!self.barcodeView.isTorchOn];
+
+    dispatch_async(dispatch_get_main_queue(), ^
+                {
+                    [self _updateTorchButton];
+                });
+}
+
 #pragma mark -
 
 - (UIButton*)_makeButtonWithTitle:(NSString*)title withSelector:(SEL)selector
@@ -521,6 +569,107 @@
     [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
 
     return button;
+}
+
+- (UIButton*)_makeImageButtonWithSelector:(SEL)selector
+{
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.hidden = YES;
+    button.frame = CGRectMake(.0, .0, 32., 32.);;
+
+    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+
+    return button;
+}
+
+- (void)_createTorchImages
+{
+    CGRect rect = CGRectMake(.0, .0, 32., 32.);
+
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, [UIScreen mainScreen].scale);
+
+    CGPathRef path1 = [PocketSVG pathFromDAttribute:@"M16.367,5.137h-1.141c-4.852,0.307-8.721,4.364-8.721,9.322c0,3.408,1.504,6.131,4.102,7.74v2.683" \
+                                                    @"c0,0.783,0.291,1.086,0.745,1.388c0.113,0.073,0.185,0.198,0.193,0.336c0.008,0.135,0.021,0.312-0.151,0.354" \
+                                                    @"c-0.703,0-0.701,0.771-0.701,0.771c0,0.312,0,1.729,0,1.729c0,0.387,0.313,0.699,0.701,0.699h0.469" \
+                                                    @"c0.375,0,0.648,0.311,0.648,0.311s1.649,1.348,3.286,1.348c1.66,0,3.285-1.348,3.285-1.348s0.273-0.311,0.648-0.311h0.469" \
+                                                    @"c0.39,0,0.701-0.312,0.701-0.699c0,0,0-1.416,0-1.729c0,0,0.002-0.771-0.701-0.771c-0.172-0.041-0.158-0.221-0.149-0.354" \
+                                                    @"c0.01-0.138,0.08-0.263,0.192-0.336c0.453-0.302,0.744-0.604,0.744-1.388v-2.683c2.598-1.608,4.103-4.332,4.103-7.74" \
+                                                    @"C25.089,9.501,21.222,5.443,16.367,5.137z" \
+                                                    @"M19.037,20.171l-0.522,0.271v2.49c0,0.426-0.295,0.788-0.709,0.879l-1.103,0.231" \
+                                                    @"c-0.186,0.041-1.074,0.188-1.812,0l-1.102-0.231c-0.414-0.091-0.709-0.453-0.709-0.879v-2.49l-0.523-0.271" \
+                                                    @"c-2.626-1.35-3.177-3.762-3.177-5.542c0-3.571,2.875-6.476,6.417-6.488c3.542,0.012,6.417,2.917,6.417,6.488" \
+                                                    @"C22.214,16.41,21.662,18.82,19.037,20.171z"];
+    CGPathRef path2 = [PocketSVG pathFromDAttribute:@"M27.568,6.199c0.035-0.229-0.029-0.462-0.176-0.645c-0.086-0.108-0.174-0.214-0.262-0.321" \
+                                                    @"c-0.15-0.177-0.365-0.285-0.6-0.298c-0.229-0.013-0.458,0.071-0.626,0.23L24.4,6.596c-0.316,0.305-0.345,0.804-0.067,1.143" \
+                                                    @"c0.02,0.02,0.033,0.04,0.053,0.061c0.275,0.342,0.771,0.412,1.133,0.158l1.699-1.192C27.406,6.633,27.533,6.428,27.568,6.199z"];
+    CGPathRef path3 = [PocketSVG pathFromDAttribute:@"M15.71,3.753c0.025-0.001,0.051-0.001,0.076-0.001c0.44-0.003,0.805-0.346,0.832-0.786l0.133-2.072" \
+                                                    @"c0.016-0.231-0.064-0.458-0.226-0.627C16.369,0.097,16.146,0.001,15.916,0c-0.14,0-0.278,0.001-0.417,0.004" \
+                                                    @"c-0.231,0.006-0.451,0.107-0.605,0.28c-0.154,0.173-0.231,0.403-0.211,0.633l0.179,2.069C14.9,3.424,15.27,3.759,15.71,3.753z"];
+    CGPathRef path4 = [PocketSVG pathFromDAttribute:@"M5.223,17.219c-0.101-0.43-0.516-0.703-0.951-0.635l-2.051,0.337c-0.229,0.037-0.432,0.166-0.562,0.358" \
+                                                    @"c-0.129,0.189-0.175,0.429-0.125,0.654c0.03,0.135,0.063,0.27,0.098,0.402c0.057,0.227,0.204,0.416,0.407,0.525" \
+                                                    @"c0.203,0.11,0.443,0.139,0.664,0.062l1.978-0.635c0.418-0.136,0.664-0.57,0.56-0.998C5.235,17.271,5.229,17.244,5.223,17.219z"];
+    CGPathRef path5 = [PocketSVG pathFromDAttribute:@"M7.215,8.008c0.017-0.021,0.032-0.042,0.049-0.062c0.272-0.348,0.229-0.845-0.097-1.141L5.63,5.41" \
+                                                    @"c-0.172-0.156-0.4-0.234-0.631-0.216C4.769,5.213,4.555,5.325,4.41,5.505C4.322,5.614,4.237,5.723,4.153,5.834" \
+                                                    @"C4.013,6.02,3.956,6.253,3.995,6.482c0.039,0.228,0.17,0.429,0.362,0.559l1.729,1.151C6.452,8.436,6.946,8.355,7.215,8.008z"];
+    CGPathRef path6 = [PocketSVG pathFromDAttribute:@"M30.15,16.986c-0.135-0.188-0.34-0.313-0.569-0.346l-2.054-0.291c-0.436-0.062-0.846,0.225-0.938,0.654" \
+                                                    @"c-0.011,0.021-0.016,0.055-0.021,0.078c-0.101,0.43,0.155,0.855,0.579,0.982l1.988,0.59c0.226,0.065,0.463,0.037,0.662-0.074" \
+                                                    @"c0.198-0.117,0.344-0.312,0.396-0.537c0.031-0.139,0.062-0.271,0.088-0.404C30.333,17.41,30.283,17.176,30.15,16.986z"];
+
+    CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path1);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path2);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path3);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path4);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path5);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path6);
+
+    [[UIColor colorWithWhite:1. alpha:.8] set];
+    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFill);
+
+    [_torchIconOn release];
+    _torchIconOn = [UIGraphicsGetImageFromCurrentImageContext() copy];
+
+    CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path1);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path2);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path3);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path4);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path5);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path6);
+
+    [[UIColor whiteColor] set];
+    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathEOFill);
+
+    [_torchIconOnPressed release];
+    _torchIconOnPressed = [UIGraphicsGetImageFromCurrentImageContext() copy];
+
+    CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path1);
+
+    [[UIColor colorWithWhite:1. alpha:.8] set];
+    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFill);
+
+    [_torchIconOff release];
+    _torchIconOff = [UIGraphicsGetImageFromCurrentImageContext() copy];
+
+    CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path1);
+
+    [[UIColor whiteColor] set];
+    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathEOFill);
+
+    [_torchIconOffPressed release];
+    _torchIconOffPressed = [UIGraphicsGetImageFromCurrentImageContext() copy];
+
+    UIGraphicsEndImageContext();
+}
+
+- (void)_updateTorchButton
+{
+    BOOL onOff = self.barcodeView.isTorchOn;
+
+    [_torchButton setImage:onOff ? _torchIconOn : _torchIconOff forState:UIControlStateNormal];
+    [_torchButton setImage:onOff ? _torchIconOnPressed : _torchIconOffPressed forState:UIControlStateHighlighted];
 }
 
 - (UILabel*)_makeLabelWithTitle:(NSString*)title

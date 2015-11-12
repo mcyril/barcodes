@@ -29,6 +29,9 @@
 		F16D61491B47477C00C80F63 /* libZXingObjC-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */; };
 		F16D61501B474ADB00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
 		F16D61F91B47570300C80F63 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D61F61B4756EA00C80F63 /* libzbar.a */; };
+		F19964091BF41EA400C80F63 /* PocketSVG.m in Sources */ = {isa = PBXBuildFile; fileRef = F19964081BF41EA400C80F63 /* PocketSVG.m */; };
+		F199640A1BF41EA400C80F63 /* PocketSVG.m in Sources */ = {isa = PBXBuildFile; fileRef = F19964081BF41EA400C80F63 /* PocketSVG.m */; };
+		F199640B1BF41EA400C80F63 /* PocketSVG.m in Sources */ = {isa = PBXBuildFile; fileRef = F19964081BF41EA400C80F63 /* PocketSVG.m */; };
 		F1ABD1981B47FFC900C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
 /* End PBXBuildFile section */
 
@@ -187,6 +190,8 @@
 		F16D61541B474DF100C80F63 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F16D61551B474E0400C80F63 /* Distribution.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Distribution.xcconfig; sourceTree = "<group>"; };
 		F16D61F11B4756E900C80F63 /* zbar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zbar.xcodeproj; path = "lib/zbar-shim/zbar.xcodeproj"; sourceTree = "<group>"; };
+		F19964071BF41EA400C80F63 /* PocketSVG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PocketSVG.h; sourceTree = "<group>"; };
+		F19964081BF41EA400C80F63 /* PocketSVG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PocketSVG.m; sourceTree = "<group>"; };
 		F1ABD1961B47FFC900C80F63 /* UMBarcodeGeneratorPvt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMBarcodeGeneratorPvt.h; sourceTree = "<group>"; };
 		F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBarcodeGenerator.m; sourceTree = "<group>"; };
 		F1ABD19E1B48002100C80F63 /* UMBarcodeGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMBarcodeGenerator.h; sourceTree = "<group>"; };
@@ -298,6 +303,7 @@
 				F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */,
 				F1ABD1961B47FFC900C80F63 /* UMBarcodeGeneratorPvt.h */,
 				F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */,
+				F19964051BF41EA400C80F63 /* 3rd-party */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -329,6 +335,23 @@
 				F16D61F61B4756EA00C80F63 /* libzbar.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F19964051BF41EA400C80F63 /* 3rd-party */ = {
+			isa = PBXGroup;
+			children = (
+				F19964061BF41EA400C80F63 /* PocketSVG */,
+			);
+			path = "3rd-party";
+			sourceTree = "<group>";
+		};
+		F19964061BF41EA400C80F63 /* PocketSVG */ = {
+			isa = PBXGroup;
+			children = (
+				F19964071BF41EA400C80F63 /* PocketSVG.h */,
+				F19964081BF41EA400C80F63 /* PocketSVG.m */,
+			);
+			path = PocketSVG;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -517,6 +540,7 @@
 				F14148CD1B48630D00C80F63 /* UMBarcodeViewController.m in Sources */,
 				F14148CE1B48630D00C80F63 /* UMBarcodeScanViewController.m in Sources */,
 				F14148CF1B48630D00C80F63 /* UMBarcodeScanContext.m in Sources */,
+				F199640A1BF41EA400C80F63 /* PocketSVG.m in Sources */,
 				F14148D01B48630D00C80F63 /* UMBarcodeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,6 +554,7 @@
 				F14148E71B48634B00C80F63 /* UMBarcodeViewController.m in Sources */,
 				F14148E81B48634B00C80F63 /* UMBarcodeScanViewController.m in Sources */,
 				F14148E91B48634B00C80F63 /* UMBarcodeScanContext.m in Sources */,
+				F199640B1BF41EA400C80F63 /* PocketSVG.m in Sources */,
 				F14148EA1B48634B00C80F63 /* UMBarcodeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,6 +568,7 @@
 				F16D613F1B47421700C80F63 /* UMBarcodeViewController.m in Sources */,
 				F16D61501B474ADB00C80F63 /* UMBarcodeScanViewController.m in Sources */,
 				F16D613B1B47421700C80F63 /* UMBarcodeScanContext.m in Sources */,
+				F19964091BF41EA400C80F63 /* PocketSVG.m in Sources */,
 				F16D613E1B47421700C80F63 /* UMBarcodeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
