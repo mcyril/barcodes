@@ -297,6 +297,7 @@
         if([_camera isFocusModeSupported:AVCaptureFocusModeAutoFocus])
             [self addGestureRecognizer:[[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_refocus)] autorelease]];
 
+        // prepare view-finder gfx
         if (![self _initializeViewFinder])
             break;
 
