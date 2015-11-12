@@ -92,4 +92,4 @@
 /* Define to 'static' if no test programs will be compiled. */
 #define __STATIC static
 /* #undef WITH_TESTS */
-   
+

@@ -175,7 +175,7 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
  *     All four orientations are permitted, regardless of any app or viewcontroller constraints.
  *    If you wish, the card guide and buttons can instead obey standard iOS constraints, including
  *     the UISupportedInterfaceOrientations settings in your app's plist.
- *    Set to NO to follow standard iOS constraints. Defaults to YES. (Does not affect the manual entry screen.)
+ *    Set to NO to follow standard iOS constraints. Defaults to YES.
  */
 @property (nonatomic, assign) BOOL allowFreelyRotatingGuide;
 
