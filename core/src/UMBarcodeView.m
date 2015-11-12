@@ -404,19 +404,6 @@
     _queue = dispatch_queue_create(NULL, NULL);
     [_metaDataOutput setMetadataObjectsDelegate:self queue:_queue];
 
-    // uglu hack: the torch mode auto works only when we have video data output capture, doh...
-    if (_context.torchMode != kUMBarcodeScanTorchMode_OFF)
-    {
-        _videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
-        if (_videoDataOutput != nil)
-        {
-            [_videoDataOutput setSampleBufferDelegate:self queue:_queue];
-
-            if ([_captureSession canAddOutput:_videoDataOutput])
-                [_captureSession addOutput:_videoDataOutput];
-        }
-    }
-
     return YES;
 }
 #endif
@@ -577,11 +564,11 @@
 
 - (void)setTorch:(BOOL)onOff
 {
-    NSError* error = nil;
+    if (_camera.hasTorch && _context.torchMode != kUMBarcodeScanTorchMode_OFF)
+    {
+        NSError* error = nil;
 
-    [self _changeCameraConfiguration:^BOOL(NSError** error)
-                                {
-                                    if (_camera.hasTorch && _context.torchMode != kUMBarcodeScanTorchMode_OFF)
+        [self _changeCameraConfiguration:^BOOL(NSError** error)
                                     {
                                         if (onOff)
                                         {
@@ -594,11 +581,11 @@
                                         }
                                         else if ([_camera isTorchModeSupported:AVCaptureTorchModeOff])
                                             _camera.torchMode = AVCaptureTorchModeOff;
-                                    }
 
-                                    return YES;
-                                }
-                               error:&error];
+                                        return YES;
+                                    }
+                                   error:&error];
+    }
 }
 
 #pragma mark -
