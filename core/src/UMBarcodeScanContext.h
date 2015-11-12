@@ -46,9 +46,9 @@ typedef enum _UMBarcodeScanState UMBarcodeScanState_t;
 @property (nonatomic, assign) UMBarcodeScanMode_t scanMode;
 @property (nonatomic, retain) NSArray* barcodeTypes;
 
-@property(nonatomic, assign) BOOL keepStatusBarStyle;
-@property(nonatomic, assign) UIBarStyle navigationBarStyle;
-@property(nonatomic, retain) UIColor* navigationBarTintColor;
+@property (nonatomic, assign) BOOL keepStatusBarStyle;
+@property (nonatomic, assign) UIBarStyle navigationBarStyle;
+@property (nonatomic, retain) UIColor* navigationBarTintColor;
 
 @property (nonatomic, assign) UIInterfaceOrientation initialInterfaceOrientationForViewcontroller;
 @property (nonatomic, readonly) NSTimeInterval orientationAnimationDuration;

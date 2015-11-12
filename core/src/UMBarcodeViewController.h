@@ -25,6 +25,8 @@
     UIButton* _helpButton;
     CGSize _helpButtonFrameSize;
 
+    UIButton* _torchButton;
+
     UILabel* _hintLabel;
 
     UMBarcodeView* _barcodeView;
