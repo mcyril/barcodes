@@ -23,6 +23,7 @@
 @dynamic hintText;
 @dynamic scanMode;
 @dynamic barcodeTypes;
+@dynamic torchMode;
 
 @dynamic keepStatusBarStyle;
 @dynamic navigationBarStyle;
@@ -185,6 +186,16 @@
 - (void)setBarcodeTypes:(NSArray*)barcodeTypes
 {
     _context.barcodeTypes = barcodeTypes;
+}
+
+- (UMBarcodeScanTorchMode_t)torchMode
+{
+    return _context.torchMode;
+}
+
+- (void)setTorchMode:(UMBarcodeScanTorchMode_t)torchMode
+{
+    _context.torchMode = torchMode;
 }
 
 - (NSString*)cancelButtonText

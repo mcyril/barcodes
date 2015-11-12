@@ -57,6 +57,10 @@
 }
 @property (nonatomic, readonly) CGRect cameraPreviewFrame;
 
+@property (nonatomic, readonly) BOOL hasTorch;
+@property (nonatomic, readonly) BOOL isTorchOn;
+- (void)setTorch:(BOOL)onOff;
+
 - (instancetype)initWithFrame:(CGRect)frame andContext:(UMBarcodeScanContext*)context;
 
 - (void)scanStart;

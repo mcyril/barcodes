@@ -30,6 +30,8 @@ typedef enum _UMBarcodeScanState UMBarcodeScanState_t;
     UMBarcodeScanMode_t _scanMode;
     NSArray* _barcodeTypes;
 
+    UMBarcodeScanTorchMode_t _torchMode;
+
     BOOL _keepStatusBarStyle;
     UIBarStyle _navigationBarStyle;
     UIColor* _navigationBarTintColor;
@@ -45,6 +47,8 @@ typedef enum _UMBarcodeScanState UMBarcodeScanState_t;
 
 @property (nonatomic, assign) UMBarcodeScanMode_t scanMode;
 @property (nonatomic, retain) NSArray* barcodeTypes;
+
+@property (nonatomic, assign) UMBarcodeScanTorchMode_t torchMode;
 
 @property (nonatomic, assign) BOOL keepStatusBarStyle;
 @property (nonatomic, assign) UIBarStyle navigationBarStyle;
