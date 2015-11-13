@@ -39,6 +39,12 @@ DEVICE_TARGET_PATH="$TARGET_BUILD_DIR/$EXECUTABLE_NAME"
 echo "building FAT library..."
 
 lipo -create $SIMULATOR_TARGET_PATH $DEVICE_TARGET_PATH -output $EXECUTABLE_NAME
+
+# strip resulting library from Apple's shit
+
+echo "stripping FAT library..."
+
+xcrun bitcode_strip $EXECUTABLE_NAME -r -o $EXECUTABLE_NAME
 strip -S $EXECUTABLE_NAME
 
 echo "done."
