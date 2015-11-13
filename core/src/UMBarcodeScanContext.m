@@ -60,7 +60,7 @@ NSString* const kUMBarcodeScanContextChangedOrientation = @"kUMBarcodeScanContex
         _initialInterfaceOrientationForViewcontroller = UIInterfaceOrientationUnknown;
         _allowFreelyRotatingGuide = YES;
 
-        _torchMode = kUMBarcodeScanTorchMode_OFF;
+        _torchMode = kUMBarcodeScanTorchModeInit_OFF;
     }
 
     return self;

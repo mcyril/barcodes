@@ -157,7 +157,7 @@
         [self.view addSubview:self.helpButton];
     }
 
-    if (_context.torchMode == kUMBarcodeScanTorchMode_MANUAL)
+    if ((_context.torchMode & kUMBarcodeScanTorchMode_BUTTON) != 0)
     {
         [self _createTorchImages];
 

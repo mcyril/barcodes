@@ -29,8 +29,15 @@ typedef enum _UMBarcodeScanMode UMBarcodeScanMode_t;
  */
 enum _UMBarcodeScanTorchMode
 {
-    kUMBarcodeScanTorchMode_OFF = 0,
-    kUMBarcodeScanTorchMode_MANUAL
+    /* initial state of the torch */
+    kUMBarcodeScanTorchModeInit_OFF = 0,
+    kUMBarcodeScanTorchModeInit_ON,
+    kUMBarcodeScanTorchModeInit_AUTO,
+
+    kUMBarcodeScanTorchModeInit_Mask = 15,  // jsut mask for kUMBarcodeScanTorchModeInit_* values
+
+    /* bit flag — show the torch control button */
+    kUMBarcodeScanTorchMode_BUTTON = 16
 };
 typedef enum _UMBarcodeScanTorchMode UMBarcodeScanTorchMode_t;
 

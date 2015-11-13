@@ -95,7 +95,7 @@
     scanViewController.hintText = [NSString stringWithFormat:@"Place barcode inside viewfinder to scan with %@",
                                                                             scanViewController.scanMode == kUMBarcodeScanMode_ZXing ? @"ZXing" :
                                                                                 (scanViewController.scanMode == kUMBarcodeScanMode_ZBar ? @"ZBar" : @"System")];
-    scanViewController.torchMode = kUMBarcodeScanTorchMode_MANUAL;
+    scanViewController.torchMode = kUMBarcodeScanTorchMode_BUTTON | kUMBarcodeScanTorchModeInit_AUTO;
 
     // set of formats depends on scan mode
     scanViewController.barcodeTypes = [NSArray arrayWithObjects:

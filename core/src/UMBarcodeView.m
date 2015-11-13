@@ -249,14 +249,19 @@
                                                     _camera.whiteBalanceMode = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
 
                                                 // torch
-                                                if (_camera.hasTorch && _context.torchMode != kUMBarcodeScanTorchMode_OFF)
+                                                if (_camera.hasTorch && (_context.torchMode & kUMBarcodeScanTorchModeInit_Mask) != kUMBarcodeScanTorchModeInit_OFF)
                                                 {
-                                                    BOOL success = NO;
-                                                    if ([_camera respondsToSelector:@selector(setTorchModeOnWithLevel:error:)])
-                                                        success = [_camera setTorchModeOnWithLevel:kMinimalTorchLevel error:error];
+                                                    if ((_context.torchMode & kUMBarcodeScanTorchModeInit_Mask) == kUMBarcodeScanTorchModeInit_AUTO && [_camera isTorchModeSupported:AVCaptureTorchModeAuto])
+                                                        _camera.torchMode = AVCaptureTorchModeAuto;
+                                                    else
+                                                    {
+                                                        BOOL success = NO;
+                                                        if ([_camera respondsToSelector:@selector(setTorchModeOnWithLevel:error:)])
+                                                            success = [_camera setTorchModeOnWithLevel:kMinimalTorchLevel error:error];
 
-                                                    if (!success && [_camera isTorchModeSupported:AVCaptureTorchModeOn])
-                                                        _camera.torchMode = AVCaptureTorchModeOn;
+                                                        if (!success && [_camera isTorchModeSupported:AVCaptureTorchModeOn])
+                                                            _camera.torchMode = AVCaptureTorchModeOn;
+                                                    }
                                                 }
 
                                                 return YES;
@@ -403,6 +408,19 @@
 
     _queue = dispatch_queue_create(NULL, NULL);
     [_metaDataOutput setMetadataObjectsDelegate:self queue:_queue];
+
+    // uglu hack: the torch mode auto works only when we have video data output capture, doh...
+    if ((_context.torchMode & kUMBarcodeScanTorchModeInit_Mask) == kUMBarcodeScanTorchModeInit_AUTO)
+    {
+        _videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
+        if (_videoDataOutput != nil)
+        {
+            [_videoDataOutput setSampleBufferDelegate:self queue:_queue];
+
+            if ([_captureSession canAddOutput:_videoDataOutput])
+                [_captureSession addOutput:_videoDataOutput];
+        }
+    }
 
     return YES;
 }
@@ -559,12 +577,12 @@
 
 - (BOOL)isTorchOn
 {
-    return _camera.hasTorch && _camera.torchMode != AVCaptureTorchModeOff;
+    return _camera.hasTorch && ((_camera.torchMode == AVCaptureTorchModeAuto && _camera.torchLevel > .0) || _camera.torchMode == AVCaptureTorchModeOn);
 }
 
 - (void)setTorch:(BOOL)onOff
 {
-    if (_camera.hasTorch && _context.torchMode != kUMBarcodeScanTorchMode_OFF)
+    if (_camera.hasTorch)
     {
         NSError* error = nil;
 
