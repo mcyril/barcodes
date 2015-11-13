@@ -572,16 +572,25 @@
 
 - (BOOL)hasTorch
 {
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     return _camera.hasTorch;
+#else
+    return NO;
+#endif
 }
 
 - (BOOL)isTorchOn
 {
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     return _camera.hasTorch && ((_camera.torchMode == AVCaptureTorchModeAuto && _camera.torchLevel > .0) || _camera.torchMode == AVCaptureTorchModeOn);
+#else
+    return NO;
+#endif
 }
 
 - (void)setTorch:(BOOL)onOff
 {
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     if (_camera.hasTorch)
     {
         NSError* error = nil;
@@ -604,6 +613,7 @@
                                     }
                                    error:&error];
     }
+#endif
 }
 
 #pragma mark -
@@ -742,6 +752,7 @@
 }
 #endif
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
 - (void)captureOutput:(AVCaptureOutput*)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection*)connection
 {
     if ((OSAtomicOr32Barrier(0, &_context->_state) & (PAUSED|RUNNING)) != RUNNING) // bypass if suspended
@@ -849,5 +860,6 @@
         }
     }
 }
+#endif
 
 @end
