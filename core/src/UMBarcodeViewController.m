@@ -230,8 +230,6 @@
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 
     [self _didReceiveDeviceOrientationNotification:nil];
-
-    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -272,8 +270,6 @@
     }
 
     [super viewWillDisappear:animated];
-
-    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
