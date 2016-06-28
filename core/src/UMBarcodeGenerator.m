@@ -22,6 +22,16 @@
 #endif
 
 
+#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+//# define QR_ECLEVEL      [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelM]
+#   define QR_ECLEVEL      [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelL]
+#   define AZTEC_ECLEVEL   [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelQ]
+#else
+//# define QR_ECLEVEL      QR_ECLEVEL_M
+#   define QR_ECLEVEL      QR_ECLEVEL_L
+#   define AZTEC_ECLEVEL   23
+#endif
+
 #if !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
 static void freeRawData(void* info, const void* data, size_t size)
 {
@@ -46,7 +56,7 @@ static void freeRawData(void* info, const void* data, size_t size)
 
     ZXEncodeHints* hints = [ZXEncodeHints hints];
     hints.encoding = CFStringConvertEncodingToNSStringEncoding(encoding);
-    hints.errorCorrectionLevel = (format == kBarcodeFormatAztec ? [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelQ] : [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelM]);
+    hints.errorCorrectionLevel = (format == kBarcodeFormatAztec ? AZTEC_ECLEVEL : QR_ECLEVEL);
     hints.margin = [NSNumber numberWithInt:4];
 
     ZXBitMatrix* result = [[ZXMultiFormatWriter writer] encode:data format:format width:ceilf(size.width) height:ceilf(size.height) hints:hints error:error];
@@ -82,9 +92,10 @@ static void freeRawData(void* info, const void* data, size_t size)
 
         UIImage* image = nil;
 
-        ag_settings settings;
-        settings.mask = AG_SF_SYMBOL_FORMAT;
+        ag_settings settings = { 0 };
+        settings.mask = AG_SF_SYMBOL_FORMAT | AG_SF_REDUNDANCY_FOR_ERROR_CORRECTION;
         settings.symbol_format = AG_FULL_FORMAT;
+        settings.redundancy_for_error_correction = AZTEC_ECLEVEL;
 
         ag_matrix* barcode = NULL;
         const int gen_result = ag_generate(&barcode, [string bytes], [string length], &settings);
@@ -103,7 +114,7 @@ static void freeRawData(void* info, const void* data, size_t size)
 
         UIImage* image = nil;
 
-        QRcode* resultCode = QRcode_encodeData((int)[string length], [string bytes], 0, QR_ECLEVEL_M);
+        QRcode* resultCode = QRcode_encodeData((int)[string length], [string bytes], 0, QR_ECLEVEL);
         if (resultCode != NULL)
         {
             image = [[self class] _imageSquareWithPixels:resultCode->data width:resultCode->width margin:4 constrains:ceilf(size.width) opaque:opaque];
