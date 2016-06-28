@@ -12,7 +12,7 @@ generator_exception::error_code_type generator_exception::error_code() const
     return _error_code;
 }
 
-const char *generator_exception::what() const
+const char *generator_exception::what() const throw()
 {
     const char *msg = "unknown error_code";
 
