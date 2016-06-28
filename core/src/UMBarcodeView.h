@@ -37,7 +37,7 @@
     AVCaptureSession* _captureSession;
     AVCaptureDeviceInput* _videoInput;
     AVCaptureMetadataOutput* _metaDataOutput;
-#if (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING) || (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     AVCaptureVideoDataOutput* _videoDataOutput;
 #endif
 #if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
