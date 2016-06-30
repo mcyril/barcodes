@@ -32,6 +32,8 @@
 #   define AZTEC_ECLEVEL   23
 #endif
 
+#define BARCODE_MARGINS     0   // let caller care of margins
+
 #if !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
 static void freeRawData(void* info, const void* data, size_t size)
 {
@@ -57,7 +59,7 @@ static void freeRawData(void* info, const void* data, size_t size)
     ZXEncodeHints* hints = [ZXEncodeHints hints];
     hints.encoding = CFStringConvertEncodingToNSStringEncoding(encoding);
     hints.errorCorrectionLevel = (format == kBarcodeFormatAztec ? AZTEC_ECLEVEL : QR_ECLEVEL);
-    hints.margin = [NSNumber numberWithInt:4];
+    hints.margin = [NSNumber numberWithInt:BARCODE_MARGINS];
 
     ZXBitMatrix* result = [[ZXMultiFormatWriter writer] encode:data format:format width:ceilf(size.width) height:ceilf(size.height) hints:hints error:error];
     if (result != nil)
@@ -100,7 +102,7 @@ static void freeRawData(void* info, const void* data, size_t size)
         ag_matrix* barcode = NULL;
         const int gen_result = ag_generate(&barcode, [string bytes], [string length], &settings);
         if (gen_result == AG_SUCCESS)
-            image = [[self class] _imageSquareWithPixels:barcode->data width:(int)barcode->width margin:4 constrains:ceilf(size.width) opaque:opaque];
+            image = [[self class] _imageSquareWithPixels:barcode->data width:(int)barcode->width margin:BARCODE_MARGINS constrains:ceilf(size.width) opaque:opaque];
 
         ag_release_matrix(barcode);
 
@@ -117,7 +119,7 @@ static void freeRawData(void* info, const void* data, size_t size)
         QRcode* resultCode = QRcode_encodeData((int)[string length], [string bytes], 0, QR_ECLEVEL);
         if (resultCode != NULL)
         {
-            image = [[self class] _imageSquareWithPixels:resultCode->data width:resultCode->width margin:4 constrains:ceilf(size.width) opaque:opaque];
+            image = [[self class] _imageSquareWithPixels:resultCode->data width:resultCode->width margin:BARCODE_MARGINS constrains:ceilf(size.width) opaque:opaque];
 
             QRcode_free(resultCode);
         }
