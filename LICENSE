@@ -56,6 +56,7 @@ libBarcodes uses 3rd party libraries and components, namely
     aztecgen   (http://aztecgen.sourceforge.net/)
     qrencode   (http://fukuchi.org/works/qrencode/)
     zbar       (http://zbar.sourceforge.net)
+    Zint       (http://www.zint.org.uk)
     ZXingObjC  (https://github.com/TheLevelUp/ZXingObjC)
     PocketSVG  (https://github.com/arielelkin/PocketSVG)
 

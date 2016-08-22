@@ -12,7 +12,8 @@ libBarcodes aggregates three ways of barcode scanning with 3rd party components:
 
 libBarcodes uses ZXingObjC to generate barcodes in default build configuration. Build
 configuration without ZXingObjC uses aztecgen (http://aztecgen.sourceforge.net/) and
-qrencode (http://fukuchi.org/works/qrencode/)
+qrencode (http://fukuchi.org/works/qrencode/), except *experimental* build with Zint
+Barcode Generator (http://www.zint.org.uk)
 ----------------------------------------------------------------------------------------
 Building:
 
@@ -23,6 +24,7 @@ Building:
     all     - build with all scanners (default)
     no-zbar - build without zbar scanner
     system  - build only with system scanner (iOS7+)
+    zint    - same as above but uses Zint as generator (experimental)
 ----------------------------------------------------------------------------------------
 Using:
 
