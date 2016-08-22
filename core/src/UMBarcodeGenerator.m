@@ -89,11 +89,10 @@ static void freeRawData(void* info, const void* data, size_t size)
     else
         return nil;
 #elif defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
-    
     struct zint_symbol * symbol = ZBarcode_Create();
 
     ZBarcode_Delete(symbol);
-    
+
     return nil; // TODO: xxx
 #else
     // without ZXing we're supporting only limited set of barcodes to generate.. why? 'cause I need only these two
