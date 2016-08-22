@@ -26,6 +26,7 @@
 //# define QR_ECLEVEL      [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelM]
 #   define QR_ECLEVEL      [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelL]
 #   define AZTEC_ECLEVEL   [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelQ]
+#elif defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
 #else
 //# define QR_ECLEVEL      QR_ECLEVEL_M
 #   define QR_ECLEVEL      QR_ECLEVEL_L
@@ -34,7 +35,8 @@
 
 #define BARCODE_MARGINS     0   // let caller care of margins
 
-#if !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
+#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+#elif !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
 static void freeRawData(void* info, const void* data, size_t size)
 {
     free((void*)data);
@@ -42,7 +44,8 @@ static void freeRawData(void* info, const void* data, size_t size)
 #endif
 
 @interface UMBarcodeGenerator ()
-#if !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
+#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+#elif !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
 + (UIImage*)_imageSquareWithPixels:(unsigned char*)pixels width:(int)width margin:(int)margin constrains:(int)cwidth opaque:(BOOL)opaque;
 #endif
 @end
@@ -83,6 +86,8 @@ static void freeRawData(void* info, const void* data, size_t size)
     }
     else
         return nil;
+#elif defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+    return nil; // TODO: xxx
 #else
     // without ZXing we're supporting only limited set of barcodes to generate.. why? 'cause I need only these two
 
@@ -131,7 +136,8 @@ static void freeRawData(void* info, const void* data, size_t size)
 #endif
 }
 
-#if !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
+#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+#elif !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
 + (UIImage*)_imageSquareWithPixels:(unsigned char*)pixels width:(int)width margin:(int)margin constrains:(int)cwidth opaque:(BOOL)opaque
 {
     int len = width * width;
