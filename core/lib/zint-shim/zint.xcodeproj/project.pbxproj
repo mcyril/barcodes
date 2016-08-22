@@ -37,6 +37,7 @@
 		F106E99C1D6B679500C80F63 /* rss.c in Sources */ = {isa = PBXBuildFile; fileRef = F106E9731D6B679500C80F63 /* rss.c */; };
 		F106E99E1D6B679500C80F63 /* telepen.c in Sources */ = {isa = PBXBuildFile; fileRef = F106E9771D6B679500C80F63 /* telepen.c */; };
 		F106E99F1D6B679500C80F63 /* upcean.c in Sources */ = {isa = PBXBuildFile; fileRef = F106E9781D6B679500C80F63 /* upcean.c */; };
+		F106EA2A1D6B83FA00C80F63 /* dummy.c in Sources */ = {isa = PBXBuildFile; fileRef = F106EA291D6B83FA00C80F63 /* dummy.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -121,6 +122,7 @@
 		F106E9771D6B679500C80F63 /* telepen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = telepen.c; path = ../zint/backend/telepen.c; sourceTree = "<group>"; };
 		F106E9781D6B679500C80F63 /* upcean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = upcean.c; path = ../zint/backend/upcean.c; sourceTree = "<group>"; };
 		F106E9791D6B679500C80F63 /* zint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zint.h; path = ../zint/backend/zint.h; sourceTree = "<group>"; };
+		F106EA291D6B83FA00C80F63 /* dummy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dummy.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				F106E9321D6B657000C80F63 /* essentials */,
+				F106EA281D6B83FA00C80F63 /* dummy */,
 				F106E93B1D6B672400C80F63 /* sources */,
 				F106E9261D6B648000C80F63 /* Products */,
 			);
@@ -233,6 +236,14 @@
 			name = sources;
 			sourceTree = "<group>";
 		};
+		F106EA281D6B83FA00C80F63 /* dummy */ = {
+			isa = PBXGroup;
+			children = (
+				F106EA291D6B83FA00C80F63 /* dummy.c */,
+			);
+			path = dummy;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,6 +309,7 @@
 				F106E9841D6B679500C80F63 /* composite.c in Sources */,
 				F106E99E1D6B679500C80F63 /* telepen.c in Sources */,
 				F106E9931D6B679500C80F63 /* pdf417.c in Sources */,
+				F106EA2A1D6B83FA00C80F63 /* dummy.c in Sources */,
 				F106E9901D6B679500C80F63 /* maxicode.c in Sources */,
 				F106E9911D6B679500C80F63 /* medical.c in Sources */,
 				F106E99B1D6B679500C80F63 /* render.c in Sources */,

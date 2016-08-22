@@ -10,7 +10,9 @@
 #import "UMBarcodeScanContext.h"
 #import "UMBarcodeScanUtilities.h"
 
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+#import "zint.h"
+#elif defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
 #import "ZXQRCodeErrorCorrectionLevel.h"
 #import "ZXEncodeHints.h"
 #import "ZXMultiFormatWriter.h"
@@ -87,6 +89,11 @@ static void freeRawData(void* info, const void* data, size_t size)
     else
         return nil;
 #elif defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+    
+    struct zint_symbol * symbol = ZBarcode_Create();
+
+    ZBarcode_Delete(symbol);
+    
     return nil; // TODO: xxx
 #else
     // without ZXing we're supporting only limited set of barcodes to generate.. why? 'cause I need only these two

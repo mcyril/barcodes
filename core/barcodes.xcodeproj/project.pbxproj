@@ -14,8 +14,7 @@
 		F106E9C41D6B7D6F00C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
 		F106E9C51D6B7D6F00C80F63 /* PocketSVG.m in Sources */ = {isa = PBXBuildFile; fileRef = F19964081BF41EA400C80F63 /* PocketSVG.m */; };
 		F106E9C61D6B7D6F00C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
-		F106E9C81D6B7D6F00C80F63 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F12AD2131B4886B600C80F63 /* libqrencode.a */; };
-		F106E9C91D6B7D6F00C80F63 /* libaztec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F14149671B48703300C80F63 /* libaztec.a */; };
+		F106EA211D6B839200C80F63 /* libzint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F106E9A91D6B7A6400C80F63 /* libzint.a */; };
 		F12AD21B1B4886D600C80F63 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F12AD2131B4886B600C80F63 /* libqrencode.a */; };
 		F14148CB1B48630D00C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
 		F14148CC1B48630D00C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
@@ -236,8 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F106E9C81D6B7D6F00C80F63 /* libqrencode.a in Frameworks */,
-				F106E9C91D6B7D6F00C80F63 /* libaztec.a in Frameworks */,
+				F106EA211D6B839200C80F63 /* libzint.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
