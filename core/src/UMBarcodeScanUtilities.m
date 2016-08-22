@@ -260,6 +260,42 @@ static dispatch_once_t onceToken;
 }
 #endif
 
+#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
++ (int)um2zintBarcodeType:(NSString*)umBarcodeType
+{
+    if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCECode])
+        return BARCODE_UPCE;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCACode])
+        return BARCODE_UPCA;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode39Code])
+        return BARCODE_CODE39;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode39Mod43Code])
+        return -1;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN13Code])
+        return -1;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN8Code])
+        return -1;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode93Code])
+        return BARCODE_CODE93;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode128Code])
+        return BARCODE_CODE128;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypePDF417Code])
+        return BARCODE_PDF417;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeAztecCode])
+        return BARCODE_AZTEC;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeQRCode])
+        return BARCODE_QRCODE;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeInterleaved2of5Code])
+        return BARCODE_C25MATRIX;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeITF14Code])
+        return BARCODE_ITF14;
+    else if ([umBarcodeType isEqualToString:kUMBarcodeTypeDataMatrixCode])
+        return BARCODE_DATAMATRIX;
+    else
+        return -1;
+}
+#endif
+
 + (BOOL)_hasVideoCamera
 {
     // check for a camera

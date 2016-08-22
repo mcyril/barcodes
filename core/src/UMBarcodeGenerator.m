@@ -89,6 +89,10 @@ static void freeRawData(void* info, const void* data, size_t size)
     else
         return nil;
 #elif defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+    int format = [UMBarcodeScanUtilities um2zintBarcodeType:type];
+    if (format == -1)
+        return nil;
+
     UIImage* image = nil;
 
     NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
@@ -97,6 +101,8 @@ static void freeRawData(void* info, const void* data, size_t size)
         struct zint_symbol* symbol = ZBarcode_Create();
         if (symbol != NULL)
         {
+            symbol->symbology = format;
+
             int result = ZBarcode_Encode(symbol, (unsigned char *)[string bytes], (int)[string length]);
             if (result == 0)
             {
@@ -109,11 +115,14 @@ static void freeRawData(void* info, const void* data, size_t size)
 
                     if (context != NULL)
                     {
-                        CGRect bounds = CGRectZero;
-                        bounds.size = size;
-                        
+                        CGRect bounds =
+                                {
+                                    .origin = CGPointZero,
+                                    .size = size
+                                };
+
                         CGContextSetShouldAntialias(context, false);
-                        
+
                         if (opaque)
                         {
                             CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
@@ -121,7 +130,7 @@ static void freeRawData(void* info, const void* data, size_t size)
                         }
                         else
                             CGContextClearRect(context, bounds);
-                        
+
                         struct zint_render* rendered = symbol->rendered;
                         if (rendered != NULL)
                         {
@@ -131,7 +140,7 @@ static void freeRawData(void* info, const void* data, size_t size)
                             while (line != NULL)
                             {
                                 CGContextFillRect(context, CGRectMake(line->x, line->y, line->width, line->length));
-                                
+
                                 line = line->next;
                             }
                         }
@@ -143,24 +152,24 @@ static void freeRawData(void* info, const void* data, size_t size)
 
                             CGImageRelease(imageRef);
                         }
-                        
+
                         CGContextRelease(context);
                     }
                 }
             }
         }
-        
+
         ZBarcode_Delete(symbol);
     }
 
     return [image autorelease];
 #else
-    // without ZXing we're supporting only limited set of barcodes to generate.. why? 'cause I need only these two
+    // without ZXing and ZINT we're supporting only limited set of barcodes to generate.. why? 'cause I need only these two
 
     if ([type isEqualToString:kUMBarcodeTypeAztecCode])
     {
         UIImage* image = nil;
-        
+
         NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
         if (string != nil)
         {
@@ -182,7 +191,7 @@ static void freeRawData(void* info, const void* data, size_t size)
     else if ([type isEqualToString:kUMBarcodeTypeQRCode])
     {
         UIImage* image = nil;
-        
+
         NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
         if (string != nil)
         {
