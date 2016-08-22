@@ -15,6 +15,10 @@
 #import "zbar.h"
 #endif
 
+#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+#import "zint.h"
+#endif
+
 @interface UMBarcodeScanUtilities : NSObject
 
 + (BOOL)appHasViewControllerBasedStatusBar;
@@ -30,6 +34,10 @@
 #if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
 + (zbar_symbol_type_t)um2zbBarcodeType:(NSString*)umBarcodeType;
 + (NSString*)zb2umBarcodeType:(zbar_symbol_type_t)zbBarcodeType;
+#endif
+
+#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
++ (int)um2zintBarcodeType:(NSString*)umBarcodeType;
 #endif
 
 + (BOOL)_hasVideoCamera;

@@ -1,0 +1,20 @@
+//
+//  PrefixHeader.pch
+//
+//  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
+//  Created by Cyril Murzin
+//
+
+#ifndef _PrefixHeader_pch
+#define _PrefixHeader_pch
+
+#import <Availability.h>
+
+#ifdef __OBJC__
+#   import <UIKit/UIKit.h>
+#   import <Foundation/Foundation.h>
+#endif
+
+#define HAVE_CONFIG_H   1
+
+#endif

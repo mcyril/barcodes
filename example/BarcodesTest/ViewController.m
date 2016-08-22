@@ -163,7 +163,13 @@
 {
     NSLog(@"### SCAN WANTS HELP");
 
+#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     _barcodeImage.image = nil;
+#else
+    _barcodeImage.image = [UMBarcodeGenerator imageWithData:@"abcdABCD123\nЧадъ и угаръ" encoding:kCFStringEncodingUTF8 barcodeType:kUMBarcodeTypeQRCode /*kUMBarcodeTypeAztecCode*/ imageSize:_barcodeImage.bounds.size whiteOpaque:YES error:nil];
+
+    [scanViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+#endif
 }
 
 /* example of viewfinder override with animation */
