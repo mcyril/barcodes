@@ -270,11 +270,11 @@ static dispatch_once_t onceToken;
     else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode39Code])
         return BARCODE_CODE39;
     else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode39Mod43Code])
-        return -1;
+        return -1; // TODO: same as BARCODE_CODE39 but with option_2 = 1
     else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN13Code])
-        return -1;
+        return BARCODE_EANX;
     else if ([umBarcodeType isEqualToString:kUMBarcodeTypeEAN8Code])
-        return -1;
+        return BARCODE_EANX;
     else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode93Code])
         return BARCODE_CODE93;
     else if ([umBarcodeType isEqualToString:kUMBarcodeTypeCode128Code])
