@@ -23,15 +23,15 @@
 #endif
 
 #if !defined(UMBARCODE_SCAN_ZBAR)
-#   define UMBARCODE_SCAN_ZBAR      1
+#   define UMBARCODE_SCAN_ZBAR      0
 #endif
 
 #if !defined(UMBARCODE_SCAN_ZXING)
-#   define UMBARCODE_SCAN_ZXING     1
+#   define UMBARCODE_SCAN_ZXING     0
 #endif
 
 #if !defined(UMBARCODE_GEN_ZINT)
-#   define UMBARCODE_GEN_ZINT       1
+#   define UMBARCODE_GEN_ZINT       0
 #endif
 
 #endif

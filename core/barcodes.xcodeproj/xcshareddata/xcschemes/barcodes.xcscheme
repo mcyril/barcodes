@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F106E9BA1D6B7D6F00C80F63"
+               BlueprintIdentifier = "F16D60F91B473E3E00C80F63"
                BuildableName = "libbarcodes.a"
-               BlueprintName = "barcodes-zint"
+               BlueprintName = "barcodes"
+               ReferencedContainer = "container:barcodes.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F16D61041B473E3E00C80F63"
+               BuildableName = "barcodesTests.xctest"
+               BlueprintName = "barcodesTests"
                ReferencedContainer = "container:barcodes.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +42,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F16D61041B473E3E00C80F63"
+               BuildableName = "barcodesTests.xctest"
+               BlueprintName = "barcodesTests"
+               ReferencedContainer = "container:barcodes.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "F16D60F91B473E3E00C80F63"
+            BuildableName = "libbarcodes.a"
+            BlueprintName = "barcodes"
+            ReferencedContainer = "container:barcodes.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,9 +78,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F106E9BA1D6B7D6F00C80F63"
+            BlueprintIdentifier = "F16D60F91B473E3E00C80F63"
             BuildableName = "libbarcodes.a"
-            BlueprintName = "barcodes-zint"
+            BlueprintName = "barcodes"
             ReferencedContainer = "container:barcodes.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +96,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F106E9BA1D6B7D6F00C80F63"
+            BlueprintIdentifier = "F16D60F91B473E3E00C80F63"
             BuildableName = "libbarcodes.a"
-            BlueprintName = "barcodes-zint"
+            BlueprintName = "barcodes"
             ReferencedContainer = "container:barcodes.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
