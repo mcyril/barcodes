@@ -149,7 +149,6 @@ if [ $? != 0 ]; then
 	echo "### ...failed..."
 	exit $?
 fi
-echo "###   done."
 
 # ---------------------------------------------------------------------------------------
 # simulator library
@@ -252,7 +251,6 @@ if [ $? != 0 ]; then
 	echo "### ...failed..."
 	exit $?
 fi
-echo "###   done."
 
 # ---------------------------------------------------------------------------------------
 # universal library
@@ -264,14 +262,20 @@ executable_name=$(get_executable_name ${arch_simulator[@]} "-configuration $barc
 
 echo "###   building universal library..."
 lipo -create $(get_device_library barcodes) $(get_simulator_library barcodes) -output $executable_name
-echo "###   done."
 
 # ---------------------------------------------------------------------------------------
 
-echo "###   stripping universal library..."
-xcrun bitcode_strip $executable_name -r -o $executable_name
-strip -S $executable_name
-echo "###   done."
+if [[ ! " ${builds[@]} " =~ " bitcode " ]]; then
+	echo "###   stripping bitcode..."
+	xcrun bitcode_strip $executable_name -r -o $executable_name
+fi
+
+# ---------------------------------------------------------------------------------------
+
+if [[ ! " ${builds[@]} " =~ " debug " ]]; then
+	echo "###   stripping debugging symbol table entries..."
+	strip -S $executable_name
+fi
 
 # ---------------------------------------------------------------------------------------
 
