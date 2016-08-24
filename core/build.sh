@@ -14,6 +14,7 @@ builds=( $@ )
 # ---------------------------------------------------------------------------------------
 
 barcodes_config="Release"
+temp_dir=$(mktemp -d "/tmp/barcodes.XXXXXXXX")
 
 arch_device=(-sdk iphoneos -arch armv7 -arch arm64)
 arch_simulator=(-sdk iphonesimulator -arch i386 -arch x86_64)
@@ -23,13 +24,13 @@ arch_simulator=(-sdk iphonesimulator -arch i386 -arch x86_64)
 # accepts list of build arguments
 function get_target_build_dir
 {
-	echo `xcodebuild -configuration $barcodes_config $@ -showBuildSettings | /usr/bin/sed -n -e 's/^.*TARGET_BUILD_DIR = //p'`
+	echo `xcodebuild -configuration $barcodes_config $@ -showBuildSettings BUILD_DIR="$temp_dir" | /usr/bin/sed -n -e 's/^.*TARGET_BUILD_DIR = //p'`
 }
 
 # accepts list of build arguments
 function get_executable_name
 {
-	echo `xcodebuild -configuration $barcodes_config $@ -showBuildSettings | /usr/bin/sed -n -e 's/^.*EXECUTABLE_NAME = //p'`
+	echo `xcodebuild -configuration $barcodes_config $@ -showBuildSettings BUILD_DIR="$temp_dir" | /usr/bin/sed -n -e 's/^.*EXECUTABLE_NAME = //p'`
 }
 
 # accepts library scheme name of barcodes
@@ -144,7 +145,7 @@ echo "###   done."
 # ---------------------------------------------------------------------------------------
 
 echo "###   building device library..."
-xcodebuild -configuration $barcodes_config ${arch_device[@]} -scheme barcodes GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
+xcodebuild -configuration $barcodes_config ${arch_device[@]} -scheme barcodes BUILD_DIR="$temp_dir" GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
 if [ $? != 0 ]; then
 	echo "### ...failed..."
 	exit $?
@@ -246,7 +247,7 @@ echo "###   done."
 # ---------------------------------------------------------------------------------------
 
 echo "###   building simulator library..."
-xcodebuild -configuration $barcodes_config ${arch_simulator[@]} -scheme barcodes GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
+xcodebuild -configuration $barcodes_config ${arch_simulator[@]} -scheme barcodes BUILD_DIR="$temp_dir" GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
 if [ $? != 0 ]; then
 	echo "### ...failed..."
 	exit $?
