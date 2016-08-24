@@ -36,7 +36,7 @@
     self = [super initWithCoder:aDecoder];
     if (self != nil)
     {
-        _barcodeGenerator = [[UMBarcodeGenerator alloc] initWithGenMode:kUMBarcodeGenMode_ZInt];
+        _barcodeGenerator = [[UMBarcodeGenerator alloc] initWithGenMode:kUMBarcodeGenMode_System];
     }
     
     return self;
@@ -62,7 +62,8 @@
     [super viewDidLoad];
 
     _barcodeImage.clipsToBounds = YES;
-    _barcodeImage.contentMode = UIViewContentModeScaleAspectFit;
+    _barcodeImage.contentMode = UIViewContentModeCenter;
+//  _barcodeImage.backgroundColor = [UIColor magentaColor];
 
     UMBarcodeScanMode_t* scanModes = [UMBarcodeScanViewController allowedScanModes];
     for (int index = 0; scanModes[index] != kUMBarcodeScanMode_NONE; index++)
@@ -179,7 +180,7 @@
 #if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     _barcodeImage.image = nil;
 #else
-    _barcodeImage.image = [_barcodeGenerator imageWithData:@"abcdABCD123\nЧадъ и угаръ" encoding:kCFStringEncodingUTF8 barcodeType:kUMBarcodeTypeQRCode /*kUMBarcodeTypeAztecCode*/ imageSize:_barcodeImage.bounds.size whiteOpaque:YES error:nil];
+    _barcodeImage.image = [_barcodeGenerator imageWithData:@"abcdABCD123\nЧадъ и угаръ" encoding:kCFStringEncodingUTF8 barcodeType:/*kUMBarcodeTypeQRCode*/ kUMBarcodeTypeAztecCode imageSize:_barcodeImage.bounds.size whiteOpaque:YES error:nil];
 
     [scanViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 #endif

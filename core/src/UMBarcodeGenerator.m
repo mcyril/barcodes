@@ -10,7 +10,10 @@
 #import "UMBarcodeScanContext.h"
 #import "UMBarcodeScanUtilities.h"
 
-#if UMBARCODE_SCAN_ZXING
+#if UMBARCODE_GEN_SYSTEM
+#import <CoreImage/CoreImage.h>
+#endif
+#if UMBARCODE_GEN_ZXING
 #import "ZXQRCodeErrorCorrectionLevel.h"
 #import "ZXEncodeHints.h"
 #import "ZXMultiFormatWriter.h"
@@ -27,7 +30,10 @@
 #import "qrencode.h"
 #endif
 
-
+#if UMBARCODE_GEN_SYSTEM
+#   define SYS_QR_ECLEVEL       @"M"
+#   define SYS_AZTEC_ECLEVEL    23
+#endif
 #if UMBARCODE_GEN_ZXING
 //# define ZXING_QR_ECLEVEL     [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelM]
 #   define ZXING_QR_ECLEVEL     [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelL]
@@ -78,7 +84,111 @@ static void freeRawData(void* info, const void* data, size_t size)
 #if UMBARCODE_GEN_SYSTEM
     case kUMBarcodeGenMode_System:
         {
+            NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
+            if (string != nil)
+            {
+                CIFilter* filter = nil;
 
+                if ([type isEqualToString:kUMBarcodeTypeAztecCode])
+                {
+                    if (UMBarcodeScan_isOS8())
+                    {
+                        filter = [CIFilter filterWithName:@"CIAztecCodeGenerator"];
+                        [filter setValue:[NSNumber numberWithDouble:SYS_AZTEC_ECLEVEL] forKey:@"inputCorrectionLevel"];
+                    }
+                }
+                else if ([type isEqualToString:kUMBarcodeTypeCode128Code])
+                {
+                    if (UMBarcodeScan_isOS8())
+                        filter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
+                }
+                else if ([type isEqualToString:kUMBarcodeTypeCode128Code])
+                {
+                    if (UMBarcodeScan_isOS9())
+                        filter = [CIFilter filterWithName:@"CIPDF417BarcodeGenerator"];
+                }
+                else if ([type isEqualToString:kUMBarcodeTypeQRCode])
+                {
+                    if (UMBarcodeScan_isOS7())
+                    {
+                        filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+                        [filter setValue:SYS_QR_ECLEVEL forKey:@"inputCorrectionLevel"];
+                    }
+                }
+
+                if (filter != nil)
+                {
+                    [filter setDefaults];
+
+                    [filter setValue:string forKey:@"inputMessage"];
+
+                    CIImage* image = nil;
+
+                    @try
+                    {
+                        image = [filter valueForKey:@"outputImage"];
+                    }
+                    @catch (NSException* exception)
+                    {
+                    }
+
+                    if (image != nil)
+                    {
+                        CGRect extent = CGRectIntegral(image.extent);
+                        double scale = MIN(size.width / CGRectGetWidth(extent), size.height / CGRectGetHeight(extent));
+
+                        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+                        CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaNone);
+                        CGColorSpaceRelease(colorSpace);
+
+                        if (context != NULL)
+                        {
+                            CGImageRef bitmapImage = [[CIContext contextWithOptions:nil] createCGImage:image fromRect:extent];
+                            if (bitmapImage != NULL)
+                            {
+                                CGRect bounds =
+                                        {
+                                            .origin = CGPointZero,
+                                            .size = size
+                                        };
+
+                                CGContextSetInterpolationQuality(context, kCGInterpolationNone);
+                                CGContextSetShouldAntialias(context, false);
+                                CGContextScaleCTM(context, scale, scale);
+
+                                CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+                                CGContextFillRect(context, bounds);
+
+                                CGContextDrawImage(context, extent, bitmapImage);
+
+                                CGImageRef scaledImage = CGBitmapContextCreateImage(context);
+                                if (scaledImage != NULL)
+                                {
+                                    if (opaque)
+                                        barImage = [UIImage imageWithCGImage:scaledImage];
+                                    else
+                                    {
+                                        const CGFloat colorMasking[] = { 255., 255., 255., 255., 255., 255. };
+                                        CGImageRef maskedImage = CGImageCreateWithMaskingColors(scaledImage, colorMasking);
+                                        if (maskedImage != NULL)
+                                        {
+                                            barImage = [UIImage imageWithCGImage:maskedImage];
+
+                                            CGImageRelease(maskedImage);
+                                        }
+                                    }
+
+                                    CGImageRelease(scaledImage);
+                                }
+
+                                CGImageRelease(bitmapImage);
+                            }
+                        }
+
+                        CGContextRelease(context);
+                    }
+                }
+            }
         }
         break;
 #endif
@@ -139,7 +249,7 @@ static void freeRawData(void* info, const void* data, size_t size)
                         if (1 /*result == 0*/) // NOTE: render returns 1?
                         {
                             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                            CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 4 * size.width, colorSpace, kCGImageAlphaPremultipliedFirst);
+                            CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaPremultipliedFirst);
                             CGColorSpaceRelease(colorSpace);
 
                             if (context != NULL)
@@ -150,6 +260,7 @@ static void freeRawData(void* info, const void* data, size_t size)
                                             .size = size
                                         };
 
+                                CGContextSetInterpolationQuality(context, kCGInterpolationNone);
                                 CGContextSetShouldAntialias(context, false);
 
                                 if (opaque)

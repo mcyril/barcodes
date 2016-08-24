@@ -19,6 +19,7 @@
 		F1567C681B44CEA500C80F63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1567C661B44CEA500C80F63 /* Main.storyboard */; };
 		F1567C6A1B44CEA500C80F63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1567C691B44CEA500C80F63 /* Images.xcassets */; };
 		F1567C6D1B44CEA500C80F63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1567C6B1B44CEA500C80F63 /* LaunchScreen.xib */; };
+		F17C19C81D6D9F2F00C80F63 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17C19C71D6D9F2F00C80F63 /* CoreImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F19A8E681B4760AB00C80F63 /* libbarcodes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E651B47609400C80F63 /* libbarcodes.a */; };
 		F19A8E741B47627100C80F63 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E731B47627100C80F63 /* MobileCoreServices.framework */; };
 		F19A8E821B47636700C80F63 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E7F1B47636700C80F63 /* AVFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -136,6 +137,7 @@
 		F1567C671B44CEA500C80F63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F1567C691B44CEA500C80F63 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F1567C6C1B44CEA500C80F63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F17C19C71D6D9F2F00C80F63 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = barcodes.xcodeproj; path = ../../core/barcodes.xcodeproj; sourceTree = "<group>"; };
 		F19A8E731B47627100C80F63 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F19A8E7F1B47636700C80F63 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -155,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F17C19C81D6D9F2F00C80F63 /* CoreImage.framework in Frameworks */,
 				F19A8E841B47636700C80F63 /* Foundation.framework in Frameworks */,
 				F19A8E831B47636700C80F63 /* CoreFoundation.framework in Frameworks */,
 				F19A8E881B47638E00C80F63 /* UIKit.framework in Frameworks */,
@@ -276,6 +279,7 @@
 				F19A8E891B4763A700C80F63 /* CoreVideo.framework */,
 				F19A8E8B1B4763B800C80F63 /* CoreMedia.framework */,
 				F19A8E731B47627100C80F63 /* MobileCoreServices.framework */,
+				F17C19C71D6D9F2F00C80F63 /* CoreImage.framework */,
 				F1C69A3C1B45A0E300C80F63 /* libiconv.dylib */,
 			);
 			name = "Supporting Files";
