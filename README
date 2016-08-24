@@ -4,27 +4,36 @@ generating of barcodes for iOS under the unified single umbrella controller
 Some portions of scan controller are acknowledged from CardIO library, by the courtesy
 of eBay Software Foundation. See LICENSE file
 ----------------------------------------------------------------------------------------
-libBarcodes aggregates three ways of barcode scanning with 3rd party components:
+libBarcodes aggregates three ways of barcode scanning (with 3rd party components
+as well):
 
  * iOS system approach (iOS7+)
  * ZXing (https://github.com/TheLevelUp/ZXingObjC ; ZXingObjC port)
  * ZBar (http://zbar.sourceforge.net ; curtsy to ultrafast scanning library ever)
 
-libBarcodes uses ZXingObjC to generate barcodes in default build configuration. Build
-configuration without ZXingObjC uses aztecgen (http://aztecgen.sourceforge.net/) and
-qrencode (http://fukuchi.org/works/qrencode/), except *experimental* build with Zint
-Barcode Generator (http://www.zint.org.uk)
+libBarcodes aggregates several ways of barcode generating (with 3rd party components
+as well):
+
+ * iOS system approach (iOS7+, and iOS8+ or iOS9+ for some symbology)
+ * ZXing (https://github.com/TheLevelUp/ZXingObjC ; ZXingObjC port)
+ * ZInt (http://www.zint.org.uk)
+ * qrencode (stand-alone QR generator, http://fukuchi.org/works/qrencode/)
+ * aztecgen (stand-alone Aztec generator, http://aztecgen.sourceforge.net/)
 ----------------------------------------------------------------------------------------
 Building:
 
   cd barcodes/core
   ./build.sh [cfg]
 
-  where cfg is
-    all     - build with all scanners (default)
-    no-zbar - build without zbar scanner
-    system  - build only with system scanner (iOS7+)
-    zint    - same as above but uses Zint as generator (experimental)
+  where cfg is set of
+    system  - with system scanner/generator (iOS7+)
+    zxing   - with ZXing scanner/generator
+    zbar    - with ZBar scanner
+    zint    - with Zint generator
+    qr      - with qrencode generator
+    aztec   - with aztecgen generator
+    bitcode - disable bitcode stripping
+    debug   - disable debug info stripping
 ----------------------------------------------------------------------------------------
 Using:
 
