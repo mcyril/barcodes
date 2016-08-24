@@ -159,9 +159,13 @@ API_EXPORT @interface UMBarcodeScanViewController : UINavigationController
  */
 @property (nonatomic, assign) UMBarcodeScanMode_t scanMode;
 /**
- *    allowed barcode types to scan
+ *    barcode types to scan
  */
 @property (nonatomic, retain) NSArray* barcodeTypes;
+/**
+ *    check if type is allowed to scan (for current scanMode)
+ */
+- (BOOL)isAllowedType:(NSString*)barcodeType;
 
 /**
  *    torch mode

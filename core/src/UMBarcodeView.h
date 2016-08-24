@@ -7,19 +7,21 @@
 
 @class UMBarcodeScanContext;
 
+#if !UMBARCODE_SCAN_SIMULATOR
 @class AVCaptureDevice;
 @class AVCaptureSession;
 @class AVCaptureDeviceInput;
 @class AVCaptureMetadataOutput;
 @class AVCaptureVideoDataOutput;
 @class AVCaptureVideoPreviewLayer;
+#endif
 
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if UMBARCODE_SCAN_ZXING
 @class ZXDecodeHints;
 @protocol ZXReader;
 #endif
 
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+#if UMBARCODE_SCAN_ZBAR
 @class ZBarImage;
 @class ZBarImageScanner;
 #endif
@@ -29,22 +31,22 @@
 @private
     UMBarcodeScanContext* _context;
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     dispatch_queue_t _queue;
     dispatch_semaphore_t _configurationSemaphore;
 
     AVCaptureDevice* _camera;
     AVCaptureSession* _captureSession;
     AVCaptureDeviceInput* _videoInput;
-    AVCaptureMetadataOutput* _metaDataOutput;
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     AVCaptureVideoDataOutput* _videoDataOutput;
+#if UMBARCODE_SCAN_SYSTEM
+    AVCaptureMetadataOutput* _metaDataOutput;
 #endif
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if UMBARCODE_SCAN_ZXING
     ZXDecodeHints* _zxHints;
     id<ZXReader> _zxReader;
 #endif
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+#if UMBARCODE_SCAN_ZBAR
     ZBarImage* _zbImage;
     ZBarImageScanner* _zbScanner;
 #endif

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F1196FAC1D6D3B1300C80F63 /* rs.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D61B21B47537700C80F63 /* rs.c */; };
 		F16D61BD1B47537700C80F63 /* config.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D618B1B47537700C80F63 /* config.c */; };
 		F16D61BE1B47537700C80F63 /* ean.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D618E1B47537700C80F63 /* ean.c */; };
 		F16D61BF1B47537700C80F63 /* code39.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D61901B47537700C80F63 /* code39.c */; };
@@ -23,7 +24,6 @@
 		F16D61CB1B47537700C80F63 /* isaac.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D61AB1B47537700C80F63 /* isaac.c */; };
 		F16D61CC1B47537700C80F63 /* binarize.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D61AD1B47537700C80F63 /* binarize.c */; };
 		F16D61CD1B47537700C80F63 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D61B11B47537700C80F63 /* util.c */; };
-		F16D61CE1B47537700C80F63 /* rs.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D61B21B47537700C80F63 /* rs.c */; };
 		F16D61CF1B47537700C80F63 /* qrdectxt.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D61B31B47537700C80F63 /* qrdectxt.c */; };
 		F16D61D01B47537700C80F63 /* qrdec.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D61B41B47537700C80F63 /* qrdec.c */; };
 		F16D61D11B47537700C80F63 /* bch15_5.c in Sources */ = {isa = PBXBuildFile; fileRef = F16D61B61B47537700C80F63 /* bch15_5.c */; };
@@ -339,7 +339,6 @@
 				F16D61C61B47537700C80F63 /* code128.c in Sources */,
 				F16D61BE1B47537700C80F63 /* ean.c in Sources */,
 				F16D61C41B47537700C80F63 /* databar.c in Sources */,
-				F16D61CE1B47537700C80F63 /* rs.c in Sources */,
 				F16D61C11B47537700C80F63 /* codabar.c in Sources */,
 				F16D61C71B47537700C80F63 /* decoder.c in Sources */,
 				F16D61D11B47537700C80F63 /* bch15_5.c in Sources */,
@@ -356,6 +355,7 @@
 				F16D61D21B47537700C80F63 /* refcnt.c in Sources */,
 				F16D61C51B47537700C80F63 /* code93.c in Sources */,
 				F16D61EC1B47560400C80F63 /* ZBarImageScanner.m in Sources */,
+				F1196FAC1D6D3B1300C80F63 /* rs.c in Sources */,
 				F16D61CC1B47537700C80F63 /* binarize.c in Sources */,
 				F16D61D41B47537700C80F63 /* symbol.c in Sources */,
 			);

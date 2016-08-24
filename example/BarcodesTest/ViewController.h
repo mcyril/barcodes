@@ -5,6 +5,8 @@
 //  Copyright (c) 2015 Ravel Developers Group. All rights reserved.
 //
 
+@class UMBarcodeGenerator;
+
 @interface ViewController : UIViewController
 {
 @private
@@ -13,7 +15,8 @@
     UIButton* _scanSystem;
     UIButton* _scanZXing;
     UIButton* _scanZBar;
+
+    UMBarcodeGenerator* _barcodeGenerator;
 }
 
 @end
-

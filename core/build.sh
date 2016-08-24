@@ -1,50 +1,282 @@
-#/bin/sh
+#!/bin/bash
 
-if [ $# -eq 1 ] ; then
-	MODEL=$1
+echo "### BARCODES"
+
+# ---------------------------------------------------------------------------------------
+
+# default build configurations
+builds=("system" "qr" "aztec") # possible values ("system" "zxing" "zbar" "zint" "qr" "aztec")
+if [ "$#" -eq 0 ]; then
+	set -- ${builds[*]}
+fi
+builds=( $@ )
+
+# ---------------------------------------------------------------------------------------
+
+barcodes_config="Release"
+
+arch_device=(-sdk iphoneos -arch armv7 -arch arm64)
+arch_simulator=(-sdk iphonesimulator -arch i386 -arch x86_64)
+
+# ---------------------------------------------------------------------------------------
+
+# accepts list of build arguments
+function get_target_build_dir
+{
+	echo `xcodebuild -configuration $barcodes_config $@ -showBuildSettings | /usr/bin/sed -n -e 's/^.*TARGET_BUILD_DIR = //p'`
+}
+
+# accepts list of build arguments
+function get_executable_name
+{
+	echo `xcodebuild -configuration $barcodes_config $@ -showBuildSettings | /usr/bin/sed -n -e 's/^.*EXECUTABLE_NAME = //p'`
+}
+
+# accepts library scheme name of barcodes
+function get_device_library
+{
+	echo $(get_target_build_dir ${arch_device[@]} -scheme $1)/$(get_executable_name ${arch_device[@]} -scheme $1)
+}
+
+# accepts library scheme name of barcodes
+function get_simulator_library
+{
+	echo $(get_target_build_dir ${arch_simulator[@]} -scheme $1)/$(get_executable_name ${arch_simulator[@]} -scheme $1)
+}
+
+# ---------------------------------------------------------------------------------------
+# device library
+# ---------------------------------------------------------------------------------------
+
+echo "###   configuring device library..."
+
+preprocessor_defs=("UMBARCODE_SCAN_SIMULATOR=0")
+inx_preprocessor_defs=${#preprocessor_defs[@]}
+
+extra_libraries=()
+inx_libraries=${#extra_libraries[@]}
+
+# with system scanner/generator
+if [[ " ${builds[@]} " =~ " system " ]]; then
+	echo "###     preparing System built-in scanner/generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_SCAN_SYSTEM=1"
+	let "inx_preprocessor_defs+=1"
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_SYSTEM=1"
+	let "inx_preprocessor_defs+=1"
 else
-	MODEL="all"
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_SCAN_SYSTEM=0"
+	let "inx_preprocessor_defs+=1"
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_SYSTEM=0"
+	let "inx_preprocessor_defs+=1"
 fi
 
-TARGET_MODEL="-target barcodes-$MODEL"
+# with zxing scanner/generator
+if [[ " ${builds[@]} " =~ " zxing " ]]; then
+	echo "###     preparing ZXing 3rd-party scanner/generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_SCAN_ZXING=1"
+	let "inx_preprocessor_defs+=1"
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_ZXING=1"
+	let "inx_preprocessor_defs+=1"
+	extra_libraries[${inx_libraries}]=$(get_device_library ZXingObjC-iOS)
+	let "inx_libraries+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_SCAN_ZXING=0"
+	let "inx_preprocessor_defs+=1"
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_ZXING=0"
+	let "inx_preprocessor_defs+=1"
+fi
 
-#simulator
+# with zbar scanner
+if [[ " ${builds[@]} " =~ " zbar " ]]; then
+	echo "###     preparing ZBar 3rd-party scanner..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_SCAN_ZBAR=1"
+	let "inx_preprocessor_defs+=1"
+	extra_libraries[${inx_libraries}]=$(get_device_library zbar)
+	let "inx_libraries+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_SCAN_ZBAR=0"
+	let "inx_preprocessor_defs+=1"
+fi
 
-echo "preparing simulator library environment..."
+# with zint generator
+if [[ " ${builds[@]} " =~ " zint " ]]; then
+	echo "###     preparing ZInt 3rd-party generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_ZINT=1"
+	let "inx_preprocessor_defs+=1"
+	extra_libraries[${inx_libraries}]=$(get_device_library zint)
+	let "inx_libraries+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_ZINT=0"
+	let "inx_preprocessor_defs+=1"
+fi
 
-TARGET_BUILD_DIR=`xcodebuild -sdk iphonesimulator -arch i386 -arch x86_64 -showBuildSettings | /usr/bin/sed -n -e 's/^.*TARGET_BUILD_DIR = //p'`
-EXECUTABLE_NAME=`xcodebuild -sdk iphonesimulator -arch i386 -arch x86_64 -showBuildSettings | /usr/bin/sed -n -e 's/^.*EXECUTABLE_NAME = //p'`
+# with QR stand-alone generator
+if [[ " ${builds[@]} " =~ " qr " ]]; then
+	echo "###     preparing QR stand-alone 3rd-party generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_QR=1"
+	let "inx_preprocessor_defs+=1"
+	extra_libraries[${inx_libraries}]=$(get_device_library qrencode)
+	let "inx_libraries+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_QR=0"
+	let "inx_preprocessor_defs+=1"
+fi
 
-echo "building simulator library..."
+# with Aztec stand-alone generator
+if [[ " ${builds[@]} " =~ " aztec " ]]; then
+	echo "###     preparing Aztec stand-alone 3rd-party generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_AZTEC=1"
+	let "inx_preprocessor_defs+=1"
+	extra_libraries[${inx_libraries}]=$(get_device_library aztec)
+	let "inx_libraries+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_AZTEC=0"
+	let "inx_preprocessor_defs+=1"
+fi
 
-xcodebuild -sdk iphonesimulator -arch i386 -arch x86_64 $TARGET_MODEL clean build > /dev/null
+extra_libraries_list=${extra_libraries[@]}
+#extra_libraries_list=$(printf " '%s'" "${extra_libraries[@]}") # TODO: do some work for spaces in paths maybe?
 
-SIMULATOR_TARGET_PATH="$TARGET_BUILD_DIR/$EXECUTABLE_NAME"
+preprocessor_defs_list=${preprocessor_defs[@]}
 
-# device
+echo "###   done."
 
-echo "preparing device library environment..."
+# ---------------------------------------------------------------------------------------
 
-TARGET_BUILD_DIR=`xcodebuild -sdk iphoneos -arch armv7 -arch arm64 -showBuildSettings | /usr/bin/sed -n -e 's/^.*TARGET_BUILD_DIR = //p'`
-EXECUTABLE_NAME=`xcodebuild -sdk iphoneos -arch armv7 -arch arm64 -showBuildSettings | /usr/bin/sed -n -e 's/^.*EXECUTABLE_NAME = //p'`
+echo "###   building device library..."
+xcodebuild -configuration $barcodes_config ${arch_device[@]} -scheme barcodes GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
+if [ $? != 0 ]; then
+	echo "### ...failed..."
+	exit $?
+fi
 
-echo "building device library..."
+# ---------------------------------------------------------------------------------------
+# simulator library
+# ---------------------------------------------------------------------------------------
 
-xcodebuild -sdk iphoneos -arch armv7 -arch arm64 $TARGET_MODEL clean build > /dev/null
+echo "###   configuring simulator library..."
 
-DEVICE_TARGET_PATH="$TARGET_BUILD_DIR/$EXECUTABLE_NAME"
+preprocessor_defs=("UMBARCODE_SCAN_SIMULATOR=1")
+inx_preprocessor_defs=${#preprocessor_defs[@]}
 
-# build FAT
+extra_libraries=()
+inx_libraries=${#extra_libraries[@]}
 
-echo "building FAT library..."
+# with system scanner/generator
+if [[ " ${builds[@]} " =~ " system " ]]; then
+	echo "###     bypassing System built-in scanner..."
+	echo "###     preparing System built-in generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_SYSTEM=1"
+	let "inx_preprocessor_defs+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_SYSTEM=0"
+	let "inx_preprocessor_defs+=1"
+fi
 
-lipo -create $SIMULATOR_TARGET_PATH $DEVICE_TARGET_PATH -output $EXECUTABLE_NAME
+preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_SCAN_SYSTEM=0"
+let "inx_preprocessor_defs+=1"
 
-# strip resulting library from Apple's shit
+# with zxing scanner/generator
+if [[ " ${builds[@]} " =~ " zxing " ]]; then
+	echo "###     bypassing ZXing 3rd-party scanner..."
+	echo "###     preparing ZXing 3rd-party generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_ZXING=1"
+	let "inx_preprocessor_defs+=1"
+	extra_libraries[${inx_libraries}]=$(get_simulator_library ZXingObjC-iOS)
+	let "inx_libraries+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_ZXING=0"
+	let "inx_preprocessor_defs+=1"
+fi
 
-echo "stripping FAT library..."
+preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_SCAN_ZXING=0"
+let "inx_preprocessor_defs+=1"
 
-xcrun bitcode_strip $EXECUTABLE_NAME -r -o $EXECUTABLE_NAME
-strip -S $EXECUTABLE_NAME
+# with zbar scanner
+if [[ " ${builds[@]} " =~ " zbar " ]]; then
+	echo "###     bypassing ZBar 3rd-party scanner..."
+fi
 
-echo "done."
+preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_SCAN_ZBAR=0"
+let "inx_preprocessor_defs+=1"
+
+# with zint generator
+if [[ " ${builds[@]} " =~ " zint " ]]; then
+	echo "###     preparing ZInt 3rd-party generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_ZINT=1"
+	let "inx_preprocessor_defs+=1"
+	extra_libraries[${inx_libraries}]=$(get_simulator_library zint)
+	let "inx_libraries+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_ZINT=0"
+	let "inx_preprocessor_defs+=1"
+fi
+
+# with QR stand-alone generator
+if [[ " ${builds[@]} " =~ " qr " ]]; then
+	echo "###     preparing QR stand-alone 3rd-party generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_QR=1"
+	let "inx_preprocessor_defs+=1"
+	extra_libraries[${inx_libraries}]=$(get_simulator_library qrencode)
+	let "inx_libraries+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_QR=0"
+	let "inx_preprocessor_defs+=1"
+fi
+
+# with Aztec stand-alone generator
+if [[ " ${builds[@]} " =~ " aztec " ]]; then
+	echo "###     preparing Aztec stand-alone 3rd-party generator..."
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_AZTEC=1"
+	let "inx_preprocessor_defs+=1"
+	extra_libraries[${inx_libraries}]=$(get_simulator_library aztec)
+	let "inx_libraries+=1"
+else
+	preprocessor_defs[${inx_preprocessor_defs}]="UMBARCODE_GEN_AZTEC=0"
+	let "inx_preprocessor_defs+=1"
+fi
+
+extra_libraries_list=${extra_libraries[@]}
+#extra_libraries_list=$(printf " '%s'" "${extra_libraries[@]}") # TODO: do some work for spaces in paths maybe?
+
+preprocessor_defs_list=${preprocessor_defs[@]}
+
+echo "###   done."
+
+# ---------------------------------------------------------------------------------------
+
+echo "###   building simulator library..."
+xcodebuild -configuration $barcodes_config ${arch_simulator[@]} -scheme barcodes GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
+if [ $? != 0 ]; then
+	echo "### ...failed..."
+	exit $?
+fi
+
+# ---------------------------------------------------------------------------------------
+# universal library
+# ---------------------------------------------------------------------------------------
+
+executable_name=$(get_executable_name ${arch_simulator[@]} -scheme barcodes)
+
+# ---------------------------------------------------------------------------------------
+
+echo "###   building universal library..."
+lipo -create $(get_device_library barcodes) $(get_simulator_library barcodes) -output $executable_name
+
+# ---------------------------------------------------------------------------------------
+
+if [[ ! " ${builds[@]} " =~ " bitcode " ]]; then
+	echo "###   stripping bitcode..."
+	xcrun bitcode_strip $executable_name -r -o $executable_name
+fi
+
+# ---------------------------------------------------------------------------------------
+
+if [[ ! " ${builds[@]} " =~ " debug " ]]; then
+	echo "###   stripping debugging symbol table entries..."
+	strip -S $executable_name
+fi
+
+# ---------------------------------------------------------------------------------------
+
+echo "### all done."

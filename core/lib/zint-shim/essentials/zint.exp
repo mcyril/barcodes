@@ -1,0 +1,13 @@
+_ZBarcode_Create
+_ZBarcode_Clear
+_ZBarcode_Delete
+_ZBarcode_Encode
+_ZBarcode_Encode_File
+_ZBarcode_Print
+_ZBarcode_Encode_and_Print
+_ZBarcode_Encode_File_and_Print
+_ZBarcode_Render
+_ZBarcode_Buffer
+_ZBarcode_Encode_and_Buffer
+_ZBarcode_Encode_File_and_Buffer
+_ZBarcode_ValidID

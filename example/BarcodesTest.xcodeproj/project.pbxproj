@@ -7,24 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F106E9E71D6B81BB00C80F63 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1567C641B44CEA500C80F63 /* ViewController.m */; };
-		F106E9E81D6B81BB00C80F63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1567C611B44CEA500C80F63 /* AppDelegate.m */; };
-		F106E9E91D6B81BB00C80F63 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1567C5E1B44CEA500C80F63 /* main.m */; };
-		F106E9EB1D6B81BB00C80F63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E811B47636700C80F63 /* Foundation.framework */; };
-		F106E9EC1D6B81BB00C80F63 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E801B47636700C80F63 /* CoreFoundation.framework */; };
-		F106E9ED1D6B81BB00C80F63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E871B47638E00C80F63 /* UIKit.framework */; };
-		F106E9EE1D6B81BB00C80F63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E851B47638400C80F63 /* CoreGraphics.framework */; };
-		F106E9EF1D6B81BB00C80F63 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139F75D1B477BAC00C80F63 /* ImageIO.framework */; };
-		F106E9F01D6B81BB00C80F63 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E8D1B47640000C80F63 /* QuartzCore.framework */; };
-		F106E9F11D6B81BB00C80F63 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E7F1B47636700C80F63 /* AVFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F106E9F21D6B81BB00C80F63 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E891B4763A700C80F63 /* CoreVideo.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F106E9F31D6B81BB00C80F63 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E8B1B4763B800C80F63 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F106E9F41D6B81BB00C80F63 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E731B47627100C80F63 /* MobileCoreServices.framework */; };
-		F106E9F51D6B81BB00C80F63 /* libbarcodes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E651B47609400C80F63 /* libbarcodes.a */; };
-		F106E9F61D6B81BB00C80F63 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C69A3C1B45A0E300C80F63 /* libiconv.dylib */; };
-		F106E9F81D6B81BB00C80F63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1567C661B44CEA500C80F63 /* Main.storyboard */; };
-		F106E9F91D6B81BB00C80F63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1567C6B1B44CEA500C80F63 /* LaunchScreen.xib */; };
-		F106E9FA1D6B81BB00C80F63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1567C691B44CEA500C80F63 /* Images.xcassets */; };
+		F1196F7C1D6D385800C80F63 /* libaztec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1196F541D6D37B000C80F63 /* libaztec.a */; };
+		F1196F7D1D6D385800C80F63 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1196F5A1D6D37CE00C80F63 /* libqrencode.a */; };
+		F1196F7E1D6D385800C80F63 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1196F601D6D37DC00C80F63 /* libzbar.a */; };
+		F1196F7F1D6D385800C80F63 /* libzint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1196F661D6D37F200C80F63 /* libzint.a */; };
+		F1196F801D6D385800C80F63 /* libZXingObjC-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1196F711D6D380A00C80F63 /* libZXingObjC-iOS.a */; };
 		F139F75E1B477BAC00C80F63 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139F75D1B477BAC00C80F63 /* ImageIO.framework */; };
 		F1567C5F1B44CEA500C80F63 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1567C5E1B44CEA500C80F63 /* main.m */; };
 		F1567C621B44CEA500C80F63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1567C611B44CEA500C80F63 /* AppDelegate.m */; };
@@ -32,6 +19,7 @@
 		F1567C681B44CEA500C80F63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1567C661B44CEA500C80F63 /* Main.storyboard */; };
 		F1567C6A1B44CEA500C80F63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1567C691B44CEA500C80F63 /* Images.xcassets */; };
 		F1567C6D1B44CEA500C80F63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1567C6B1B44CEA500C80F63 /* LaunchScreen.xib */; };
+		F17C19C81D6D9F2F00C80F63 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17C19C71D6D9F2F00C80F63 /* CoreImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F19A8E681B4760AB00C80F63 /* libbarcodes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E651B47609400C80F63 /* libbarcodes.a */; };
 		F19A8E741B47627100C80F63 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E731B47627100C80F63 /* MobileCoreServices.framework */; };
 		F19A8E821B47636700C80F63 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19A8E7F1B47636700C80F63 /* AVFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -46,33 +34,75 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F106EA031D6B81BC00C80F63 /* PBXContainerItemProxy */ = {
+		F1196F531D6D37B000C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */;
+			containerPortal = F1196F4F1D6D37B000C80F63 /* aztec.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = F106E9CF1D6B7D6F00C80F63;
-			remoteInfo = "barcodes-zint";
+			remoteGlobalIDString = F14149071B486B5600C80F63;
+			remoteInfo = aztec;
 		};
-		F106EA051D6B820500C80F63 /* PBXContainerItemProxy */ = {
+		F1196F591D6D37CE00C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F106E9BA1D6B7D6F00C80F63;
-			remoteInfo = "barcodes-zint";
-		};
-		F119CAF31BBBBA9700C80F63 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */;
+			containerPortal = F1196F551D6D37CE00C80F63 /* qrencode.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = F14148D91B48630D00C80F63;
-			remoteInfo = "barcodes-no-zbar";
+			remoteGlobalIDString = F12AD1C91B48827100C80F63;
+			remoteInfo = qrencode;
 		};
-		F119CAF51BBBBA9700C80F63 /* PBXContainerItemProxy */ = {
+		F1196F5F1D6D37DC00C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */;
+			containerPortal = F1196F5B1D6D37DC00C80F63 /* zbar.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = F14148F31B48634B00C80F63;
-			remoteInfo = "barcodes-system";
+			remoteGlobalIDString = F16D615F1B47508000C80F63;
+			remoteInfo = zbar;
+		};
+		F1196F651D6D37F200C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1196F611D6D37F100C80F63 /* zint.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F106E9251D6B648000C80F63;
+			remoteInfo = zint;
+		};
+		F1196F701D6D380A00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1196F671D6D380A00C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25403CB3166A96FA00E13304;
+			remoteInfo = "ZXingObjC-iOS";
+		};
+		F1196F721D6D380A00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1196F671D6D380A00C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25403CC4166A96FA00E13304;
+			remoteInfo = "Unit Tests iOS";
+		};
+		F1196F741D6D380A00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1196F671D6D380A00C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25404166166AADAC00E13304;
+			remoteInfo = "ZXingObjC-osx";
+		};
+		F1196F761D6D380A00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1196F671D6D380A00C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25404178166AADAC00E13304;
+			remoteInfo = "Unit Tests OS X";
+		};
+		F1196F781D6D380A00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1196F671D6D380A00C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2540439E166ABA0A00E13304;
+			remoteInfo = "OS X Framework";
+		};
+		F1196F7A1D6D380A00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1196F671D6D380A00C80F63 /* ZXingObjC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DB72547F1A523C9200EFF81B;
+			remoteInfo = "iOS Framework";
 		};
 		F19A8E641B47609400C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -91,7 +121,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F106E9FE1D6B81BB00C80F63 /* BarcodesTest-ZINT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BarcodesTest-ZINT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1196F4F1D6D37B000C80F63 /* aztec.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = aztec.xcodeproj; path = "../../core/lib/aztec-shim/aztec.xcodeproj"; sourceTree = "<group>"; };
+		F1196F551D6D37CE00C80F63 /* qrencode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = qrencode.xcodeproj; path = "../../core/lib/qrencode-shim/qrencode.xcodeproj"; sourceTree = "<group>"; };
+		F1196F5B1D6D37DC00C80F63 /* zbar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zbar.xcodeproj; path = "../../core/lib/zbar-shim/zbar.xcodeproj"; sourceTree = "<group>"; };
+		F1196F611D6D37F100C80F63 /* zint.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zint.xcodeproj; path = "../../core/lib/zint-shim/zint.xcodeproj"; sourceTree = "<group>"; };
+		F1196F671D6D380A00C80F63 /* ZXingObjC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZXingObjC.xcodeproj; path = ../../core/lib/zxing/ZXingObjC.xcodeproj; sourceTree = "<group>"; };
 		F139F75D1B477BAC00C80F63 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		F1567C591B44CEA500C80F63 /* BarcodesTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarcodesTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1567C5D1B44CEA500C80F63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,6 +137,7 @@
 		F1567C671B44CEA500C80F63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F1567C691B44CEA500C80F63 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F1567C6C1B44CEA500C80F63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F17C19C71D6D9F2F00C80F63 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = barcodes.xcodeproj; path = ../../core/barcodes.xcodeproj; sourceTree = "<group>"; };
 		F19A8E731B47627100C80F63 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F19A8E7F1B47636700C80F63 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -118,29 +153,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F106E9EA1D6B81BB00C80F63 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F106E9EB1D6B81BB00C80F63 /* Foundation.framework in Frameworks */,
-				F106E9EC1D6B81BB00C80F63 /* CoreFoundation.framework in Frameworks */,
-				F106E9ED1D6B81BB00C80F63 /* UIKit.framework in Frameworks */,
-				F106E9EE1D6B81BB00C80F63 /* CoreGraphics.framework in Frameworks */,
-				F106E9EF1D6B81BB00C80F63 /* ImageIO.framework in Frameworks */,
-				F106E9F01D6B81BB00C80F63 /* QuartzCore.framework in Frameworks */,
-				F106E9F11D6B81BB00C80F63 /* AVFoundation.framework in Frameworks */,
-				F106E9F21D6B81BB00C80F63 /* CoreVideo.framework in Frameworks */,
-				F106E9F31D6B81BB00C80F63 /* CoreMedia.framework in Frameworks */,
-				F106E9F41D6B81BB00C80F63 /* MobileCoreServices.framework in Frameworks */,
-				F106E9F51D6B81BB00C80F63 /* libbarcodes.a in Frameworks */,
-				F106E9F61D6B81BB00C80F63 /* libiconv.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F1567C561B44CEA500C80F63 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F17C19C81D6D9F2F00C80F63 /* CoreImage.framework in Frameworks */,
 				F19A8E841B47636700C80F63 /* Foundation.framework in Frameworks */,
 				F19A8E831B47636700C80F63 /* CoreFoundation.framework in Frameworks */,
 				F19A8E881B47638E00C80F63 /* UIKit.framework in Frameworks */,
@@ -152,6 +169,11 @@
 				F19A8E8C1B4763B800C80F63 /* CoreMedia.framework in Frameworks */,
 				F19A8E741B47627100C80F63 /* MobileCoreServices.framework in Frameworks */,
 				F19A8E681B4760AB00C80F63 /* libbarcodes.a in Frameworks */,
+				F1196F7C1D6D385800C80F63 /* libaztec.a in Frameworks */,
+				F1196F7D1D6D385800C80F63 /* libqrencode.a in Frameworks */,
+				F1196F7E1D6D385800C80F63 /* libzbar.a in Frameworks */,
+				F1196F7F1D6D385800C80F63 /* libzint.a in Frameworks */,
+				F1196F801D6D385800C80F63 /* libZXingObjC-iOS.a in Frameworks */,
 				F1C69A3D1B45A0E300C80F63 /* libiconv.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +181,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F1196F501D6D37B000C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1196F541D6D37B000C80F63 /* libaztec.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1196F561D6D37CE00C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1196F5A1D6D37CE00C80F63 /* libqrencode.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1196F5C1D6D37DC00C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1196F601D6D37DC00C80F63 /* libzbar.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1196F621D6D37F100C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1196F661D6D37F200C80F63 /* libzint.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1196F681D6D380A00C80F63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1196F711D6D380A00C80F63 /* libZXingObjC-iOS.a */,
+				F1196F731D6D380A00C80F63 /* Unit Tests iOS.xctest */,
+				F1196F751D6D380A00C80F63 /* libZXingObjC-osx.a */,
+				F1196F771D6D380A00C80F63 /* Unit Tests OS X.xctest */,
+				F1196F791D6D380A00C80F63 /* ZXingObjC.framework */,
+				F1196F7B1D6D380A00C80F63 /* ZXingObjC.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F1567C501B44CEA500C80F63 = {
 			isa = PBXGroup;
 			children = (
@@ -171,7 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				F1567C591B44CEA500C80F63 /* BarcodesTest.app */,
-				F106E9FE1D6B81BB00C80F63 /* BarcodesTest-ZINT.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -194,10 +260,15 @@
 		F1567C5C1B44CEA500C80F63 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */,
+				F1196F671D6D380A00C80F63 /* ZXingObjC.xcodeproj */,
+				F1196F5B1D6D37DC00C80F63 /* zbar.xcodeproj */,
+				F1196F4F1D6D37B000C80F63 /* aztec.xcodeproj */,
+				F1196F551D6D37CE00C80F63 /* qrencode.xcodeproj */,
+				F1196F611D6D37F100C80F63 /* zint.xcodeproj */,
 				F1567C5D1B44CEA500C80F63 /* Info.plist */,
 				F1567C5E1B44CEA500C80F63 /* main.m */,
 				F1D359801B454DA000C80F63 /* PrefixHeader.pch */,
-				F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */,
 				F19A8E811B47636700C80F63 /* Foundation.framework */,
 				F19A8E801B47636700C80F63 /* CoreFoundation.framework */,
 				F19A8E871B47638E00C80F63 /* UIKit.framework */,
@@ -208,6 +279,7 @@
 				F19A8E891B4763A700C80F63 /* CoreVideo.framework */,
 				F19A8E8B1B4763B800C80F63 /* CoreMedia.framework */,
 				F19A8E731B47627100C80F63 /* MobileCoreServices.framework */,
+				F17C19C71D6D9F2F00C80F63 /* CoreImage.framework */,
 				F1C69A3C1B45A0E300C80F63 /* libiconv.dylib */,
 			);
 			name = "Supporting Files";
@@ -217,9 +289,6 @@
 			isa = PBXGroup;
 			children = (
 				F19A8E651B47609400C80F63 /* libbarcodes.a */,
-				F119CAF41BBBBA9700C80F63 /* libbarcodes.a */,
-				F119CAF61BBBBA9700C80F63 /* libbarcodes.a */,
-				F106EA041D6B81BC00C80F63 /* libbarcodes.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,24 +296,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F106E9E31D6B81BB00C80F63 /* BarcodesTest-ZINT */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F106E9FB1D6B81BB00C80F63 /* Build configuration list for PBXNativeTarget "BarcodesTest-ZINT" */;
-			buildPhases = (
-				F106E9E61D6B81BB00C80F63 /* Sources */,
-				F106E9EA1D6B81BB00C80F63 /* Frameworks */,
-				F106E9F71D6B81BB00C80F63 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F106EA061D6B820500C80F63 /* PBXTargetDependency */,
-			);
-			name = "BarcodesTest-ZINT";
-			productName = BarcodesTest;
-			productReference = F106E9FE1D6B81BB00C80F63 /* BarcodesTest-ZINT.app */;
-			productType = "com.apple.product-type.application";
-		};
 		F1567C581B44CEA500C80F63 /* BarcodesTest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1567C7C1B44CEA500C80F63 /* Build configuration list for PBXNativeTarget "BarcodesTest" */;
@@ -290,38 +341,106 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = F1196F501D6D37B000C80F63 /* Products */;
+					ProjectRef = F1196F4F1D6D37B000C80F63 /* aztec.xcodeproj */;
+				},
+				{
 					ProductGroup = F19A8E5F1B47609300C80F63 /* Products */;
 					ProjectRef = F19A8E5E1B47609300C80F63 /* barcodes.xcodeproj */;
+				},
+				{
+					ProductGroup = F1196F561D6D37CE00C80F63 /* Products */;
+					ProjectRef = F1196F551D6D37CE00C80F63 /* qrencode.xcodeproj */;
+				},
+				{
+					ProductGroup = F1196F5C1D6D37DC00C80F63 /* Products */;
+					ProjectRef = F1196F5B1D6D37DC00C80F63 /* zbar.xcodeproj */;
+				},
+				{
+					ProductGroup = F1196F621D6D37F100C80F63 /* Products */;
+					ProjectRef = F1196F611D6D37F100C80F63 /* zint.xcodeproj */;
+				},
+				{
+					ProductGroup = F1196F681D6D380A00C80F63 /* Products */;
+					ProjectRef = F1196F671D6D380A00C80F63 /* ZXingObjC.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
 				F1567C581B44CEA500C80F63 /* BarcodesTest */,
-				F106E9E31D6B81BB00C80F63 /* BarcodesTest-ZINT */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		F106EA041D6B81BC00C80F63 /* libbarcodes.a */ = {
+		F1196F541D6D37B000C80F63 /* libaztec.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libbarcodes.a;
-			remoteRef = F106EA031D6B81BC00C80F63 /* PBXContainerItemProxy */;
+			path = libaztec.a;
+			remoteRef = F1196F531D6D37B000C80F63 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F119CAF41BBBBA9700C80F63 /* libbarcodes.a */ = {
+		F1196F5A1D6D37CE00C80F63 /* libqrencode.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libbarcodes.a;
-			remoteRef = F119CAF31BBBBA9700C80F63 /* PBXContainerItemProxy */;
+			path = libqrencode.a;
+			remoteRef = F1196F591D6D37CE00C80F63 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F119CAF61BBBBA9700C80F63 /* libbarcodes.a */ = {
+		F1196F601D6D37DC00C80F63 /* libzbar.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libbarcodes.a;
-			remoteRef = F119CAF51BBBBA9700C80F63 /* PBXContainerItemProxy */;
+			path = libzbar.a;
+			remoteRef = F1196F5F1D6D37DC00C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1196F661D6D37F200C80F63 /* libzint.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libzint.a;
+			remoteRef = F1196F651D6D37F200C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1196F711D6D380A00C80F63 /* libZXingObjC-iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libZXingObjC-iOS.a";
+			remoteRef = F1196F701D6D380A00C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1196F731D6D380A00C80F63 /* Unit Tests iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Unit Tests iOS.xctest";
+			remoteRef = F1196F721D6D380A00C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1196F751D6D380A00C80F63 /* libZXingObjC-osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libZXingObjC-osx.a";
+			remoteRef = F1196F741D6D380A00C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1196F771D6D380A00C80F63 /* Unit Tests OS X.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Unit Tests OS X.xctest";
+			remoteRef = F1196F761D6D380A00C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1196F791D6D380A00C80F63 /* ZXingObjC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ZXingObjC.framework;
+			remoteRef = F1196F781D6D380A00C80F63 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1196F7B1D6D380A00C80F63 /* ZXingObjC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ZXingObjC.framework;
+			remoteRef = F1196F7A1D6D380A00C80F63 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F19A8E651B47609400C80F63 /* libbarcodes.a */ = {
@@ -334,16 +453,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F106E9F71D6B81BB00C80F63 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F106E9F81D6B81BB00C80F63 /* Main.storyboard in Resources */,
-				F106E9F91D6B81BB00C80F63 /* LaunchScreen.xib in Resources */,
-				F106E9FA1D6B81BB00C80F63 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F1567C571B44CEA500C80F63 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,16 +466,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F106E9E61D6B81BB00C80F63 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F106E9E71D6B81BB00C80F63 /* ViewController.m in Sources */,
-				F106E9E81D6B81BB00C80F63 /* AppDelegate.m in Sources */,
-				F106E9E91D6B81BB00C80F63 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F1567C551B44CEA500C80F63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -380,11 +479,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F106EA061D6B820500C80F63 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "barcodes-zint";
-			targetProxy = F106EA051D6B820500C80F63 /* PBXContainerItemProxy */;
-		};
 		F19A8E671B4760A300C80F63 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = barcodes;
@@ -412,46 +506,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		F106E9FC1D6B81BB00C80F63 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_MODULES_AUTOLINK = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/BarcodesTest/PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../core/include",
-				);
-				INFOPLIST_FILE = BarcodesTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		F106E9FD1D6B81BB00C80F63 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_MODULES_AUTOLINK = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/BarcodesTest/PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../core/include",
-				);
-				INFOPLIST_FILE = BarcodesTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		F1567C7A1B44CEA500C80F63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -538,7 +592,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_MODULES_AUTOLINK = NO;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BarcodesTest/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -548,7 +605,11 @@
 				INFOPLIST_FILE = BarcodesTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-lc++",
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -558,7 +619,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_MODULES_AUTOLINK = NO;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BarcodesTest/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -568,7 +632,11 @@
 				INFOPLIST_FILE = BarcodesTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-lc++",
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -577,15 +645,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F106E9FB1D6B81BB00C80F63 /* Build configuration list for PBXNativeTarget "BarcodesTest-ZINT" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F106E9FC1D6B81BB00C80F63 /* Debug */,
-				F106E9FD1D6B81BB00C80F63 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		F1567C541B44CEA500C80F63 /* Build configuration list for PBXProject "BarcodesTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

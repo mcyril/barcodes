@@ -7,39 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F106E9C01D6B7D6F00C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
-		F106E9C11D6B7D6F00C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
-		F106E9C21D6B7D6F00C80F63 /* UMBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */; };
-		F106E9C31D6B7D6F00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
-		F106E9C41D6B7D6F00C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
-		F106E9C51D6B7D6F00C80F63 /* PocketSVG.m in Sources */ = {isa = PBXBuildFile; fileRef = F19964081BF41EA400C80F63 /* PocketSVG.m */; };
-		F106E9C61D6B7D6F00C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
-		F106EA211D6B839200C80F63 /* libzint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F106E9A91D6B7A6400C80F63 /* libzint.a */; };
-		F12AD21B1B4886D600C80F63 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F12AD2131B4886B600C80F63 /* libqrencode.a */; };
-		F14148CB1B48630D00C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
-		F14148CC1B48630D00C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
-		F14148CD1B48630D00C80F63 /* UMBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */; };
-		F14148CE1B48630D00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
-		F14148CF1B48630D00C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
-		F14148D01B48630D00C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
-		F14148D31B48630D00C80F63 /* libZXingObjC-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */; };
-		F14148E51B48634B00C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
-		F14148E61B48634B00C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
-		F14148E71B48634B00C80F63 /* UMBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */; };
-		F14148E81B48634B00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
-		F14148E91B48634B00C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
-		F14148EA1B48634B00C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
-		F141496F1B48705F00C80F63 /* libaztec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F14149671B48703300C80F63 /* libaztec.a */; };
 		F16D613B1B47421700C80F63 /* UMBarcodeScanContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61321B47421700C80F63 /* UMBarcodeScanContext.m */; };
 		F16D613C1B47421700C80F63 /* UMBarcodeScanUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61351B47421700C80F63 /* UMBarcodeScanUtilities.m */; };
 		F16D613E1B47421700C80F63 /* UMBarcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D61391B47421700C80F63 /* UMBarcodeView.m */; };
 		F16D613F1B47421700C80F63 /* UMBarcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D613A1B47421700C80F63 /* UMBarcodeViewController.m */; };
-		F16D61491B47477C00C80F63 /* libZXingObjC-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D611F1B47405400C80F63 /* libZXingObjC-iOS.a */; };
 		F16D61501B474ADB00C80F63 /* UMBarcodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16D614F1B474ADB00C80F63 /* UMBarcodeScanViewController.m */; };
-		F16D61F91B47570300C80F63 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16D61F61B4756EA00C80F63 /* libzbar.a */; };
 		F19964091BF41EA400C80F63 /* PocketSVG.m in Sources */ = {isa = PBXBuildFile; fileRef = F19964081BF41EA400C80F63 /* PocketSVG.m */; };
-		F199640A1BF41EA400C80F63 /* PocketSVG.m in Sources */ = {isa = PBXBuildFile; fileRef = F19964081BF41EA400C80F63 /* PocketSVG.m */; };
-		F199640B1BF41EA400C80F63 /* PocketSVG.m in Sources */ = {isa = PBXBuildFile; fileRef = F19964081BF41EA400C80F63 /* PocketSVG.m */; };
 		F1ABD1981B47FFC900C80F63 /* UMBarcodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F1ABD1971B47FFC900C80F63 /* UMBarcodeGenerator.m */; };
 /* End PBXBuildFile section */
 
@@ -51,13 +24,6 @@
 			remoteGlobalIDString = F106E9251D6B648000C80F63;
 			remoteInfo = zint;
 		};
-		F106E9D01D6B7E3E00C80F63 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F106E9A41D6B7A6400C80F63 /* zint.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F106E9241D6B648000C80F63;
-			remoteInfo = zint;
-		};
 		F12AD2121B4886B600C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F12AD20E1B4886B600C80F63 /* qrencode.xcodeproj */;
@@ -65,32 +31,11 @@
 			remoteGlobalIDString = F12AD1C91B48827100C80F63;
 			remoteInfo = qrencode;
 		};
-		F12AD2191B4886CB00C80F63 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F12AD20E1B4886B600C80F63 /* qrencode.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F12AD1C81B48827100C80F63;
-			remoteInfo = qrencode;
-		};
-		F14148C91B48630D00C80F63 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 25403CB2166A96FA00E13304;
-			remoteInfo = "ZXingObjC-iOS";
-		};
 		F14149661B48703300C80F63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F14149621B48703300C80F63 /* aztec.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F14149071B486B5600C80F63;
-			remoteInfo = aztec;
-		};
-		F141496D1B48705000C80F63 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F14149621B48703300C80F63 /* aztec.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F14149061B486B5600C80F63;
 			remoteInfo = aztec;
 		};
 		F16D611E1B47405400C80F63 /* PBXContainerItemProxy */ = {
@@ -156,36 +101,30 @@
 			remoteGlobalIDString = F16D615E1B47508000C80F63;
 			remoteInfo = zbar;
 		};
+		F1ACB0271D6CC77B00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F14149621B48703300C80F63 /* aztec.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F14149061B486B5600C80F63;
+			remoteInfo = aztec;
+		};
+		F1ACB0291D6CC77F00C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F12AD20E1B4886B600C80F63 /* qrencode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F12AD1C81B48827100C80F63;
+			remoteInfo = qrencode;
+		};
+		F1ACB02B1D6CC78200C80F63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F106E9A41D6B7A6400C80F63 /* zint.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F106E9241D6B648000C80F63;
+			remoteInfo = zint;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		F106E9CA1D6B7D6F00C80F63 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F14148D41B48630D00C80F63 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F14148EE1B48634B00C80F63 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F16D60F81B473E3E00C80F63 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -199,10 +138,7 @@
 
 /* Begin PBXFileReference section */
 		F106E9A41D6B7A6400C80F63 /* zint.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zint.xcodeproj; path = "lib/zint-shim/zint.xcodeproj"; sourceTree = "<group>"; };
-		F106E9CF1D6B7D6F00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12AD20E1B4886B600C80F63 /* qrencode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = qrencode.xcodeproj; path = "lib/qrencode-shim/qrencode.xcodeproj"; sourceTree = "<group>"; };
-		F14148D91B48630D00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F14148F31B48634B00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F14149621B48703300C80F63 /* aztec.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = aztec.xcodeproj; path = "lib/aztec-shim/aztec.xcodeproj"; sourceTree = "<group>"; };
 		F16D60FA1B473E3E00C80F63 /* libbarcodes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbarcodes.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F16D61151B47405300C80F63 /* ZXingObjC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZXingObjC.xcodeproj; path = lib/zxing/ZXingObjC.xcodeproj; sourceTree = "<group>"; };
@@ -231,37 +167,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F106E9C71D6B7D6F00C80F63 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F106EA211D6B839200C80F63 /* libzint.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F14148D11B48630D00C80F63 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F14148D31B48630D00C80F63 /* libZXingObjC-iOS.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F14148EB1B48634B00C80F63 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F12AD21B1B4886D600C80F63 /* libqrencode.a in Frameworks */,
-				F141496F1B48705F00C80F63 /* libaztec.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F16D60F71B473E3E00C80F63 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F16D61F91B47570300C80F63 /* libzbar.a in Frameworks */,
-				F16D61491B47477C00C80F63 /* libZXingObjC-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,9 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				F16D60FA1B473E3E00C80F63 /* libbarcodes.a */,
-				F14148D91B48630D00C80F63 /* libbarcodes.a */,
-				F14148F31B48634B00C80F63 /* libbarcodes.a */,
-				F106E9CF1D6B7D6F00C80F63 /* libbarcodes.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,64 +314,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F106E9BA1D6B7D6F00C80F63 /* barcodes-zint */ = {
+		F16D60F91B473E3E00C80F63 /* barcodes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F106E9CB1D6B7D6F00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-zint" */;
-			buildPhases = (
-				F106E9BF1D6B7D6F00C80F63 /* Sources */,
-				F106E9C71D6B7D6F00C80F63 /* Frameworks */,
-				F106E9CA1D6B7D6F00C80F63 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F106E9D11D6B7E3E00C80F63 /* PBXTargetDependency */,
-			);
-			name = "barcodes-zint";
-			productName = barcodes;
-			productReference = F106E9CF1D6B7D6F00C80F63 /* libbarcodes.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		F14148C51B48630D00C80F63 /* barcodes-no-zbar */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F14148D51B48630D00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-no-zbar" */;
-			buildPhases = (
-				F14148CA1B48630D00C80F63 /* Sources */,
-				F14148D11B48630D00C80F63 /* Frameworks */,
-				F14148D41B48630D00C80F63 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F14148C81B48630D00C80F63 /* PBXTargetDependency */,
-			);
-			name = "barcodes-no-zbar";
-			productName = barcodes;
-			productReference = F14148D91B48630D00C80F63 /* libbarcodes.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		F14148DF1B48634B00C80F63 /* barcodes-system */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F14148EF1B48634B00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-system" */;
-			buildPhases = (
-				F14148E41B48634B00C80F63 /* Sources */,
-				F14148EB1B48634B00C80F63 /* Frameworks */,
-				F14148EE1B48634B00C80F63 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F12AD21A1B4886CB00C80F63 /* PBXTargetDependency */,
-				F141496E1B48705000C80F63 /* PBXTargetDependency */,
-			);
-			name = "barcodes-system";
-			productName = barcodes;
-			productReference = F14148F31B48634B00C80F63 /* libbarcodes.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		F16D60F91B473E3E00C80F63 /* barcodes-all */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-all" */;
+			buildConfigurationList = F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes" */;
 			buildPhases = (
 				F16D60F61B473E3E00C80F63 /* Sources */,
 				F16D60F71B473E3E00C80F63 /* Frameworks */,
@@ -474,10 +325,13 @@
 			buildRules = (
 			);
 			dependencies = (
-				F16D61F81B4756FB00C80F63 /* PBXTargetDependency */,
 				F16D61481B47477200C80F63 /* PBXTargetDependency */,
+				F16D61F81B4756FB00C80F63 /* PBXTargetDependency */,
+				F1ACB02C1D6CC78200C80F63 /* PBXTargetDependency */,
+				F1ACB02A1D6CC77F00C80F63 /* PBXTargetDependency */,
+				F1ACB0281D6CC77B00C80F63 /* PBXTargetDependency */,
 			);
-			name = "barcodes-all";
+			name = barcodes;
 			productName = barcodes;
 			productReference = F16D60FA1B473E3E00C80F63 /* libbarcodes.a */;
 			productType = "com.apple.product-type.library.static";
@@ -530,10 +384,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				F16D60F91B473E3E00C80F63 /* barcodes-all */,
-				F14148C51B48630D00C80F63 /* barcodes-no-zbar */,
-				F14148DF1B48634B00C80F63 /* barcodes-system */,
-				F106E9BA1D6B7D6F00C80F63 /* barcodes-zint */,
+				F16D60F91B473E3E00C80F63 /* barcodes */,
 			);
 		};
 /* End PBXProject section */
@@ -612,48 +463,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F106E9BF1D6B7D6F00C80F63 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F106E9C01D6B7D6F00C80F63 /* UMBarcodeGenerator.m in Sources */,
-				F106E9C11D6B7D6F00C80F63 /* UMBarcodeScanUtilities.m in Sources */,
-				F106E9C21D6B7D6F00C80F63 /* UMBarcodeViewController.m in Sources */,
-				F106E9C31D6B7D6F00C80F63 /* UMBarcodeScanViewController.m in Sources */,
-				F106E9C41D6B7D6F00C80F63 /* UMBarcodeScanContext.m in Sources */,
-				F106E9C51D6B7D6F00C80F63 /* PocketSVG.m in Sources */,
-				F106E9C61D6B7D6F00C80F63 /* UMBarcodeView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F14148CA1B48630D00C80F63 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F14148CB1B48630D00C80F63 /* UMBarcodeGenerator.m in Sources */,
-				F14148CC1B48630D00C80F63 /* UMBarcodeScanUtilities.m in Sources */,
-				F14148CD1B48630D00C80F63 /* UMBarcodeViewController.m in Sources */,
-				F14148CE1B48630D00C80F63 /* UMBarcodeScanViewController.m in Sources */,
-				F14148CF1B48630D00C80F63 /* UMBarcodeScanContext.m in Sources */,
-				F199640A1BF41EA400C80F63 /* PocketSVG.m in Sources */,
-				F14148D01B48630D00C80F63 /* UMBarcodeView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F14148E41B48634B00C80F63 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F14148E51B48634B00C80F63 /* UMBarcodeGenerator.m in Sources */,
-				F14148E61B48634B00C80F63 /* UMBarcodeScanUtilities.m in Sources */,
-				F14148E71B48634B00C80F63 /* UMBarcodeViewController.m in Sources */,
-				F14148E81B48634B00C80F63 /* UMBarcodeScanViewController.m in Sources */,
-				F14148E91B48634B00C80F63 /* UMBarcodeScanContext.m in Sources */,
-				F199640B1BF41EA400C80F63 /* PocketSVG.m in Sources */,
-				F14148EA1B48634B00C80F63 /* UMBarcodeView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F16D60F61B473E3E00C80F63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -671,26 +480,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F106E9D11D6B7E3E00C80F63 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = zint;
-			targetProxy = F106E9D01D6B7E3E00C80F63 /* PBXContainerItemProxy */;
-		};
-		F12AD21A1B4886CB00C80F63 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = qrencode;
-			targetProxy = F12AD2191B4886CB00C80F63 /* PBXContainerItemProxy */;
-		};
-		F14148C81B48630D00C80F63 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "ZXingObjC-iOS";
-			targetProxy = F14148C91B48630D00C80F63 /* PBXContainerItemProxy */;
-		};
-		F141496E1B48705000C80F63 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = aztec;
-			targetProxy = F141496D1B48705000C80F63 /* PBXContainerItemProxy */;
-		};
 		F16D61481B47477200C80F63 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ZXingObjC-iOS";
@@ -701,81 +490,24 @@
 			name = zbar;
 			targetProxy = F16D61F71B4756FB00C80F63 /* PBXContainerItemProxy */;
 		};
+		F1ACB0281D6CC77B00C80F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = aztec;
+			targetProxy = F1ACB0271D6CC77B00C80F63 /* PBXContainerItemProxy */;
+		};
+		F1ACB02A1D6CC77F00C80F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = qrencode;
+			targetProxy = F1ACB0291D6CC77F00C80F63 /* PBXContainerItemProxy */;
+		};
+		F1ACB02C1D6CC78200C80F63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = zint;
+			targetProxy = F1ACB02B1D6CC78200C80F63 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		F106E9CC1D6B7D6F00C80F63 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=0 UMBARCODE_GEN_ZINT=1";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F106E9CD1D6B7D6F00C80F63 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=0 UMBARCODE_GEN_ZINT=1";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		F106E9CE1D6B7D6F00C80F63 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=0 UMBARCODE_GEN_ZINT=1";
-				SKIP_INSTALL = YES;
-			};
-			name = Distribution;
-		};
-		F14148D61B48630D00C80F63 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=1 UMBARCODE_GEN_ZINT=0";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F14148D71B48630D00C80F63 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=1 UMBARCODE_GEN_ZINT=0";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		F14148D81B48630D00C80F63 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=1 UMBARCODE_GEN_ZINT=0";
-				SKIP_INSTALL = YES;
-			};
-			name = Distribution;
-		};
-		F14148F01B48634B00C80F63 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=0 UMBARCODE_GEN_ZINT=0";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F14148F11B48634B00C80F63 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=0 UMBARCODE_GEN_ZINT=0";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		F14148F21B48634B00C80F63 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=0 UMBARCODE_SCAN_ZXING=0 UMBARCODE_GEN_ZINT=0";
-				SKIP_INSTALL = YES;
-			};
-			name = Distribution;
-		};
 		F16D610C1B473E3E00C80F63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F16D61531B474DCB00C80F63 /* Debug.xcconfig */;
@@ -834,7 +566,6 @@
 		F16D610F1B473E3E00C80F63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=1 UMBARCODE_SCAN_ZXING=1 UMBARCODE_GEN_ZINT=0";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -842,7 +573,6 @@
 		F16D61101B473E3E00C80F63 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=1 UMBARCODE_SCAN_ZXING=1 UMBARCODE_GEN_ZINT=0";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -878,7 +608,6 @@
 		F16D61521B474D1E00C80F63 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS_BASE = "UMBARCODE_SCAN_ZBAR=1 UMBARCODE_SCAN_ZXING=1 UMBARCODE_GEN_ZINT=0";
 				SKIP_INSTALL = YES;
 			};
 			name = Distribution;
@@ -886,36 +615,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F106E9CB1D6B7D6F00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-zint" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F106E9CC1D6B7D6F00C80F63 /* Debug */,
-				F106E9CD1D6B7D6F00C80F63 /* Release */,
-				F106E9CE1D6B7D6F00C80F63 /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F14148D51B48630D00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-no-zbar" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F14148D61B48630D00C80F63 /* Debug */,
-				F14148D71B48630D00C80F63 /* Release */,
-				F14148D81B48630D00C80F63 /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F14148EF1B48634B00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-system" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F14148F01B48634B00C80F63 /* Debug */,
-				F14148F11B48634B00C80F63 /* Release */,
-				F14148F21B48634B00C80F63 /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		F16D60F51B473E3E00C80F63 /* Build configuration list for PBXProject "barcodes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -926,7 +625,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes-all" */ = {
+		F16D610E1B473E3E00C80F63 /* Build configuration list for PBXNativeTarget "barcodes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F16D610F1B473E3E00C80F63 /* Debug */,
