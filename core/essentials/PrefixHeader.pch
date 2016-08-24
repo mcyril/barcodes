@@ -16,22 +16,64 @@
 
 /* Apple has changed supportedInterfaceOrientations result's type in iOS 9 SDK */
 #   if defined(__IPHONE_9_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
-#   define  UMInterfaceOrientationMask  UIInterfaceOrientationMask
+#       define  UMInterfaceOrientationMask  UIInterfaceOrientationMask
 #   else
-#   define  UMInterfaceOrientationMask  NSUInteger
+#       define  UMInterfaceOrientationMask  NSUInteger
 #   endif
 #endif
 
-#if !defined(UMBARCODE_SCAN_ZBAR)
-#   define UMBARCODE_SCAN_ZBAR      0
+#if !defined(UMBARCODE_SCAN_SIMULATOR)
+#   if defined(TARGET_IPHONE_SIMULATOR) && TARGET_IPHONE_SIMULATOR
+#       define UMBARCODE_SCAN_SIMULATOR 1
+#   else
+#       define UMBARCODE_SCAN_SIMULATOR 0
+#   endif
+#else
+#   if defined(TARGET_IPHONE_SIMULATOR) && TARGET_IPHONE_SIMULATOR
+#       if !UMBARCODE_SCAN_SIMULATOR
+#           error LIBRARY BUILD MISCONFIGURATION
+#       endif
+#   else
+#       if UMBARCODE_SCAN_SIMULATOR
+#           error LIBRARY BUILD MISCONFIGURATION
+#       endif
+#   endif
+#endif
+
+#if !defined(UMBARCODE_SCAN_SYSTEM)
+#   define UMBARCODE_SCAN_SYSTEM        !UMBARCODE_SCAN_SIMULATOR
 #endif
 
 #if !defined(UMBARCODE_SCAN_ZXING)
-#   define UMBARCODE_SCAN_ZXING     0
+#   define UMBARCODE_SCAN_ZXING         !UMBARCODE_SCAN_SIMULATOR
+#endif
+
+#if !defined(UMBARCODE_SCAN_ZBAR)
+#   define UMBARCODE_SCAN_ZBAR          !UMBARCODE_SCAN_SIMULATOR
+#endif
+
+#if !defined(UMBARCODE_GEN_SYSTEM)
+#   define UMBARCODE_GEN_SYSTEM         1
+#endif
+
+#if !defined(UMBARCODE_GEN_ZXING)
+#   define UMBARCODE_GEN_ZXING          1
 #endif
 
 #if !defined(UMBARCODE_GEN_ZINT)
-#   define UMBARCODE_GEN_ZINT       0
+#   define UMBARCODE_GEN_ZINT           1
+#endif
+
+#if !defined(UMBARCODE_GEN_QR)
+#   define UMBARCODE_GEN_QR             1
+#endif
+
+#if !defined(UMBARCODE_GEN_AZTEC)
+#   define UMBARCODE_GEN_AZTEC          1
+#endif
+
+#if UMBARCODE_SCAN_SIMULATOR && (UMBARCODE_SCAN_SYSTEM || UMBARCODE_SCAN_ZXING || UMBARCODE_SCAN_ZBAR)
+#   error LIBRARY BUILD MISCONFIGURATION
 #endif
 
 #endif

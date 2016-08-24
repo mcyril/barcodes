@@ -51,7 +51,7 @@
 
         context.delegate = delegate;
         context.initialInterfaceOrientationForViewcontroller = [UIApplication sharedApplication].statusBarOrientation;
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if UMBARCODE_SCAN_ZXING
         context.scanMode = UMBarcodeScan_isOS7() ? kUMBarcodeScanMode_System : kUMBarcodeScanMode_ZXing;
 #else
         context.scanMode = kUMBarcodeScanMode_System;
@@ -165,8 +165,6 @@
 
 - (void)setScanMode:(UMBarcodeScanMode_t)scanMode
 {
-    NSAssert(scanMode != kUMBarcodeScanMode_System || UMBarcodeScan_isOS7(), @"*** iOS 6 HAS NO SCANNING CAPABILITIES");
-
     UMBarcodeScanMode_t* scanModes = [UMBarcodeScanUtilities _allowedScanModes];
     for (int index = 0; scanModes[index] != kUMBarcodeScanMode_NONE; index++)
         if (scanModes[index] == scanMode)
@@ -174,6 +172,8 @@
             _context.scanMode = scanMode;
             return;
         }
+
+    _context.scanMode = kUMBarcodeScanMode_NONE;
 
     NSAssert(NO, @"*** UNDEFINED SCAN MODE");
 }
@@ -186,6 +186,40 @@
 - (void)setBarcodeTypes:(NSArray*)barcodeTypes
 {
     _context.barcodeTypes = barcodeTypes;
+}
+
+- (BOOL)isAllowedType:(NSString*)barcodeType
+{
+    BOOL allowed = NO;
+
+    switch (_context.scanMode)
+    {
+#if UMBARCODE_SCAN_SYSTEM
+    case kUMBarcodeScanMode_System:
+        {
+            allowed = ([UMBarcodeScanUtilities um2avBarcodeType:barcodeType] != nil);
+        }
+        break;
+#endif
+#if UMBARCODE_SCAN_ZXING
+    case kUMBarcodeScanMode_ZXing:
+        {
+            allowed = ([UMBarcodeScanUtilities um2zxBarcodeType:barcodeType] != (ZXBarcodeFormat)-1);
+        }
+        break;
+#endif
+#if UMBARCODE_SCAN_ZBAR
+    case kUMBarcodeScanMode_ZBar:
+        {
+            allowed = ([UMBarcodeScanUtilities um2zbBarcodeType:barcodeType] != ZBAR_NONE);
+        }
+        break;
+#endif
+    default:
+        break;
+    }
+
+    return allowed;
 }
 
 - (UMBarcodeScanTorchMode_t)torchMode

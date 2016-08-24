@@ -40,17 +40,17 @@ static BOOL _isOS8 = NO;
     return _isOS8;
 }
 
-BOOL __attribute__((noinline)) UMBarcodeScan_isOS83()
+BOOL __attribute__((noinline)) UMBarcodeScan_isOS9()
 {
 static dispatch_once_t _once;
-static BOOL _isOS83 = NO;
+static BOOL _isOS9 = NO;
 
     dispatch_once(&_once, ^
         {
-            _isOS83 = UMBarcodeScan_isOS8() && [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){ 8, 3, 0 }];
+            _isOS9 = UMBarcodeScan_isOS8() && [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){ 9, 0, 0 }];
         });
 
-    return _isOS83;
+    return _isOS9;
 }
 
 @implementation UMBarcodeScanUtilities
@@ -68,6 +68,7 @@ static dispatch_once_t onceToken;
     return _appHasViewControllerBasedStatusBar;
 }
 
+#if UMBARCODE_SCAN_SYSTEM
 + (NSString*)um2avBarcodeType:(NSString*)umBarcodeType
 {
     if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCECode])
@@ -133,8 +134,9 @@ static dispatch_once_t onceToken;
     else
         return nil;
 }
+#endif
 
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if UMBARCODE_SCAN_ZXING || UMBARCODE_GEN_ZXING
 + (ZXBarcodeFormat)um2zxBarcodeType:(NSString*)umBarcodeType
 {
     if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCECode])
@@ -199,7 +201,7 @@ static dispatch_once_t onceToken;
 }
 #endif
 
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+#if UMBARCODE_SCAN_ZBAR
 + (zbar_symbol_type_t)um2zbBarcodeType:(NSString*)umBarcodeType
 {
     if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCECode])
@@ -260,7 +262,7 @@ static dispatch_once_t onceToken;
 }
 #endif
 
-#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+#if UMBARCODE_GEN_ZINT
 + (int)um2zintBarcodeType:(NSString*)umBarcodeType
 {
     if ([umBarcodeType isEqualToString:kUMBarcodeTypeUPCECode])
@@ -395,12 +397,17 @@ static UMBarcodeScanMode_t _allowedScanModes[kUMBarcodeScanMode_COUNT + 1];
     dispatch_once(&_once, ^
         {
             int index = 0;
+#if UMBARCODE_SCAN_SIMULATOR
+            _allowedScanModes[index++] = kUMBarcodeScanMode_System;
+#endif
+#if UMBARCODE_SCAN_SYSTEM
             if (UMBarcodeScan_isOS7())
                 _allowedScanModes[index++] = kUMBarcodeScanMode_System;
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#endif
+#if UMBARCODE_SCAN_ZXING
             _allowedScanModes[index++] = kUMBarcodeScanMode_ZXing;
 #endif
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+#if UMBARCODE_SCAN_ZBAR
             _allowedScanModes[index++] = kUMBarcodeScanMode_ZBar;
 #endif
             _allowedScanModes[index++] = kUMBarcodeScanMode_NONE;

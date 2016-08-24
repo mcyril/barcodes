@@ -31,6 +31,17 @@
 @synthesize scanZXing = _scanZXing;
 @synthesize scanZBar = _scanZBar;
 
+- (instancetype)initWithCoder:(NSCoder*)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self != nil)
+    {
+        _barcodeGenerator = [[UMBarcodeGenerator alloc] initWithGenMode:kUMBarcodeGenMode_ZInt];
+    }
+    
+    return self;
+}
+
 - (void)dealloc
 {
     [_barcodeImage release];
@@ -39,6 +50,8 @@
     [_scanZXing release];
     [_scanZBar release];
 
+    [_barcodeGenerator release];
+    
     [super dealloc];
 }
 
@@ -141,7 +154,7 @@
 {
     NSLog(@"### SCAN: %@ (%@)", barcodeData, barcodeType);
 
-    _barcodeImage.image = [UMBarcodeGenerator imageWithData:barcodeData encoding:kCFStringEncodingUTF8 barcodeType:barcodeType imageSize:_barcodeImage.bounds.size whiteOpaque:YES error:nil];
+    _barcodeImage.image = [_barcodeGenerator imageWithData:barcodeData encoding:kCFStringEncodingUTF8 barcodeType:barcodeType imageSize:_barcodeImage.bounds.size whiteOpaque:YES error:nil];
 
 #if 0
     if ([scanViewController isSuspended])   // recognized code suspends scanner
@@ -166,7 +179,7 @@
 #if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
     _barcodeImage.image = nil;
 #else
-    _barcodeImage.image = [UMBarcodeGenerator imageWithData:@"abcdABCD123\nЧадъ и угаръ" encoding:kCFStringEncodingUTF8 barcodeType:kUMBarcodeTypeQRCode /*kUMBarcodeTypeAztecCode*/ imageSize:_barcodeImage.bounds.size whiteOpaque:YES error:nil];
+    _barcodeImage.image = [_barcodeGenerator imageWithData:@"abcdABCD123\nЧадъ и угаръ" encoding:kCFStringEncodingUTF8 barcodeType:kUMBarcodeTypeQRCode /*kUMBarcodeTypeAztecCode*/ imageSize:_barcodeImage.bounds.size whiteOpaque:YES error:nil];
 
     [scanViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 #endif

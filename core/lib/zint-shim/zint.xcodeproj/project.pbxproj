@@ -123,6 +123,7 @@
 		F106E9781D6B679500C80F63 /* upcean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = upcean.c; path = ../zint/backend/upcean.c; sourceTree = "<group>"; };
 		F106E9791D6B679500C80F63 /* zint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zint.h; path = ../zint/backend/zint.h; sourceTree = "<group>"; };
 		F106EA291D6B83FA00C80F63 /* dummy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dummy.c; sourceTree = "<group>"; };
+		F1196FAD1D6D3C6600C80F63 /* zint.exp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.exports; path = zint.exp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +162,7 @@
 				F106E9371D6B657000C80F63 /* Debug.xcconfig */,
 				F106E9351D6B657000C80F63 /* Release.xcconfig */,
 				F106E9361D6B657000C80F63 /* Distribution.xcconfig */,
+				F1196FAD1D6D3C6600C80F63 /* zint.exp */,
 				F106E9381D6B657000C80F63 /* PrefixHeader.pch */,
 				F106E9331D6B657000C80F63 /* config.h */,
 			);

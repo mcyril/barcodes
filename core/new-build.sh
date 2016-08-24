@@ -23,25 +23,25 @@ arch_simulator=(-sdk iphonesimulator -arch i386 -arch x86_64)
 # accepts list of build arguments
 function get_target_build_dir
 {
-	echo `xcodebuild $@ -showBuildSettings | /usr/bin/sed -n -e 's/^.*TARGET_BUILD_DIR = //p'`
+	echo `xcodebuild -configuration $barcodes_config $@ -showBuildSettings | /usr/bin/sed -n -e 's/^.*TARGET_BUILD_DIR = //p'`
 }
 
 # accepts list of build arguments
 function get_executable_name
 {
-	echo `xcodebuild $@ -showBuildSettings | /usr/bin/sed -n -e 's/^.*EXECUTABLE_NAME = //p'`
+	echo `xcodebuild -configuration $barcodes_config $@ -showBuildSettings | /usr/bin/sed -n -e 's/^.*EXECUTABLE_NAME = //p'`
 }
 
 # accepts library scheme name of barcodes
 function get_device_library
 {
-	echo $(get_target_build_dir ${arch_device[@]} "-configuration $barcodes_config -scheme $1")/$(get_executable_name ${arch_device[@]} "-configuration $barcodes_config -scheme $1")
+	echo $(get_target_build_dir ${arch_device[@]} -scheme $1)/$(get_executable_name ${arch_device[@]} -scheme $1)
 }
 
 # accepts library scheme name of barcodes
 function get_simulator_library
 {
-	echo $(get_target_build_dir ${arch_simulator[@]} "-configuration $barcodes_config -scheme $1")/$(get_executable_name ${arch_simulator[@]} "-configuration $barcodes_config -scheme $1")
+	echo $(get_target_build_dir ${arch_simulator[@]} -scheme $1)/$(get_executable_name ${arch_simulator[@]} -scheme $1)
 }
 
 # ---------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ echo "###   done."
 # ---------------------------------------------------------------------------------------
 
 echo "###   building device library..."
-xcodebuild ${arch_device[@]} -configuration $barcodes_config -scheme barcodes GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
+xcodebuild -configuration $barcodes_config ${arch_device[@]} -scheme barcodes GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
 if [ $? != 0 ]; then
 	echo "### ...failed..."
 	exit $?
@@ -246,7 +246,7 @@ echo "###   done."
 # ---------------------------------------------------------------------------------------
 
 echo "###   building simulator library..."
-xcodebuild ${arch_simulator[@]} -configuration $barcodes_config -scheme barcodes GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
+xcodebuild -configuration $barcodes_config ${arch_simulator[@]} -scheme barcodes GCC_PREPROCESSOR_DEFINITIONS_BASE="$preprocessor_defs_list" OTHER_LIBTOOLFLAGS_BASE="$extra_libraries_list" clean build > /dev/null
 if [ $? != 0 ]; then
 	echo "### ...failed..."
 	exit $?
@@ -256,7 +256,7 @@ fi
 # universal library
 # ---------------------------------------------------------------------------------------
 
-executable_name=$(get_executable_name ${arch_simulator[@]} "-configuration $barcodes_config -scheme barcodes")
+executable_name=$(get_executable_name ${arch_simulator[@]} -scheme barcodes)
 
 # ---------------------------------------------------------------------------------------
 

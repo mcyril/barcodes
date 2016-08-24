@@ -34,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F1196FBA1D6D40DD00C80F63 /* aztec.exp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.exports; path = aztec.exp; sourceTree = "<group>"; };
 		F14149071B486B5600C80F63 /* libaztec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaztec.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F14149221B486BAE00C80F63 /* Distribution.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Distribution.xcconfig; sourceTree = "<group>"; };
 		F14149231B486BAE00C80F63 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 				F14149251B486BAE00C80F63 /* Debug.xcconfig */,
 				F14149241B486BAE00C80F63 /* Release.xcconfig */,
 				F14149221B486BAE00C80F63 /* Distribution.xcconfig */,
+				F1196FBA1D6D40DD00C80F63 /* aztec.exp */,
 				F14149261B486BAE00C80F63 /* PrefixHeader.pch */,
 			);
 			path = essentials;

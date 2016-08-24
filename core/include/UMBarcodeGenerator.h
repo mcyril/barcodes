@@ -7,6 +7,22 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *    gen modes
+ */
+enum _UMBarcodeGenMode
+{
+    kUMBarcodeGenMode_NONE = 0,
+    kUMBarcodeGenMode_System,  // iOS7+ (QR is only available from iOS7+, other barcode types available from iOS8+ or even iOS9+ for PDF417)
+    kUMBarcodeGenMode_ZXing,
+    kUMBarcodeGenMode_ZInt,
+    kUMBarcodeGenMode_Aztec, // stand-alone Aztec only generator
+    kUMBarcodeGenMode_QR, // stand-alone QR only generator
+
+    kUMBarcodeGenMode_COUNT
+};
+typedef enum _UMBarcodeGenMode UMBarcodeGenMode_t;
+
 #ifndef API_EXPORT
 #define API_EXPORT  __attribute__((visibility("default")))
 #endif
@@ -34,6 +50,17 @@ EXT_EXPORT NSString* const kUMBarcodeTypeITF14Code;
 EXT_EXPORT NSString* const kUMBarcodeTypeDataMatrixCode;
 
 API_EXPORT @interface UMBarcodeGenerator : NSObject
+{
+@private
+    UMBarcodeGenMode_t _genMode;
+}
+
+- (instancetype)initWithGenMode:(UMBarcodeGenMode_t)genMode;
+
+/**
+ *    check if type is allowed to generate (for current genMode)
+ */
+- (BOOL)isAllowedType:(NSString*)barcodeType;
 
 /**
  *    generate barcode image
@@ -47,6 +74,13 @@ API_EXPORT @interface UMBarcodeGenerator : NSObject
  *
  *    @return generated image or nil if error occured
  */
-+ (UIImage*)imageWithData:(NSString*)data encoding:(CFStringEncoding)encoding barcodeType:(NSString*)type imageSize:(CGSize)size whiteOpaque:(BOOL)opaque error:(NSError**)error;
+- (UIImage*)imageWithData:(NSString*)data encoding:(CFStringEncoding)encoding barcodeType:(NSString*)type imageSize:(CGSize)size whiteOpaque:(BOOL)opaque error:(NSError**)error;
+
+/**
+ *    list of allowed modes to generate (terminating by kUMBarcodeGenMode_NONE)
+ *
+ *    @return allowed gen modes
+ */
++ (UMBarcodeGenMode_t*)allowedGenModes;
 
 @end

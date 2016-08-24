@@ -10,35 +10,40 @@
 #import "UMBarcodeScanContext.h"
 #import "UMBarcodeScanUtilities.h"
 
-#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
-#import "zint.h"
-#elif defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if UMBARCODE_SCAN_ZXING
 #import "ZXQRCodeErrorCorrectionLevel.h"
 #import "ZXEncodeHints.h"
 #import "ZXMultiFormatWriter.h"
 #import "ZXBitMatrix.h"
 #import "ZXImage.h"
-#else
+#endif
+#if UMBARCODE_GEN_ZINT
+#import "zint.h"
+#endif
+#if UMBARCODE_GEN_AZTEC
 #import "aztecgen.h"
+#endif
+#if UMBARCODE_GEN_QR
 #import "qrencode.h"
 #endif
 
 
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
-//# define QR_ECLEVEL      [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelM]
-#   define QR_ECLEVEL      [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelL]
-#   define AZTEC_ECLEVEL   [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelQ]
-#elif defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
-#else
-//# define QR_ECLEVEL      QR_ECLEVEL_M
-#   define QR_ECLEVEL      QR_ECLEVEL_L
-#   define AZTEC_ECLEVEL   23
+#if UMBARCODE_GEN_ZXING
+//# define ZXING_QR_ECLEVEL     [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelM]
+#   define ZXING_QR_ECLEVEL     [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelL]
+#   define ZXING_AZTEC_ECLEVEL  [ZXQRCodeErrorCorrectionLevel errorCorrectionLevelQ]
+#endif
+#if UMBARCODE_GEN_QR
+//# define QR_ECLEVEL           QR_ECLEVEL_M
+#   define QR_ECLEVEL           QR_ECLEVEL_L
+#endif
+#if UMBARCODE_GEN_AZTEC
+#   define AZTEC_ECLEVEL        23
 #endif
 
-#define BARCODE_MARGINS     0   // let caller care of margins
+#define BARCODE_MARGINS         0   // let caller care of margins
 
-#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
-#elif !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
+#if UMBARCODE_GEN_AZTEC || UMBARCODE_GEN_QR
 static void freeRawData(void* info, const void* data, size_t size)
 {
     free((void*)data);
@@ -46,173 +51,241 @@ static void freeRawData(void* info, const void* data, size_t size)
 #endif
 
 @interface UMBarcodeGenerator ()
-#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
-#elif !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
+#if UMBARCODE_GEN_AZTEC || UMBARCODE_GEN_QR
 + (UIImage*)_imageSquareWithPixels:(unsigned char*)pixels width:(int)width margin:(int)margin constrains:(int)cwidth opaque:(BOOL)opaque;
 #endif
 @end
 
 @implementation UMBarcodeGenerator
 
-+ (UIImage*)imageWithData:(NSString*)data encoding:(CFStringEncoding)encoding barcodeType:(NSString*)type imageSize:(CGSize)size whiteOpaque:(BOOL)opaque error:(NSError**)error
+- (instancetype)initWithGenMode:(UMBarcodeGenMode_t)genMode
 {
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
-    ZXBarcodeFormat format = [UMBarcodeScanUtilities um2zxBarcodeType:type];
-    if (format == (ZXBarcodeFormat)-1)
-        return nil;
-
-    ZXEncodeHints* hints = [ZXEncodeHints hints];
-    hints.encoding = CFStringConvertEncodingToNSStringEncoding(encoding);
-    hints.errorCorrectionLevel = (format == kBarcodeFormatAztec ? AZTEC_ECLEVEL : QR_ECLEVEL);
-    hints.margin = [NSNumber numberWithInt:BARCODE_MARGINS];
-
-    ZXBitMatrix* result = [[ZXMultiFormatWriter writer] encode:data format:format width:ceilf(size.width) height:ceilf(size.height) hints:hints error:error];
-    if (result != nil)
+    self = [super init];
+    if (self != nil)
     {
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
-
-        CGFloat blackComponents[] = { .0, 1. };
-        CGColorRef black = CGColorCreate(colorSpace, blackComponents);
-
-        CGFloat whiteComponents[] = { opaque ?  1. : .0, opaque ?  1. : .0 };
-        CGColorRef white = CGColorCreate(colorSpace, whiteComponents);
-
-        CFRelease(colorSpace);
-
-        ZXImage* image = [ZXImage imageWithMatrix:result onColor:black offColor:white];
-
-        CGColorRelease(white);
-        CGColorRelease(black);
-
-        return [UIImage imageWithCGImage:image.cgimage];
+        _genMode = genMode;
     }
-    else
-        return nil;
-#elif defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
-    int format = [UMBarcodeScanUtilities um2zintBarcodeType:type];
-    if (format == -1)
-        return nil;
 
-    UIImage* image = nil;
+    return self;
+}
 
-    NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
-    if (string != nil)
+- (UIImage*)imageWithData:(NSString*)data encoding:(CFStringEncoding)encoding barcodeType:(NSString*)type imageSize:(CGSize)size whiteOpaque:(BOOL)opaque error:(NSError**)error
+{
+    UIImage* barImage = nil;
+
+    switch (_genMode)
     {
-        struct zint_symbol* symbol = ZBarcode_Create();
-        if (symbol != NULL)
+#if UMBARCODE_GEN_SYSTEM
+    case kUMBarcodeGenMode_System:
         {
-            symbol->symbology = format;
 
-            int result = ZBarcode_Encode(symbol, (unsigned char *)[string bytes], (int)[string length]);
-            if (result == 0)
+        }
+        break;
+#endif
+#if UMBARCODE_GEN_ZXING
+    case kUMBarcodeGenMode_ZXing:
+        {
+            ZXBarcodeFormat format = [UMBarcodeScanUtilities um2zxBarcodeType:type];
+            if (format == (ZXBarcodeFormat)-1)
+                break;
+
+            ZXEncodeHints* hints = [ZXEncodeHints hints];
+            hints.encoding = CFStringConvertEncodingToNSStringEncoding(encoding);
+            hints.errorCorrectionLevel = (format == kBarcodeFormatAztec ? ZXING_AZTEC_ECLEVEL : ZXING_QR_ECLEVEL);
+            hints.margin = [NSNumber numberWithInt:BARCODE_MARGINS];
+
+            ZXBitMatrix* result = [[ZXMultiFormatWriter writer] encode:data format:format width:ceilf(size.width) height:ceilf(size.height) hints:hints error:error];
+            if (result != nil)
             {
-                result = ZBarcode_Render(symbol, size.width, size.height);
-                if (1 /*result == 0*/) // NOTE: render returns 1?
+                CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+
+                CGFloat blackComponents[] = { .0, 1. };
+                CGColorRef black = CGColorCreate(colorSpace, blackComponents);
+
+                CGFloat whiteComponents[] = { opaque ?  1. : .0, opaque ?  1. : .0 };
+                CGColorRef white = CGColorCreate(colorSpace, whiteComponents);
+
+                CFRelease(colorSpace);
+
+                ZXImage* image = [ZXImage imageWithMatrix:result onColor:black offColor:white];
+
+                CGColorRelease(white);
+                CGColorRelease(black);
+
+                barImage = image != nil ? [UIImage imageWithCGImage:image.cgimage] : nil;
+            }
+        }
+        break;
+#endif
+#if UMBARCODE_GEN_ZINT
+    case kUMBarcodeGenMode_ZInt:
+        {
+            int format = [UMBarcodeScanUtilities um2zintBarcodeType:type];
+            if (format == -1)
+                break;
+
+            NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
+            if (string != nil)
+            {
+                struct zint_symbol* symbol = ZBarcode_Create();
+                if (symbol != NULL)
                 {
-                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                    CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 8 * size.width, colorSpace, kCGImageAlphaPremultipliedFirst);
-                    CGColorSpaceRelease(colorSpace);
+                    symbol->symbology = format;
 
-                    if (context != NULL)
+                    int result = ZBarcode_Encode(symbol, (unsigned char *)[string bytes], (int)[string length]);
+                    if (result == 0)
                     {
-                        CGRect bounds =
-                                {
-                                    .origin = CGPointZero,
-                                    .size = size
-                                };
-
-                        CGContextSetShouldAntialias(context, false);
-
-                        if (opaque)
+                        result = ZBarcode_Render(symbol, size.width, size.height);
+                        if (1 /*result == 0*/) // NOTE: render returns 1?
                         {
-                            CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-                            CGContextFillRect(context, bounds);
-                        }
-                        else
-                            CGContextClearRect(context, bounds);
+                            CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+                            CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 4 * size.width, colorSpace, kCGImageAlphaPremultipliedFirst);
+                            CGColorSpaceRelease(colorSpace);
 
-                        struct zint_render* rendered = symbol->rendered;
-                        if (rendered != NULL)
-                        {
-                            CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
-
-                            struct zint_render_line* line = rendered->lines;
-                            while (line != NULL)
+                            if (context != NULL)
                             {
-                                CGContextFillRect(context, CGRectMake(line->x, line->y, line->width, line->length));
+                                CGRect bounds =
+                                        {
+                                            .origin = CGPointZero,
+                                            .size = size
+                                        };
 
-                                line = line->next;
+                                CGContextSetShouldAntialias(context, false);
+
+                                if (opaque)
+                                {
+                                    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+                                    CGContextFillRect(context, bounds);
+                                }
+                                else
+                                    CGContextClearRect(context, bounds);
+
+                                struct zint_render* rendered = symbol->rendered;
+                                if (rendered != NULL)
+                                {
+                                    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+
+                                    struct zint_render_line* line = rendered->lines;
+                                    while (line != NULL)
+                                    {
+                                        CGContextFillRect(context, CGRectMake(line->x, line->y, line->width, line->length));
+
+                                        line = line->next;
+                                    }
+                                }
+
+                                CGImageRef imageRef = CGBitmapContextCreateImage(context);
+                                if (imageRef != NULL)
+                                {
+                                    barImage = [UIImage imageWithCGImage:imageRef];
+
+                                    CGImageRelease(imageRef);
+                                }
+
+                                CGContextRelease(context);
                             }
                         }
-
-                        CGImageRef imageRef = CGBitmapContextCreateImage(context);
-                        if (imageRef != NULL)
-                        {
-                            image = [[UIImage alloc] initWithCGImage:imageRef];
-
-                            CGImageRelease(imageRef);
-                        }
-
-                        CGContextRelease(context);
                     }
+
+                    ZBarcode_Delete(symbol);
                 }
             }
         }
-
-        ZBarcode_Delete(symbol);
-    }
-
-    return [image autorelease];
-#else
-    // without ZXing and ZINT we're supporting only limited set of barcodes to generate.. why? 'cause I need only these two
-
-    if ([type isEqualToString:kUMBarcodeTypeAztecCode])
-    {
-        UIImage* image = nil;
-
-        NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
-        if (string != nil)
+        break;
+#endif
+#if UMBARCODE_GEN_AZTEC
+    case kUMBarcodeGenMode_Aztec:
+        if ([type isEqualToString:kUMBarcodeTypeAztecCode])
         {
-            ag_settings settings = { 0 };
-            settings.mask = AG_SF_SYMBOL_FORMAT | AG_SF_REDUNDANCY_FOR_ERROR_CORRECTION;
-            settings.symbol_format = AG_FULL_FORMAT;
-            settings.redundancy_for_error_correction = AZTEC_ECLEVEL;
-
-            ag_matrix* barcode = NULL;
-            const int gen_result = ag_generate(&barcode, [string bytes], [string length], &settings);
-            if (gen_result == AG_SUCCESS)
-                image = [[self class] _imageSquareWithPixels:barcode->data width:(int)barcode->width margin:BARCODE_MARGINS constrains:ceilf(size.width) opaque:opaque];
-
-            ag_release_matrix(barcode);
-        }
-
-        return image;
-    }
-    else if ([type isEqualToString:kUMBarcodeTypeQRCode])
-    {
-        UIImage* image = nil;
-
-        NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
-        if (string != nil)
-        {
-            QRcode* resultCode = QRcode_encodeData((int)[string length], [string bytes], 0, QR_ECLEVEL);
-            if (resultCode != NULL)
+            NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
+            if (string != nil)
             {
-                image = [[self class] _imageSquareWithPixels:resultCode->data width:resultCode->width margin:BARCODE_MARGINS constrains:ceilf(size.width) opaque:opaque];
+                ag_settings settings = { 0 };
+                settings.mask = AG_SF_SYMBOL_FORMAT | AG_SF_REDUNDANCY_FOR_ERROR_CORRECTION;
+                settings.symbol_format = AG_FULL_FORMAT;
+                settings.redundancy_for_error_correction = AZTEC_ECLEVEL;
 
-                QRcode_free(resultCode);
+                ag_matrix* barcode = NULL;
+                const int gen_result = ag_generate(&barcode, [string bytes], [string length], &settings);
+                if (gen_result == AG_SUCCESS)
+                    barImage = [[self class] _imageSquareWithPixels:barcode->data width:(int)barcode->width margin:BARCODE_MARGINS constrains:ceilf(size.width) opaque:opaque];
+
+                ag_release_matrix(barcode);
             }
         }
-
-        return image;
-    }
-    else
-        return nil;
+        break;
 #endif
+#if UMBARCODE_GEN_QR
+    case kUMBarcodeGenMode_QR:
+        if ([type isEqualToString:kUMBarcodeTypeQRCode])
+        {
+            NSData* string = [data dataUsingEncoding:CFStringConvertEncodingToNSStringEncoding(encoding)];
+            if (string != nil)
+            {
+                QRcode* resultCode = QRcode_encodeData((int)[string length], [string bytes], 0, QR_ECLEVEL);
+                if (resultCode != NULL)
+                {
+                    barImage = [[self class] _imageSquareWithPixels:resultCode->data width:resultCode->width margin:BARCODE_MARGINS constrains:ceilf(size.width) opaque:opaque];
+
+                    QRcode_free(resultCode);
+                }
+            }
+        }
+        break;
+#endif
+    default:
+        break;
+    }
+
+    return barImage;
 }
 
-#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
-#elif !defined(UMBARCODE_SCAN_ZXING) || !UMBARCODE_SCAN_ZXING
+- (BOOL)isAllowedType:(NSString*)barcodeType
+{
+    BOOL allowed = NO;
+
+    switch (_genMode)
+    {
+#if UMBARCODE_GEN_SYSTEM
+    case kUMBarcodeGenMode_System:
+        if ([barcodeType isEqualToString:kUMBarcodeTypeAztecCode])
+            allowed = UMBarcodeScan_isOS8();
+        else if ([barcodeType isEqualToString:kUMBarcodeTypeQRCode])
+            allowed = UMBarcodeScan_isOS8();
+        else if ([barcodeType isEqualToString:kUMBarcodeTypeCode128Code])
+            allowed = UMBarcodeScan_isOS7();
+        else if ([barcodeType isEqualToString:kUMBarcodeTypePDF417Code])
+            allowed = UMBarcodeScan_isOS9();
+        break;
+#endif
+#if UMBARCODE_GEN_ZXING
+    case kUMBarcodeGenMode_ZXing:
+        allowed = ([UMBarcodeScanUtilities um2zxBarcodeType:barcodeType] != (ZXBarcodeFormat)-1);
+        break;
+#endif
+#if UMBARCODE_GEN_ZINT
+    case kUMBarcodeGenMode_ZInt:
+        allowed = ([UMBarcodeScanUtilities um2zintBarcodeType:barcodeType] != -1);
+        break;
+#endif
+#if UMBARCODE_GEN_AZTEC
+    case kUMBarcodeGenMode_Aztec:
+        allowed = [barcodeType isEqualToString:kUMBarcodeTypeAztecCode];
+        break;
+#endif
+#if UMBARCODE_GEN_QR
+    case kUMBarcodeGenMode_QR:
+        allowed = [barcodeType isEqualToString:kUMBarcodeTypeQRCode];
+        break;
+#endif
+    default:
+        break;
+    }
+
+    return allowed;
+}
+
+#if UMBARCODE_GEN_AZTEC || UMBARCODE_GEN_QR
 + (UIImage*)_imageSquareWithPixels:(unsigned char*)pixels width:(int)width margin:(int)margin constrains:(int)cwidth opaque:(BOOL)opaque
 {
     int len = width * width;
@@ -278,5 +351,29 @@ static void freeRawData(void* info, const void* data, size_t size)
     return image;
 }
 #endif
+
++ (UMBarcodeGenMode_t*)allowedGenModes
+{
+static dispatch_once_t _once;
+static UMBarcodeGenMode_t _allowedGenModes[kUMBarcodeGenMode_COUNT + 1];
+
+    dispatch_once(&_once, ^
+        {
+            int index = 0;
+#if UMBARCODE_GEN_SYSTEM
+            if (UMBarcodeScan_isOS7())
+                _allowedGenModes[index++] = kUMBarcodeGenMode_System;
+#endif
+#if UMBARCODE_GEN_ZXING
+            _allowedGenModes[index++] = kUMBarcodeGenMode_ZXing;
+#endif
+#if UMBARCODE_GEN_ZINT
+            _allowedGenModes[index++] = kUMBarcodeGenMode_ZInt;
+#endif
+            _allowedGenModes[index++] = kUMBarcodeGenMode_NONE;
+        });
+
+    return _allowedGenModes;
+}
 
 @end

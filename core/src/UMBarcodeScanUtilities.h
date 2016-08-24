@@ -7,15 +7,15 @@
 
 #import "UMBarcodeScanViewControllerPvt.h"
 
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if UMBARCODE_SCAN_ZXING || UMBARCODE_GEN_ZXING
 #import "ZXingObjC.h"
 #endif
 
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+#if UMBARCODE_SCAN_ZBAR
 #import "zbar.h"
 #endif
 
-#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+#if UMBARCODE_GEN_ZINT
 #import "zint.h"
 #endif
 
@@ -23,20 +23,22 @@
 
 + (BOOL)appHasViewControllerBasedStatusBar;
 
+#if UMBARCODE_SCAN_SYSTEM
 + (NSString*)um2avBarcodeType:(NSString*)umBarcodeType;
 + (NSString*)av2umBarcodeType:(NSString*)avBarcodeType;
+#endif
 
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if UMBARCODE_SCAN_ZXING || UMBARCODE_GEN_ZXING
 + (ZXBarcodeFormat)um2zxBarcodeType:(NSString*)umBarcodeType;
 + (NSString*)zx2umBarcodeType:(ZXBarcodeFormat)zxBarcodeType;
 #endif
 
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+#if UMBARCODE_SCAN_ZBAR
 + (zbar_symbol_type_t)um2zbBarcodeType:(NSString*)umBarcodeType;
 + (NSString*)zb2umBarcodeType:(zbar_symbol_type_t)zbBarcodeType;
 #endif
 
-#if defined(UMBARCODE_GEN_ZINT) && UMBARCODE_GEN_ZINT
+#if UMBARCODE_GEN_ZINT
 + (int)um2zintBarcodeType:(NSString*)umBarcodeType;
 #endif
 
@@ -48,7 +50,7 @@
 
 BOOL UMBarcodeScan_isOS7();
 BOOL UMBarcodeScan_isOS8();
-BOOL UMBarcodeScan_isOS83();
+BOOL UMBarcodeScan_isOS9();
 
 typedef uint8_t InterfaceToDeviceOrientationDelta; // the amount that the interfaceOrientation is rotated relative to the deviceOrientation
 

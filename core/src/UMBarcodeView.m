@@ -14,7 +14,7 @@
 #import "UMBarcodeScanContext.h"
 #import "UMBarcodeScanUtilities.h"
 
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if UMBARCODE_SCAN_ZXING
 #import "ZXCGImageLuminanceSource.h"
 #import "ZXHybridBinarizer.h"
 #import "ZXBinaryBitmap.h"
@@ -24,12 +24,14 @@
 #import "ZXResultPoint.h"
 #endif
 
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+#if UMBARCODE_SCAN_ZBAR
 #import "ZBarImage.h"
 #import "ZBarImageScanner.h"
 #endif
 
+#if !UMBARCODE_SCAN_SIMULATOR
 #import <AVFoundation/AVFoundation.h>
+#endif
 
 #import <libkern/OSAtomic.h>
 
@@ -40,28 +42,28 @@
 #define kViewFinderFrameMargin  8.
 
 @interface UMBarcodeView ()
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
                             <AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 #endif
 
 @property (nonatomic, readwrite) BOOL enableCapture;
 @property (nonatomic, retain) NSError* error;
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
 - (void)_initializeAVBowels;
 #endif
 - (BOOL)_initializeViewFinder;
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if UMBARCODE_SCAN_SYSTEM
 - (BOOL)_initializeSystemOutput;
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
-- (BOOL)_initializeSystemZXingOutput;
 #endif
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
-- (BOOL)_initializeSystemZBar;
+#if UMBARCODE_SCAN_ZXING
+- (BOOL)_initializeZXingOutput;
 #endif
+#if UMBARCODE_SCAN_ZBAR
+- (BOOL)_initializeZBarOutput;
 #endif
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
 - (BOOL)_changeCameraConfiguration:(BOOL(^)(NSError** error))changeBlock error:(NSError**)outError;
 - (void)_refocus;
 - (void)_autofocusOnce;
@@ -92,7 +94,7 @@
 
         self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         self.backgroundColor = [UIColor clearColor];
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
         [self _initializeAVBowels];
 #else
         [self _initializeViewFinder];
@@ -107,31 +109,35 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     if (_queue != NULL)
     {
+#if UMBARCODE_SCAN_SYSTEM
         [_metaDataOutput setMetadataObjectsDelegate:nil queue:_queue];
+#endif
         [_videoDataOutput setSampleBufferDelegate:nil queue:_queue];
     }
 
+#if UMBARCODE_SCAN_SYSTEM
     [_metaDataOutput release];
+#endif
     [_videoDataOutput release];
 
     if (_queue != NULL)
         dispatch_release(_queue);
 
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
+#if UMBARCODE_SCAN_ZXING
     [_zxReader release];
     [_zxHints release];
 #endif
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
+#if UMBARCODE_SCAN_ZBAR
     [_zbImage release];
     [_zbScanner release];
 #endif
 #endif /* !simulator */
 
     [_viewfinderLayers release];
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     [_videoPreviewLayer release];
     [_captureSession release];
     [_videoInput release];
@@ -142,7 +148,7 @@
 
     [_context release];
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     if (_configurationSemaphore != NULL)
         dispatch_release(_configurationSemaphore);
 #endif
@@ -152,7 +158,7 @@
 
 #pragma mark -
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
 - (BOOL)_changeCameraConfiguration:(BOOL(^)(NSError** error))changeBlock error:(NSError**)outError
 {
     dispatch_semaphore_wait(_configurationSemaphore, DISPATCH_TIME_FOREVER);
@@ -179,7 +185,7 @@
 }
 #endif
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
 - (void)_refocus
 {
     [self _autofocusOnce];
@@ -189,7 +195,7 @@
 }
 #endif
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
 - (void)_autofocusOnce
 {
     [self _changeCameraConfiguration:^BOOL(NSError** error)
@@ -203,7 +209,7 @@
 }
 #endif
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
 - (void)_resumeContinuousAutofocusing
 {
     [self _changeCameraConfiguration:^BOOL(NSError** error)
@@ -222,7 +228,7 @@
 }
 #endif
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
 - (void)_initializeAVBowels
 {
     _configurationSemaphore = dispatch_semaphore_create(1);
@@ -301,27 +307,26 @@
             break;
 
         // connect dedicated capture to output
-        if (_context.scanMode == kUMBarcodeScanMode_System)
+        switch (_context.scanMode)
         {
-            if (![self _initializeSystemOutput])
-                break;
-        }
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
-        else if (_context.scanMode == kUMBarcodeScanMode_ZXing)
-        {
-            if (![self _initializeSystemZXingOutput])
-                break;
-        }
+#if UMBARCODE_SCAN_SYSTEM
+        case kUMBarcodeScanMode_System:
+            success = [self _initializeSystemOutput];
+            break;
 #endif
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
-        else if (_context.scanMode == kUMBarcodeScanMode_ZBar)
-        {
-            if (![self _initializeSystemZBar])
-                break;
-        }
+#if UMBARCODE_SCAN_ZXING
+        case kUMBarcodeScanMode_ZXing:
+            success = [self _initializeZXingOutput];
+            break;
 #endif
-
-        success = YES;
+#if UMBARCODE_SCAN_ZBAR
+        case kUMBarcodeScanMode_ZBar:
+            success = [self _initializeZBarOutput];
+            break;
+#endif
+        default:
+            break;
+        }
 
     } while (0);
 
@@ -340,7 +345,7 @@
 - (BOOL)_initializeViewFinder
 {
     // create a preview layer
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     if (_videoPreviewLayer == nil)
         return NO;
@@ -348,7 +353,7 @@
 
     [self _didReceiveDeviceOrientationNotification:nil];
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     [self.layer insertSublayer:_videoPreviewLayer atIndex:0];
 #endif
 
@@ -374,7 +379,7 @@
     return YES;
 }
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if UMBARCODE_SCAN_SYSTEM
 - (BOOL)_initializeSystemOutput
 {
     _metaDataOutput = [[AVCaptureMetadataOutput alloc] init];
@@ -426,8 +431,8 @@
 }
 #endif
 
-#if (!defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR) && (defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING)
-- (BOOL)_initializeSystemZXingOutput
+#if UMBARCODE_SCAN_ZXING
+- (BOOL)_initializeZXingOutput
 {
     _zxReader = [[ZXMultiFormatReader reader] retain];
     if (_zxReader == nil)
@@ -471,8 +476,8 @@
 }
 #endif
 
-#if (!defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR) && (defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR)
-- (BOOL)_initializeSystemZBar
+#if UMBARCODE_SCAN_ZBAR
+- (BOOL)_initializeZBarOutput
 {
     _zbImage = [[ZBarImage alloc] init];
     if (_zbImage == nil)
@@ -524,7 +529,7 @@
             [self performSelectorOnMainThread: @selector(_didReadNewCode:) withObject:nil waitUntilDone:NO];
         else
         {
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
             [_captureSession startRunning];
 #endif
             self.enableCapture = YES;
@@ -537,7 +542,7 @@
     if (self.enableCapture)
     {
         self.enableCapture = NO;
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
         [_captureSession stopRunning];
 #endif
     }
@@ -560,7 +565,7 @@
 
 - (CGRect)cameraPreviewFrame
 {
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     return _videoPreviewLayer.frame;
 #else
     if (!CGRectIsEmpty(self.bounds))
@@ -572,7 +577,7 @@
 
 - (BOOL)hasTorch
 {
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     return _camera.hasTorch;
 #else
     return NO;
@@ -581,7 +586,7 @@
 
 - (BOOL)isTorchOn
 {
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     return _camera.hasTorch && ((_camera.torchMode == AVCaptureTorchModeAuto && _camera.torchLevel > .0) || _camera.torchMode == AVCaptureTorchModeOn);
 #else
     return NO;
@@ -590,7 +595,7 @@
 
 - (void)setTorch:(BOOL)onOff
 {
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     if (_camera.hasTorch)
     {
         NSError* error = nil;
@@ -643,7 +648,7 @@
     {
         CGRect r = CGRectInset(self.bounds, kViewFinderMargin, kViewFinderMargin);
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
         _videoPreviewLayer.frame = r;
 
         // fill the entire screen, without this we get empty areas at the long sides
@@ -670,7 +675,7 @@
 
 - (void)_didReceiveDeviceOrientationNotification:(NSNotification*)notification
 {
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
     if ([[_videoPreviewLayer connection] isVideoOrientationSupported])
         [[_videoPreviewLayer connection] setVideoOrientation:(AVCaptureVideoOrientation)[UIApplication sharedApplication].statusBarOrientation];
 #endif
@@ -680,34 +685,44 @@
 {
     if (obj != nil)
     {
-        if (_context.scanMode == kUMBarcodeScanMode_System)
+        switch (_context.scanMode)
         {
-            AVMetadataMachineReadableCodeObject* code = obj;
+#if UMBARCODE_SCAN_SYSTEM
+        case kUMBarcodeScanMode_System:
+            {
+                AVMetadataMachineReadableCodeObject* code = obj;
 
-            [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self]
-                                    didScanString:[[code.stringValue copy] autorelease]
-                                    ofBarcodeType:[UMBarcodeScanUtilities av2umBarcodeType:code.type]];
-        }
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
-        else if (_context.scanMode == kUMBarcodeScanMode_ZXing)
-        {
-            ZXResult* result = obj;
-
-            [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self]
-                                    didScanString:[[result.text copy] autorelease]
-                                    ofBarcodeType:[UMBarcodeScanUtilities zx2umBarcodeType:result.barcodeFormat]];
-        }
+                [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self]
+                                        didScanString:[[code.stringValue copy] autorelease]
+                                        ofBarcodeType:[UMBarcodeScanUtilities av2umBarcodeType:code.type]];
+            }
+            break;
 #endif
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
-        else if (_context.scanMode == kUMBarcodeScanMode_ZBar)
-        {
-            ZBarSymbol* symb = obj;
+#if UMBARCODE_SCAN_ZXING
+        case kUMBarcodeScanMode_ZXing:
+            {
+                ZXResult* result = obj;
 
-            [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self]
-                                    didScanString:[[symb.data copy] autorelease]
-                                    ofBarcodeType:[UMBarcodeScanUtilities zb2umBarcodeType:symb.type]];
-        }
+                [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self]
+                                        didScanString:[[result.text copy] autorelease]
+                                        ofBarcodeType:[UMBarcodeScanUtilities zx2umBarcodeType:result.barcodeFormat]];
+            }
+            break;
 #endif
+#if UMBARCODE_SCAN_ZBAR
+        case kUMBarcodeScanMode_ZBar:
+            {
+                ZBarSymbol* symb = obj;
+
+                [_context.delegate scanViewController:[UMBarcodeScanViewController _barcodeScanViewControllerForResponder:self]
+                                        didScanString:[[symb.data copy] autorelease]
+                                        ofBarcodeType:[UMBarcodeScanUtilities zb2umBarcodeType:symb.type]];
+            }
+            break;
+#endif
+        default:
+            break;
+        }
     }
     else
     {
@@ -718,7 +733,7 @@
 
 #pragma mark -
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if UMBARCODE_SCAN_SYSTEM
 - (void)captureOutput:(AVCaptureOutput*)captureOutput didOutputMetadataObjects:(NSArray*)metadataObjects fromConnection:(AVCaptureConnection*)connection
 {
     if ((OSAtomicOr32Barrier(0, &_context->_state) & (PAUSED|RUNNING)) != RUNNING) // bypass if suspended
@@ -752,7 +767,7 @@
 }
 #endif
 
-#if !defined(TARGET_IPHONE_SIMULATOR) || !TARGET_IPHONE_SIMULATOR
+#if !UMBARCODE_SCAN_SIMULATOR
 - (void)captureOutput:(AVCaptureOutput*)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection*)connection
 {
     if ((OSAtomicOr32Barrier(0, &_context->_state) & (PAUSED|RUNNING)) != RUNNING) // bypass if suspended
@@ -773,85 +788,93 @@
 
             do
             {
-                if (_context.scanMode == kUMBarcodeScanMode_System)
+                switch (_context.scanMode)
                 {
-                }
-#if defined(UMBARCODE_SCAN_ZXING) && UMBARCODE_SCAN_ZXING
-                else if (_context.scanMode == kUMBarcodeScanMode_ZXing)
-                {
-                    CVImageBufferRef videoFrame = CMSampleBufferGetImageBuffer(sampleBuffer);
-                    if (videoFrame == NULL)
-                        break;
-
-                    CGImageRef videoFrameImage = [ZXCGImageLuminanceSource createImageFromBuffer:videoFrame];
-                    if (videoFrameImage == NULL)
-                        break;
-
-                    ZXCGImageLuminanceSource* source = [[[ZXCGImageLuminanceSource alloc] initWithCGImage:videoFrameImage] autorelease];
-                    CGImageRelease(videoFrameImage);
-
-                    if (source == nil)
-                        break;
-
-                    ZXHybridBinarizer* binarizer = [[[ZXHybridBinarizer alloc] initWithSource:source] autorelease];
-                    if (binarizer == nil)
-                        break;
-
-                    ZXBinaryBitmap* bitmap = [[[ZXBinaryBitmap alloc] initWithBinarizer:binarizer] autorelease];
-                    if (bitmap == nil)
-                        break;
-
-                    NSError* error;
-                    ZXResult* result = [_zxReader decode:bitmap hints:_zxHints error:&error];
-                    if (result != nil)
-                    {
-                        resume = NO;
-
-                        [self performSelectorOnMainThread: @selector(_didReadNewCode:) withObject:result waitUntilDone:NO];
-                    }
-                }
+#if UMBARCODE_SCAN_SYSTEM
+                case kUMBarcodeScanMode_System:
+                    break;
 #endif
-#if defined(UMBARCODE_SCAN_ZBAR) && UMBARCODE_SCAN_ZBAR
-                else if (_context.scanMode == kUMBarcodeScanMode_ZBar)
-                {
-                    CVImageBufferRef videoFrame = CMSampleBufferGetImageBuffer(sampleBuffer);
-                    if (videoFrame == NULL)
-                        break;
-
-                    if (CVPixelBufferLockBaseAddress(videoFrame, kCVPixelBufferLock_ReadOnly) != kCVReturnSuccess)
-                        break;
-
-                    void* videoData = CVPixelBufferGetBaseAddressOfPlane(videoFrame, 0);
-                    if (videoData == NULL)
+#if UMBARCODE_SCAN_ZXING
+                case kUMBarcodeScanMode_ZXing:
                     {
-                        CVPixelBufferUnlockBaseAddress(videoFrame, kCVPixelBufferLock_ReadOnly);
-                        break;
-                    }
-
-                    size_t w = CVPixelBufferGetBytesPerRowOfPlane(videoFrame, 0);
-                    size_t h = CVPixelBufferGetHeightOfPlane(videoFrame, 0);
-                    [_zbImage setData:videoData withLength:w * h];
-
-                    CGRect r = CGRectMake(.0, .0, w, h);
-                    _zbImage.size = r.size;
-                    _zbImage.crop = r;
-
-                    if ([_zbScanner scanImage:_zbImage] > 0)
-                    {
-                        resume = NO;
-
-                        ZBarSymbol* sym = nil;
-                        for (sym in _zbScanner.results)
+                        CVImageBufferRef videoFrame = CMSampleBufferGetImageBuffer(sampleBuffer);
+                        if (videoFrame == NULL)
                             break;
 
-                        [self performSelectorOnMainThread: @selector(_didReadNewCode:) withObject:sym waitUntilDone:NO];
+                        CGImageRef videoFrameImage = [ZXCGImageLuminanceSource createImageFromBuffer:videoFrame];
+                        if (videoFrameImage == NULL)
+                            break;
+
+                        ZXCGImageLuminanceSource* source = [[[ZXCGImageLuminanceSource alloc] initWithCGImage:videoFrameImage] autorelease];
+                        CGImageRelease(videoFrameImage);
+
+                        if (source == nil)
+                            break;
+
+                        ZXHybridBinarizer* binarizer = [[[ZXHybridBinarizer alloc] initWithSource:source] autorelease];
+                        if (binarizer == nil)
+                            break;
+
+                        ZXBinaryBitmap* bitmap = [[[ZXBinaryBitmap alloc] initWithBinarizer:binarizer] autorelease];
+                        if (bitmap == nil)
+                            break;
+
+                        NSError* error;
+                        ZXResult* result = [_zxReader decode:bitmap hints:_zxHints error:&error];
+                        if (result != nil)
+                        {
+                            resume = NO;
+
+                            [self performSelectorOnMainThread: @selector(_didReadNewCode:) withObject:result waitUntilDone:NO];
+                        }
                     }
-
-                    [_zbImage setData:NULL withLength:0];
-
-                    CVPixelBufferUnlockBaseAddress(videoFrame, kCVPixelBufferLock_ReadOnly);
-                }
+                    break;
 #endif
+#if UMBARCODE_SCAN_ZBAR
+                case kUMBarcodeScanMode_ZBar:
+                    {
+                        CVImageBufferRef videoFrame = CMSampleBufferGetImageBuffer(sampleBuffer);
+                        if (videoFrame == NULL)
+                            break;
+
+                        if (CVPixelBufferLockBaseAddress(videoFrame, kCVPixelBufferLock_ReadOnly) != kCVReturnSuccess)
+                            break;
+
+                        void* videoData = CVPixelBufferGetBaseAddressOfPlane(videoFrame, 0);
+                        if (videoData == NULL)
+                        {
+                            CVPixelBufferUnlockBaseAddress(videoFrame, kCVPixelBufferLock_ReadOnly);
+                            break;
+                        }
+
+                        size_t w = CVPixelBufferGetBytesPerRowOfPlane(videoFrame, 0);
+                        size_t h = CVPixelBufferGetHeightOfPlane(videoFrame, 0);
+                        [_zbImage setData:videoData withLength:w * h];
+
+                        CGRect r = CGRectMake(.0, .0, w, h);
+                        _zbImage.size = r.size;
+                        _zbImage.crop = r;
+
+                        if ([_zbScanner scanImage:_zbImage] > 0)
+                        {
+                            resume = NO;
+
+                            ZBarSymbol* sym = nil;
+                            for (sym in _zbScanner.results)
+                                break;
+
+                            [self performSelectorOnMainThread: @selector(_didReadNewCode:) withObject:sym waitUntilDone:NO];
+                        }
+
+                        [_zbImage setData:NULL withLength:0];
+
+                        CVPixelBufferUnlockBaseAddress(videoFrame, kCVPixelBufferLock_ReadOnly);
+                    }
+                    break;
+#endif
+                default:
+                    break;
+                }
 
             } while (0);
 
