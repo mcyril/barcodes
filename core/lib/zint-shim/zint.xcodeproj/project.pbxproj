@@ -54,7 +54,6 @@
 
 /* Begin PBXFileReference section */
 		F106E9251D6B648000C80F63 /* libzint.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libzint.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F106E9331D6B657000C80F63 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		F106E9341D6B657000C80F63 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		F106E9351D6B657000C80F63 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F106E9361D6B657000C80F63 /* Distribution.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Distribution.xcconfig; sourceTree = "<group>"; };
@@ -164,7 +163,6 @@
 				F106E9361D6B657000C80F63 /* Distribution.xcconfig */,
 				F1196FAD1D6D3C6600C80F63 /* zint.exp */,
 				F106E9381D6B657000C80F63 /* PrefixHeader.pch */,
-				F106E9331D6B657000C80F63 /* config.h */,
 			);
 			path = essentials;
 			sourceTree = "<group>";
