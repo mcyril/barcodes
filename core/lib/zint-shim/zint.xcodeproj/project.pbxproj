@@ -38,6 +38,7 @@
 		F106E99E1D6B679500C80F63 /* telepen.c in Sources */ = {isa = PBXBuildFile; fileRef = F106E9771D6B679500C80F63 /* telepen.c */; };
 		F106E99F1D6B679500C80F63 /* upcean.c in Sources */ = {isa = PBXBuildFile; fileRef = F106E9781D6B679500C80F63 /* upcean.c */; };
 		F106EA2A1D6B83FA00C80F63 /* dummy.c in Sources */ = {isa = PBXBuildFile; fileRef = F106EA291D6B83FA00C80F63 /* dummy.c */; };
+		F1D373411D820BC1001FC6CC /* codablock.c in Sources */ = {isa = PBXBuildFile; fileRef = F1D373401D820BC1001FC6CC /* codablock.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -123,6 +124,7 @@
 		F106E9791D6B679500C80F63 /* zint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zint.h; path = ../zint/backend/zint.h; sourceTree = "<group>"; };
 		F106EA291D6B83FA00C80F63 /* dummy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dummy.c; sourceTree = "<group>"; };
 		F1196FAD1D6D3C6600C80F63 /* zint.exp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.exports; path = zint.exp; sourceTree = "<group>"; };
+		F1D373401D820BC1001FC6CC /* codablock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = codablock.c; path = ../zint/backend/codablock.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 				F106E93D1D6B679500C80F63 /* auspost.c */,
 				F106E93F1D6B679500C80F63 /* aztec.h */,
 				F106E93E1D6B679500C80F63 /* aztec.c */,
+				F1D373401D820BC1001FC6CC /* codablock.c */,
 				F106E9421D6B679500C80F63 /* code.c */,
 				F106E9441D6B679500C80F63 /* code1.h */,
 				F106E9431D6B679500C80F63 /* code1.c */,
@@ -270,7 +273,7 @@
 		F106E91D1D6B648000C80F63 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ravel Developers Group";
 				TargetAttributes = {
 					F106E9241D6B648000C80F63 = {
@@ -330,6 +333,7 @@
 				F106E9941D6B679500C80F63 /* plessey.c in Sources */,
 				F106E9881D6B679500C80F63 /* eci.c in Sources */,
 				F106E97A1D6B679500C80F63 /* 2of5.c in Sources */,
+				F1D373411D820BC1001FC6CC /* codablock.c in Sources */,
 				F106E97B1D6B679500C80F63 /* auspost.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

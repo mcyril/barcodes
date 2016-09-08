@@ -15,7 +15,12 @@
 
 #define kViewFinderAimMargin    16.
 
-@interface ViewController () <UMBarcodeScanDelegate>
+@interface ViewController () <
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+                                CAAnimationDelegate,
+#endif
+                                UMBarcodeScanDelegate>
+
 @property (nonatomic, retain) IBOutlet UIImageView* barcodeImage;
 
 @property (nonatomic, retain) IBOutlet UIButton* scanSystem;
