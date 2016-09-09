@@ -362,9 +362,9 @@ static void freeRawData(void* info, const void* data, size_t size)
         if ([barcodeType isEqualToString:kUMBarcodeTypeAztecCode])
             allowed = UMBarcodeScan_isOS8();
         else if ([barcodeType isEqualToString:kUMBarcodeTypeQRCode])
-            allowed = UMBarcodeScan_isOS8();
-        else if ([barcodeType isEqualToString:kUMBarcodeTypeCode128Code])
             allowed = UMBarcodeScan_isOS7();
+        else if ([barcodeType isEqualToString:kUMBarcodeTypeCode128Code])
+            allowed = UMBarcodeScan_isOS8();
         else if ([barcodeType isEqualToString:kUMBarcodeTypePDF417Code])
             allowed = UMBarcodeScan_isOS9();
         break;
