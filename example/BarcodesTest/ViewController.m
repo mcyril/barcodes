@@ -43,7 +43,7 @@
     {
         _barcodeGenerator = [[UMBarcodeGenerator alloc] initWithGenMode:kUMBarcodeGenMode_System];
     }
-    
+
     return self;
 }
 
@@ -56,7 +56,7 @@
     [_scanZBar release];
 
     [_barcodeGenerator release];
-    
+
     [super dealloc];
 }
 
