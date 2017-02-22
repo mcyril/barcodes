@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, PocketSVGControlPoint)
     PocketSVGControlPointQ
 };
 
-@interface PocketSVG : NSObject
+API_PRIVATE @interface PocketSVG : NSObject
 {
 @private
 	float			pathScale;
