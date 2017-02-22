@@ -61,6 +61,7 @@
 - (UIButton*)_makeImageButtonWithSelector:(SEL)selector;
 - (UILabel*)_makeLabelWithTitle:(NSString*)title;
 
+- (UIImage*)_imageWithSVG:(NSString*)data size:(CGSize)size color:(UIColor*)color;
 - (void)_createTorchImages;
 - (void)_updateTorchButton;
 
@@ -578,53 +579,62 @@
     return button;
 }
 
-- (void)_createTorchImages
+- (UIImage*)_imageWithSVG:(NSString*)data size:(CGSize)size color:(UIColor*)color
 {
-    CGRect rect = CGRectMake(.0, .0, 32., 32.);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
 
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, [UIScreen mainScreen].scale);
+    CGPathRef path = [PocketSVG pathFromDAttribute:data];
 
-    CGPathRef pathOn = [PocketSVG pathFromDAttribute:@"M14,0L0,18h7L6,30l14-18h-7L14,0L14,0z"];
+    CGContextClearRect(UIGraphicsGetCurrentContext(), CGRectMake(.0, .0, size.width, size.height));
 
-    CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
-    CGContextAddPath(UIGraphicsGetCurrentContext(), pathOn);
+    CGRect boundingBox = CGPathGetBoundingBox(path);
+    CGFloat boundingBoxAspectRatio = CGRectGetWidth(boundingBox) / CGRectGetHeight(boundingBox);
 
-    [[UIColor colorWithWhite:1. alpha:.8] set];
+    CGFloat viewAspectRatio = size.width / size.height;
+
+    CGFloat scaleFactor;
+    if (boundingBoxAspectRatio > viewAspectRatio)
+        scaleFactor = size.width / CGRectGetWidth(boundingBox);
+    else
+        scaleFactor = size.height / CGRectGetHeight(boundingBox);
+
+    CGAffineTransform scaleTransform = CGAffineTransformIdentity;
+    scaleTransform = CGAffineTransformScale(scaleTransform, scaleFactor, scaleFactor);
+    scaleTransform = CGAffineTransformTranslate(scaleTransform, -CGRectGetMinX(boundingBox), -CGRectGetMinY(boundingBox));
+
+    CGSize scaledSize = CGSizeApplyAffineTransform(boundingBox.size, CGAffineTransformMakeScale(scaleFactor, scaleFactor));
+    CGSize centerOffset = CGSizeMake((size.width - scaledSize.width) / (scaleFactor * 2.), (size.height - scaledSize.height) / (scaleFactor * 2.));
+    scaleTransform = CGAffineTransformTranslate(scaleTransform, centerOffset.width, centerOffset.height);
+
+    path = CGPathCreateCopyByTransformingPath(path, &scaleTransform);
+    CGContextAddPath(UIGraphicsGetCurrentContext(), path);
+    CGPathRelease(path);
+
+    [color set];
     CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFill);
 
-    [_torchIconOn release];
-    _torchIconOn = [UIGraphicsGetImageFromCurrentImageContext() copy];
-
-    CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
-    CGContextAddPath(UIGraphicsGetCurrentContext(), pathOn);
-
-    [[UIColor whiteColor] set];
-    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFill);
-
-    [_torchIconOnPressed release];
-    _torchIconOnPressed = [UIGraphicsGetImageFromCurrentImageContext() copy];
-
-    CGPathRef pathOff = [PocketSVG pathFromDAttribute:@"M12.724,3.269L11.913,13h6.042L7.276,26.73L8.087,17H2.044L12.724,3.269 M14,0L0,18h7L6,30l14-18h-7L14,0L14,0z"];
-
-    CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
-    CGContextAddPath(UIGraphicsGetCurrentContext(), pathOff);
-
-    [[UIColor colorWithWhite:1. alpha:.8] set];
-    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFill);
-
-    [_torchIconOff release];
-    _torchIconOff = [UIGraphicsGetImageFromCurrentImageContext() copy];
-
-    CGContextClearRect(UIGraphicsGetCurrentContext(), rect);
-    CGContextAddPath(UIGraphicsGetCurrentContext(), pathOff);
-
-    [[UIColor whiteColor] set];
-    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFill);
-
-    [_torchIconOffPressed release];
-    _torchIconOffPressed = [UIGraphicsGetImageFromCurrentImageContext() copy];
+    UIImage* image = [UIGraphicsGetImageFromCurrentImageContext() copy];
 
     UIGraphicsEndImageContext();
+
+    return [image autorelease];
+}
+
+- (void)_createTorchImages
+{
+    CGSize size = CGSizeMake(32., 32.);
+
+    [_torchIconOn release];
+    _torchIconOn = [[self _imageWithSVG:@"M14,0L0,18h7L6,30l14-18h-7L14,0L14,0z" size:size color:[UIColor colorWithWhite:1. alpha:.8]] retain];
+
+    [_torchIconOnPressed release];
+    _torchIconOnPressed = [[self _imageWithSVG:@"M14,0L0,18h7L6,30l14-18h-7L14,0L14,0z" size:size color:[UIColor whiteColor]] retain];
+
+    [_torchIconOff release];
+    _torchIconOff = [[self _imageWithSVG:@"M12.724,3.269L11.913,13h6.042L7.276,26.73L8.087,17H2.044L12.724,3.269 M14,0L0,18h7L6,30l14-18h-7L14,0L14,0z" size:size color:[UIColor colorWithWhite:1. alpha:.8]] retain];
+
+    [_torchIconOffPressed release];
+    _torchIconOffPressed = [[self _imageWithSVG:@"M12.724,3.269L11.913,13h6.042L7.276,26.73L8.087,17H2.044L12.724,3.269 M14,0L0,18h7L6,30l14-18h-7L14,0L14,0z" size:size color:[UIColor whiteColor]] retain];
 }
 
 - (void)_updateTorchButton
