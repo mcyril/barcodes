@@ -99,7 +99,6 @@
 		F106E9601D6B679500C80F63 /* library.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = library.c; path = ../zint/backend/library.c; sourceTree = "<group>"; };
 		F106E9611D6B679500C80F63 /* maxicode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = maxicode.c; path = ../zint/backend/maxicode.c; sourceTree = "<group>"; };
 		F106E9621D6B679500C80F63 /* maxicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = maxicode.h; path = ../zint/backend/maxicode.h; sourceTree = "<group>"; };
-		F106E9631D6B679500C80F63 /* maxihex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = maxihex.h; path = ../zint/backend/maxihex.h; sourceTree = "<group>"; };
 		F106E9641D6B679500C80F63 /* medical.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = medical.c; path = ../zint/backend/medical.c; sourceTree = "<group>"; };
 		F106E9651D6B679500C80F63 /* pcx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pcx.c; path = ../zint/backend/pcx.c; sourceTree = "<group>"; };
 		F106E9661D6B679500C80F63 /* pcx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pcx.h; path = ../zint/backend/pcx.h; sourceTree = "<group>"; };
@@ -212,7 +211,6 @@
 				F106E9771D6B679500C80F63 /* telepen.c */,
 				F106E9781D6B679500C80F63 /* upcean.c */,
 				F106E9531D6B679500C80F63 /* font.h */,
-				F106E9631D6B679500C80F63 /* maxihex.h */,
 				F106E9521D6B679500C80F63 /* eci.h */,
 				F106E9511D6B679500C80F63 /* eci.c */,
 				F106E9541D6B679500C80F63 /* gb2312.h */,
