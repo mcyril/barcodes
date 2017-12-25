@@ -320,7 +320,7 @@
 		F1567C511B44CEA500C80F63 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Ravel Developers Group";
 				TargetAttributes = {
 					F1567C581B44CEA500C80F63 = {
