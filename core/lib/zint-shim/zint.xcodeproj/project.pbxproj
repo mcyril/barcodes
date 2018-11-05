@@ -38,6 +38,8 @@
 		F106E99E1D6B679500C80F63 /* telepen.c in Sources */ = {isa = PBXBuildFile; fileRef = F106E9771D6B679500C80F63 /* telepen.c */; };
 		F106E99F1D6B679500C80F63 /* upcean.c in Sources */ = {isa = PBXBuildFile; fileRef = F106E9781D6B679500C80F63 /* upcean.c */; };
 		F106EA2A1D6B83FA00C80F63 /* dummy.c in Sources */ = {isa = PBXBuildFile; fileRef = F106EA291D6B83FA00C80F63 /* dummy.c */; };
+		F12B20D12190AC55009930A1 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = F12B20CF2190AC55009930A1 /* vector.c */; };
+		F12B20D22190AC55009930A1 /* mailmark.c in Sources */ = {isa = PBXBuildFile; fileRef = F12B20D02190AC55009930A1 /* mailmark.c */; };
 		F1D373411D820BC1001FC6CC /* codablock.c in Sources */ = {isa = PBXBuildFile; fileRef = F1D373401D820BC1001FC6CC /* codablock.c */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +125,8 @@
 		F106E9791D6B679500C80F63 /* zint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zint.h; path = ../zint/backend/zint.h; sourceTree = "<group>"; };
 		F106EA291D6B83FA00C80F63 /* dummy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dummy.c; sourceTree = "<group>"; };
 		F1196FAD1D6D3C6600C80F63 /* zint.exp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.exports; path = zint.exp; sourceTree = "<group>"; };
+		F12B20CF2190AC55009930A1 /* vector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vector.c; path = ../zint/backend/vector.c; sourceTree = "<group>"; };
+		F12B20D02190AC55009930A1 /* mailmark.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mailmark.c; path = ../zint/backend/mailmark.c; sourceTree = "<group>"; };
 		F1D373401D820BC1001FC6CC /* codablock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = codablock.c; path = ../zint/backend/codablock.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,6 +175,8 @@
 		F106E93B1D6B672400C80F63 /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				F12B20D02190AC55009930A1 /* mailmark.c */,
+				F12B20CF2190AC55009930A1 /* vector.c */,
 				F106E9791D6B679500C80F63 /* zint.h */,
 				F106E9601D6B679500C80F63 /* library.c */,
 				F106E94A1D6B679500C80F63 /* common.h */,
@@ -306,6 +312,7 @@
 				F106E97F1D6B679500C80F63 /* code1.c in Sources */,
 				F106E9871D6B679500C80F63 /* dotcode.c in Sources */,
 				F106E9861D6B679500C80F63 /* dmatrix.c in Sources */,
+				F12B20D12190AC55009930A1 /* vector.c in Sources */,
 				F106E98A1D6B679500C80F63 /* gridmtx.c in Sources */,
 				F106E9841D6B679500C80F63 /* composite.c in Sources */,
 				F106E99E1D6B679500C80F63 /* telepen.c in Sources */,
@@ -329,6 +336,7 @@
 				F106E99A1D6B679500C80F63 /* reedsol.c in Sources */,
 				F106E9961D6B679500C80F63 /* postal.c in Sources */,
 				F106E9941D6B679500C80F63 /* plessey.c in Sources */,
+				F12B20D22190AC55009930A1 /* mailmark.c in Sources */,
 				F106E9881D6B679500C80F63 /* eci.c in Sources */,
 				F106E97A1D6B679500C80F63 /* 2of5.c in Sources */,
 				F1D373411D820BC1001FC6CC /* codablock.c in Sources */,
