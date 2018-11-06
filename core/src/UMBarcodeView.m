@@ -298,8 +298,8 @@
         else
             break;
 
-        // Tap-to-refocus support
-        if([_camera isFocusModeSupported:AVCaptureFocusModeAutoFocus])
+        // tap-to-refocus support
+        if ([_camera isFocusModeSupported:AVCaptureFocusModeAutoFocus])
             [self addGestureRecognizer:[[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_refocus)] autorelease]];
 
         // prepare view-finder gfx
