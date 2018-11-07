@@ -334,7 +334,7 @@ static ScanAvailabilityStatus cachedScanAvailabilityStatus = ScanAvailabilityUnk
     if (cachedScanAvailabilityStatus == ScanAvailabilityUnknown)
     {
         // Check that AVFoundation is present (excludes OS 3.x and below)
-        if(!NSClassFromString(@"AVCaptureSession"))
+        if (!NSClassFromString(@"AVCaptureSession"))
         {
             cachedScanAvailabilityStatus = ScanAvailabilityNever;
 
